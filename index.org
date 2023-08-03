@@ -1,1 +1,16 @@
-[[file:progen.org]]
+#+title: progen
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
+
+:PROPERTIES:
+:END:
+
+* README
+  :PROPERTIES:
+  :custom_id: 2718693E-E67B-1004-8C53-1358D4DD2867
+  :END:
+
+#+begin_src markdown
+# Progen
+
+Version 2 of the MASD Code Generator.
