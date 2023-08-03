@@ -1,14 +1,14 @@
-#+title: progen
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-#+tags: { element(e) attribute(a) module(m) }
+#+title: Progen, or Dogen v2
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil
 
-:PROPERTIES:
-:END:
+This site contains all of the product documentation for Progen. Progen is the
+second incantation of [[https://github.com/MASD-Project/dogen][Dogen]], the MASD code generator. MASD - Model Assisted
+Software Development - is a methodology to develop software systems based on
+MDE - Model Driven Development. Throughout this site you will find all the
+information needed to make sense of these and many other terms, as well as the
+rationale for the existence of Progen. This project makes heavy use of the
+org-roam approach.
 
-[[file:readme.org][readme]]
+* Starting points
 
-* readme
-  :PROPERTIES:
-  :custom_id: 2718693E-E67B-1004-8C53-1358D4DD2867
-  :generation: handwritten
-  :END:
+- [[file:readme.org][readme]]: the project README in github.
