@@ -1,1 +1,9 @@
-# progen
+#+title: Progen
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { element(e) attribute(a) module(m) }
+
+#+CAPTION: Dogen logo
+#+NAME: fig:logo
+[[./assets/images/new_logo_with_message.png]]
+
+* Overview

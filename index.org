@@ -5,12 +5,10 @@
 :PROPERTIES:
 :END:
 
-* README
+[[file:readme.org][readme]]
+
+* readme
   :PROPERTIES:
   :custom_id: 2718693E-E67B-1004-8C53-1358D4DD2867
+  :generation: handwritten
   :END:
-
-#+begin_src markdown
-# Progen
-
-Version 2 of the MASD Code Generator.

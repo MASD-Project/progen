@@ -29,7 +29,9 @@ jobs:
         with:
           version: 29.1
       - name: Build site
-        run: emacs -Q --script .build-site.el
+        run: |
+          emacs -Q --script .build-site.el
+          cp -r assets/ build/output/site/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
