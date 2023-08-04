@@ -1,9 +1,29 @@
 #+title: Progen
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-#+tags: { element(e) attribute(a) module(m) }
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil title:nil toc:nil html-postamble:nil
 
-#+CAPTION: Dogen logo
-#+NAME: fig:logo
+#+caption:
+#+name: fig:logo
 [[./assets/images/new_logo_with_message.png]]
 
 * Overview
+
+Dogen is the reference implementation of the MASD Project code generator. MASD -
+Model Assisted Software Development - is a new methodology for the development
+of software systems based on MDE (Model Driven Engineering). MASD was developed
+in the context of a PhD programme; if you are that way inclined, you may find
+the thesis of interest: Model Assisted Software Development - a MDE-Based
+Software Development Methodology.
+
+In lay terms, Dogen's objective is to automate the development process as much
+as possible: the user creates models using Org Mode, though these must respect a
+set of predefined restrictions. Dogen uses this input to generate a source code
+representation of the model. Unlike traditional modeling techniques like UML,
+Dogen focuses instead on literate modeling - an approach based on Knuth's
+Literate programming.
+
+The generated code contains most of the functionality required from a typical
+domain object such as serialisation, hashing, streaming and so on. Whilst we
+intend for the application to be useful out of the box for most use cases, our
+end goal is to enable users to extend Dogen, adapting it to the vagaries of
+their specific needs. Note that Dogen has experimental C# support, but it is not
+in feature parity with C++ support.
