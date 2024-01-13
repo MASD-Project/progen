@@ -17,9 +17,9 @@ is a working context with a set of associated concepts, body of knowledge,
 tools, required skills, and possibilities." Mens and Van Gorp subsequently
 \marginpar{Definition} updated the language and tightened the notion by
 connecting it to metametamodels: "A technical space is determined by the
-metametamodel that is used (M3-level)." cite:mens2006taxonomy (/cf,/ Section
-[[#metamodelling-hierarchy]]) Examples of acrshortpl:ts include acrshort:mde itself,
-acrshort:xml, Java and other such programming languages.
+metametamodel that is used (M3-level)." cite:mens2006taxonomy Examples of
+acrshortpl:ts include acrshort:mde itself, acrshort:xml, Java and other such
+programming languages.
 
 #+begin_src bibtex :tangle yes
 @article{kurtev2002technological,

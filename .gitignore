@@ -1,2 +1,5 @@
 build/output
+
+# Emacs
 .packages
+.org-id-locations-file
