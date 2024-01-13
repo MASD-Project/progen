@@ -1,0 +1,48 @@
+:properties:
+:id: 02E29EFE-34EE-4614-882B-8EA856275D97
+:masd.technical_space: [[id:ED434D4E-C821-1544-AC4B-A05B266B997E][c++]]
+:masd.variability.profile: [[id:17E27354-905F-BBF4-53CB-843CADC4D754][some_profile]]
+:end:
+#+title: model.name
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+tags: { package(p) class(c) attribute(a) operation(o) parameter(b) }
+
+Some description.
+
+* Some namespace                                                    :package:
+  :properties:
+  :id: 17E27354-905F-BBF4-53CB-843CADC4D754
+  :end:
+
+A namespace description.
+
+** A class                                                            :class:
+  :properties:
+  :id: 0109B911-66B2-1D24-A7D3-2F3F86989180
+  :end:
+
+A class description.
+
+*** An attribute                                                  :attribute:
+    :properties:
+    :id: FA0D7B49-2FC0-81C4-1E1B-5A71F533A6F3
+    :PROGEN_TYPE: [[id:02E29EFE-34EE-4614-882B-8EA856275D97][model.name]]
+    :END:
+
+An attribute description.
+
+*** An Operation                                                  :operation:
+    :PROPERTIES:
+    :ID: 0F16B2D4-6926-65E4-523B-6F27E60D64AF
+    :PROGEN_TYPE: [[id:02E29EFE-34EE-4614-882B-8EA856275D97][model.name]]
+    :END:
+
+An operation description.
+
+**** First parameter                                              :parameter:
+     :PROPERTIES:
+     :ID: 0F16B2D4-6926-65E4-523B-6F27E60D64AF
+     :PROGEN_TYPE: [[id:02E29EFE-34EE-4614-882B-8EA856275D97][model.name]]
+     :END:
+
+A parameter description

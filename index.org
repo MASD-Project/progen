@@ -1,3 +1,7 @@
+:properties:
+:id: 11F938FF-2A01-4424-DBE3-16527251E747
+:masd.technical_space: masd
+:end:
 #+title: Progen, or Dogen v2
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
 
@@ -11,4 +15,7 @@ org-roam approach.
 
 * Starting points
 
-- [[file:readme.org][readme]]: the project README in github.
+- [[id:BA763158-3DC5-E914-BF2B-5C9CABBC3676][readme]]: The project README in github.
+- [[id:26C11B63-95AE-D454-4663-0B147D32B568][progen]]: Details of the project itself.
+- models: Contains all of MASD's base models:
+  - [[id:4537C384-FB75-AE04-CC0B-92C4DC2EB4EC][masd]]: Core meta-model.

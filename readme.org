@@ -1,6 +1,9 @@
+:properties:
+:id: BA763158-3DC5-E914-BF2B-5C9CABBC3676
+:end:
 #+title: Progen
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil title:nil toc:nil html-postamble:nil
-
+#+startup: inlineimages
 #+caption:
 #+name: fig:logo
 [[./assets/images/new_logo_with_message.png]]

@@ -1,6 +1,28 @@
+:properties:
+:id: 26C11B63-95AE-D454-4663-0B147D32B568
+:end:
 #+title: progen
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 #+tags: { element(e) attribute(a) module(m) }
 
 :PROPERTIES:
 :END:
+
+Progen, the /product generator/ is MASD's second generation code generator. MASD
+(Model Assisted Software Development) is a methodology for software development
+based on MDE (Model Driven Engineering). See my PhD thesis for more details:
+[[https://uhra.herts.ac.uk/handle/2299/25708][Model Assisted Software Development - a MDE-Based Software Development
+Methodology]]. Progen is based on Data-Oriented Design (DOD) principles. For
+more details on DOD, see the [[https://www.dataorienteddesign.com/dodbook/][Data-Oriented Design]] book by Richard Fabian.
+
+* progen                                                            :element:
+  :PROPERTIES:
+  :custom_id: 1F82B9DD-2C25-1A04-8FA3-23669A544C82
+  :END:
+
+Represents the product model for progen.
+
+* readme                                                            :element:
+  :PROPERTIES:
+  :custom_id: 7CF88053-7F81-98E4-851B-6916CB4D82C5
+  :END:
