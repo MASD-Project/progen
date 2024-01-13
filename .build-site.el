@@ -69,7 +69,7 @@
         ("progen-site:images"
          :base-directory "./assets/images"
          :base-extension "png\\|jpg"
-         :publishing-directory "./build/output/site"
+         :publishing-directory "./build/output/site/assets/images"
          :publishing-function org-publish-attachment)
         ( "progen-site:main"
           :components("progen-site:images" "progen-site:pages"))
