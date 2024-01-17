@@ -4,7 +4,6 @@
 #+title: MASD Academic Papers
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
 #+startup: inlineimages
-#+cite_export: basic author author-year
 
 /[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
 

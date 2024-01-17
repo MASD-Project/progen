@@ -4,7 +4,7 @@
 #+title: From Problem Space to Solution Space
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
 #+tags: { package(p) technical_space(t) }
-#+cite_export: basic numeric numeric
+#+cite_export: csl
 #+bibliography: ../bibliography.bib
 
 /[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/

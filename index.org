@@ -21,7 +21,6 @@ should not make much difference.
 [fn:thesis] MASD was developed as part of my PhD thesis. See [[id:5FA85AF3-E55C-B174-D943-1E2246CAEB14][MASD Academic
 Papers]].
 
-
 * Content
 
 ** General Pages
@@ -59,3 +58,7 @@ Contains all of MASD's base models.
 |------------+------------------|
 | [[id:4537C384-FB75-AE04-CC0B-92C4DC2EB4EC][masd]]       | Core meta-model. |
 | [[id:02E29EFE-34EE-4614-882B-8EA856275D97][model.name]] |                  |
+
+* Theme
+
+This site uses "[[https://gongzhitaao.org/orgcss/][CSS for Org-exported HTML]]" by [[https://gongzhitaao.org/][Zhitao Gong]].

@@ -5,7 +5,7 @@
 #+title: Towards a Definition of MDE
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
 #+startup: inlineimages
-#+cite_export: basic numeric numeric
+#+cite_export: csl
 #+bibliography: ../bibliography.bib
 
 /[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
@@ -15,13 +15,13 @@ It is striking to see however, that though [[id:C29C6088-B396-A404-9183-09FE5AD2
 modelling, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] core concepts are not defined through precise models. [...] In
 such conditions, it is very difficult to understand how the basic concepts of
 [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are related, and how they can be mapped to existing [[id:8077C481-01C0-4384-1AA3-5DA290362463][Technical Spaces]]. ---
-Jean-Marie Favre [cite:@@favre2004towards]
+Jean-Marie Favre [cite:@favre2004towards]
 #+end_quote
 
 [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering (MDE)]] is an established approach for the engineering of
 software systems. [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] distinguishes itself from related approaches due to its
 explicit focus on the /modeling/ of entities within a software system, and on
-the /transformations/ that can be applied to them. The first challenge facing a
+the /[[id:707BD590-1E59-56B4-D333-33525E43A78A][transformations]]/ that can be applied to them. The first challenge facing a
 new [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner is in obtaining a rigorous definition of the discipline and
 its boundaries. The present document aims to guide the reader towards an
 understanding of the discipline, across a difficult landscape.
@@ -35,9 +35,9 @@ followed by a discussion of the hierarchical model of modeling approaches
 complexities associated with the vast number of acronyms in the field (Section
 [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][The Model-Driven Jungle]]), sketch out the boundaries of the discipline (Section
 [[id:28849189-513D-7224-A64B-CB92CED3BFC3][Conditions at the Boundaries]]) and understand the role of pragmatism in modeling
-(Section [[id:EF8AB73B-F189-7AE4-CD4B-9713E34AC63E][Pragmatism in a Fuzzy Discipline]]). The chapter concludes with a brief
-discussion outlining our conclusions on the role of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] (Section [[id:4872BDDC-CAE7-0F64-DD4B-86394DE946C4][Sketch of a
-Definition]]).
+(Section [[id:EF8AB73B-F189-7AE4-CD4B-9713E34AC63E][Pragmatism in a Fuzzy Discipline]]). The document concludes with a brief
+discussion outlining our conclusions on the essence and role of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] (Section
+[[id:4872BDDC-CAE7-0F64-DD4B-86394DE946C4][Sketch of a Definition]]).
 
 * What, if anything, is MDE?
   :properties:
