@@ -1,0 +1,678 @@
+:properties:
+:id: C807836B-B1D6-1024-86E3-7D49BCF20D74
+:end:
+#+title: Models and Transformations
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+startup: inlineimages
+#+cite_export: basic numeric numeric
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+Accordingly, all of cognition is /cognition in models or by means of models/,
+and in general, any human encounter with the world needs "model" as the mediator
+[...]. --- Herbert Stachowiak [cite:@podnieks2017philosophy]
+#+end_quote
+
+At the core of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model-Driven Engineering (MDE)]] sit two key concepts: that of
+[[id:8E393033-45DD-B9C4-1903-D99CB54BBBD1][models]] and of [[id:707BD590-1E59-56B4-D333-33525E43A78A][transformations]]. These notions are so central to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] that
+Brambilia /et al./ distilled the entire discipline into the following equation
+[cite:@brambilla2012model] (p. 8):
+
+\begin{align}
+Models + Transformations &= Software
+\end{align}
+
+This document provides an overview of both of these concepts. It is organised as
+follows. It starts by determining the need for models in the first instance
+(Section [[id:7D92A620-ED3E-D264-46A3-2A2597C59DC7][Why Model?]]), and then elaborates more precisely what is meant by the
+term /model/ in this context (Section [[id:EB696FE5-39E7-79C4-FB8B-61C8FD89EA78][What Kind of Model?]]). Next, we analyse the
+relationship between models and metamodels (Section [[id:8E393033-45DD-B9C4-1903-D99CB54BBBD1][Models and Metamodels]]) as
+well as their hierarchical nature (Section [[id:1405A531-73F5-E094-04A3-F08451EC02BC][Metamodelling Hierarchy]]). Following
+this, we provide a context for modeling languages, first by looking at their
+/purpose/ (Section [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][Modeling Languages and Their Purposes]]) and then by
+contrasting and comparing them with the better known programming languages
+(Section [[id:BF561E70-3586-DC44-AF3B-BDD2206E4196][Modeling Languages and Programming Languages]]).
+
+Let us begin then by considering the role of models in the general case.
+
+* Why Model?
+  :properties:
+  :id: 7D92A620-ED3E-D264-46A3-2A2597C59DC7
+  :custom_id: ID-7D92A620-ED3E-D264-46A3-2A2597C59DC7
+  :end:
+
+Unlike the difficulties faced in defining [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s boundaries (/cf./ [[id:28849189-513D-7224-A64B-CB92CED3BFC3][Conditions
+at the Boundaries]]), the literature presents a far more consensual picture on the
+reasons for modeling. Predictably, it emanates mainly from without, given the
+importance of models in most scientific and engineering contexts. Due to this,
+we have limited our excursion to two often cited sources in the early [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+literature: Rothenberg and Stachowiak.
+
+In "General Model Theory" [cite:@stachowiak1973general], Stachowiak
+proposes a model-based concept of cognition and identifies three
+principal features of models:
+
+- *Mapping*: Models map individuals, original or artificial, to a
+  category of all such individuals sharing similar properties. The
+  object of the mapping could itself be a model, thus allowing for
+  complex composition.
+- *Reduction*: Models focus only on a subset of the individual's properties,
+  ignoring aspects that are deemed irrelevant.
+- *Pragmatism*: Models have a purpose as defined by its creators, which guides
+  the modeling process. Stachowiak states (/emphasis ours/): "[models] are not
+  only models of something. They are also models for somebody, a human or an
+  artificial model user. They perform therefore their functions in time, within
+  a time interval. /And they are finally models for a definite
+  purpose/."[fn:podnieks]
+
+[fn:podnieks] The quote was sourced from Podnieks [cite:@podnieks2017philosophy]
+(p. 19). As we could not locate an English translation of "General Model Theory"
+[cite:@stachowiak1973general], we were forced to rely on secondary sources,
+including Podnieks, to access fragments of Stachowiak's work. Podnieks' paper is
+of great interest with regards to the philosophical aspects of modeling, but
+lays beyond the scope of our dissertation.
+
+
+Much of the expressive power of models arises from these three fundamental
+properties.
+
+For his part, Rothenberg's contribution [cite:@rothenberg1989nature] also gives
+a deep insight into the nature of models and the modeling process[fn:rothenberg]
+and, in particular, his statements on substitutability are of keen interest when
+uncovering the reasons for modeling (/emphasis his/):
+
+[fn:rothenberg] The paper is recommended reading to anyone with interest in the
+philosophical aspects of modeling and its relation to computer science. Readers
+are also directed to Czarenecki [cite:@czarnecki2000generative], Chapter 2
+"Conceptual Modeling" and to Bézivin [cite:@bezivin2005unification], Section
+3.1. "On the meaning of models". Incidentally, it was Bézivin's paper that
+guided us towards Rothenberg's work.
+
+
+#+begin_quote
+Modeling, in the broadest sense, /is the cost-effective use of something in
+place of something else for some cognitive purpose/. It allows us to use
+something that is simpler, safer or cheaper than reality instead of reality for
+some purpose. A model represents reality for the given purpose; the model is an
+abstraction of reality in the sense that it cannot represent all aspects of
+reality. This allows us to deal with the world in a simplified manner, avoiding
+the complexity, danger and irreversibility of reality.
+#+end_quote
+
+Taken together, the properties identified by Rothenberg and Stachowiak make it
+clear that software engineering is inevitably deeply connected to models and
+modeling, as is any other human endeavour that involves cognition. However, this
+implicit understanding only scratches the surface of possibilities. In order to
+extract all of the potential of the modeling activity, /explicit/ introspection
+is necessary. Evans eloquently explains why it must be so (/emphasis ours/):
+
+#+begin_quote
+To create software that is valuably involved in users' activities, a development
+team must bring to bear /a body of knowledge related to those activities/. The
+breadth of knowledge required can be daunting. The volume and complexity of
+information can be overwhelming. /Models are tools for grappling with this
+overhead/. A model is a /selectively simplified and consciously structured form
+of knowledge/. An /appropriate model/ makes sense of information and focuses it
+on a problem. [cite:@evans2004domaindriven] (p. 3)
+#+end_quote
+
+Therefore, it is important to model /consciously/; with a purpose. In order to
+do so, one must first start with a better understanding of what is meant by
+"model" in the context of the target domain.
+
+* What Kind of Model?
+  :properties:
+  :id: EB696FE5-39E7-79C4-FB8B-61C8FD89EA78
+  :custom_id: ID-EB696FE5-39E7-79C4-FB8B-61C8FD89EA78
+  :end:
+
+The term /model/ is used informally by software engineers as a shorthand for any
+kind of abstract representation of a system's function, behaviour or
+structure.[fn:model_model] Ever critical in matters of rigour, Jörges /et al./
+[cite:@jorges2013construction] (p. 13) remind us that "[the] existence of MD*
+approaches and numerous corresponding tools [...] indicates that there seems to
+be at least a common intuition of what a model actually is. However, there is
+still no generally accepted definition of the term 'model'." In typical
+pragmatic form, Bézivin [cite:@bezivin2005model] provides what he calls an
+"operational engineering definition of a 'model'" (/emphasis ours/): "[...] a
+graph-based structure representing some aspects of a given system and
+/conforming to the definition of another graph/ called a metamodel." Stahl /et
+al./ call this a /formal model/ [cite:@Stahl:2006:MSD:1196766] (p. 58).
+
+[fn:model_model] An idea which is, in itself, a model taken from software design
+[cite:@al2016function].
+
+
+The crux here is to address ambiguity. A formal model is one which is expressed
+using a formal language, called the /modeling language/, and designed
+specifically for the purpose of modeling well-defined aspects of a problem
+domain. A modeling language needs to be a formal language because it must have
+well-defined /syntax/ and /semantics/, required in order to determine if its
+instances are well-formed or not. The next sections provide an overview of these
+two topics; since the literature was found to be largely consensual, the focus
+is solely on their exposition. We then join these two notions as we revisit the
+concept of metamodel.
+
+** Syntax
+   :properties:
+   :id: B7990F6B-1138-4314-7B93-678974FB5E43
+  :custom_id: ID-B7990F6B-1138-4314-7B93-678974FB5E43
+   :end:
+
+Syntax concerns itself with /form/, defining the basic building blocks
+of the language and the set of rules that determine their valid
+combinations. This is done in two distinct dimensions:
+
+- *Concrete Syntax*: Specifies a physical representation of the language,
+  textually or graphically. It can be thought of its external representation or
+  /notation/, of which there can be one or more.
+- *Abstract Syntax*: Specifies the language's underlying structure,
+  independent of its concrete syntax. It can be thought of as its
+  internal representation.
+
+** Semantics
+   :properties:
+   :id: 32B36585-D905-D264-918B-8496BB103272
+   :custom_id: ID-32B36585-D905-D264-918B-8496BB103272
+   :end:
+
+Validation is not complete at the syntactic level, however, because a
+statement's validity may be dependent on context and therefore
+requiring an understanding of its /semantics/. Semantics deals with
+/meaning/ and, as with syntax, it is also split across two distinct
+dimensions:
+
+- *Static Semantics*: Concerns itself with contextual aspects that can be
+  inferred from the abstract syntax representation of the model. In the case of
+  a typed general purpose programming language, static semantics are comprised
+  of a set of rules that determine if an expression is well-formed given the
+  types involved. For modeling languages, the exact role of static semantics
+  varies but is commonly concerned with placing constraints on types.
+- *Dynamic Semantics*: These are only relevant to modeling languages
+  whose instances can be executed and are thus also known as execution
+  semantics. They define the execution behaviour of the various
+  language constructs.
+
+* Models and Metamodels
+  :properties:
+  :id: 8E393033-45DD-B9C4-1903-D99CB54BBBD1
+  :custom_id: ID-8E393033-45DD-B9C4-1903-D99CB54BBBD1
+  :end:
+
+Given these concepts, we can now elaborate further on Bezivin's definition
+above, and connect them from a modeling point of view. Formal models are
+instances of a modeling language, which provides the modeler with the vocabulary
+to describe entities from a domain. Together, the abstract syntax and the static
+semantics of the modeling language make up its /metamodel/, and instance models
+--- by definition --- must /conform/ to it.
+
+Employing terminology from Kottemann and Konsynsk [cite:@kottemann1984dynamic],
+the metamodel can be said to capture the /deep structure/ that connects all of
+its instance models, and the instance models are expressed in the abstract
+syntax of the modeling language --- its /surface structure/. Within this
+construct, we now have a very clear separation between the entities being
+modeled, the model and the model's metamodel as they exist at different /layers
+of abstraction/.[fn:oo_metamodels] However, the layering process does not end at
+the metamodel.
+
+[fn:oo_metamodels] It is worth noticing that the use of metamodels in the
+context of OO languages has a long history in computer science.
+Henderson-Sellers /et al./ [cite:@henderson2013ptolemaic], in their interesting
+and thought provoking work, report of their emergence within this context: "The
+use of metamodels for OO modelling languages was first promoted in 1994 [...]
+and consequently realized in Henderson-Sellers and Bulthuis
+[cite:@henderson2012object] in their creation of metamodels for 14 out of a list
+of 22 identified (then extant) modelling languages (at that time often
+mis-called methodologies)." These /retro-fitting/ steps were key to the modern
+understanding of the role of metamodels in modeling languages.
+
+
+* Metamodelling Hierarchy
+  :properties:
+  :id: 1405A531-73F5-E094-04A3-F08451EC02BC
+  :custom_id: ID-1405A531-73F5-E094-04A3-F08451EC02BC
+  :end:
+
+Since all formal models are instances of a metamodel, the metamodel itself is no
+exception: it too must conform to a /metametamodel/. The metametamodel provides
+a generalised way to talk about metamodels and exists at a layer above that of
+the metamodel. Though in theory infinite, the layering process is typically
+curtailed at the metametamodel layer, since it is possible to create a
+metametamodel that conforms to
+itself.[fn:reflexive_metamodel],[fn:metalevels]
+
+#+caption[OMG four-layer metamodel architecture]: OMG four-layer metamodel architecture. /Source/: Author's drawing based on a diagram by Bézivin [cite:@bezivin2004search].
+#+name: fig-metamodel_archecture
+#+attr_latex: :scale 0.3
+[[../assets/images/omg_four_layer_metamodel_architecture.png]]
+
+[fn:reflexive_metamodel] Seidewitz calls this a /reflexive/ metametamodel
+[cite:@seidewitz2003models] whereas Álvarez /et al./ [cite:@alvarez2001mapping]
+favour the term /meta-circular/, but both are used with equivalent meaning.
+
+[fn:metalevels] Jörges /et al./ refer to these meta-layers as /metalevels/
+[cite:@jorges2013construction] (p. 17).
+
+
+Following on from the above-mentioned work of Kottemann and Konsynski
+[cite:@kottemann1984dynamic], and that of many others, the OMG standardised
+these notions of an abstraction hierarchy into a /four-layer metamodel
+architecture/ that describes higher-order modeling. Bézivin
+[cite:@bezivin2005unification] referred to it as the /3+1 architecture/, and
+summarised it as follows: "[at] the bottom level, the M0 layer is the real
+system. A model represents this system at level M1. This model conforms to its
+metamodel defined at level M2 and the metamodel itself conforms to the
+metametamodel at level M3." Figure [[fig-metamodel_archecture]] illustrates the
+idea. Its worthwhile pointing out that the four-layer architecture is a typical
+example of the constant cross-pollination within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], as it was originally
+created in the context of what eventually became the MDA but nowadays is seen as
+part of the core [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] cannon itself
+[cite:@brambilla2012model].[fn:four_layer_metamodel]
+
+[fn:four_layer_metamodel] The historical context in which the four-layer
+metamodeling hierarchy emerged is quite interesting and illuminating with
+regards to its spirit. Henderson-Sellers /et al./ [cite:@henderson2013ptolemaic]
+chronicle it quite vividly: "Around 1997, the OMG first publicized their strict
+metamodelling hierarchy [...] apparently based on theoretical suggestions of
+Colin Atkinson, not published until a little later [...]. The need for a
+multiple level hierarchy [...], thus extending the two level type-instance
+model, was seen as necessary in order to 1) provide a clear means by which
+elements in the (then emergent) modelling language of UML could be themselves
+defined /i.e/ an M3 level and 2) acknowledge the existence at the M0 level of
+individual (instances) of the classes designed at the M1 level --- although for
+the OMG/UML world these were seen as less important because such instances only
+exist as 'data' within the computer program and, in general, do not appear
+within the modelling process."
+
+
+As the literature traditionally explains the four layer model by means of an
+example [cite:@bezivin2005unification] [cite:@brambilla2012model]
+[cite:@henderson2012object], we shall use a trivial model of cars to do so. It
+is illustrated in Figure [[fig-metamodel_example]]. Here, at M0, we have two cars
+with licence plates "123-ABC" and "456-DEG". At M1, the two cars are abstracted
+to the class =Car=, with a single attribute of type =String=: =LicencePlate=. At
+M2, these concepts are further abstracted to the notions of a =Class= and
+=Attribute=. =Car= is an instance of a =Class=, and its property =LicencePlate=
+is an instance of =Attribute=. Finally, at M3, we introduce =Class=; M2's
+=Class= and =Attribute= are both instances of M3's =Class=, as is M3's =Class=
+itself.
+
+#+caption[Example of the four-layer metamodel architecture]: Example of the four-layer metamodel architecture. /Source/: Author's drawing based on a diagram by Brambilla /et al./ [cite:@brambilla2012model] (p. 16)
+#+name: fig-metamodel_example
+#+attr_latex: :scale 0.3
+[[../assets/images/metamodel_hierarchy_example.png]]
+
+The four-layer metamodel architecture has important properties. For example,
+whilst terms "model" and "meta" are often used in a relative (and even
+subjective) manner, within the architecture they now become concise --- /i.e./,
+/metametamodel/ is an unambiguous term within this framework. In addition, it
+was designed as a /strict metamodeling framework/. Atkinson and Kühne explain
+concisely the intent (/emphasis theirs/):
+
+#+begin_quote
+Strict metamodeling is based on the tenet that if a model A is an instance of
+another model B then every element of A is an instance-of some element in B. In
+other words, it interprets the instance-of relationship at the granularity of
+individual model elements. The doctrine of strict metamodeling thus holds that
+the instance-of relationship, and /only/ the instance-of relationship, crosses
+meta-level boundaries, and that every instance-of relationship must cross
+exactly one meta-level boundary to an immediately adjacent level.
+[cite:@atkinson2002profiles]
+#+end_quote
+
+Strict metamodeling is not the only possible approach --- Atkinson and Kühne go
+on to describe /loose metamodeling/ on the same paper --- nor is the four-layer
+metamodel hierarchy itself free of criticism. On this regard, we'd like to
+single out the thorough work done by Henderson-Sellers /et al./
+[cite:@henderson2013ptolemaic], who scoured the literature to identify the main
+problems with the architecture, and surveyed proposed "fixes", which ranged from
+small evolutionary changes to "paradigm shifting" modifications. Their work
+notwithstanding, our opinion is that, though the four-layer metamodel has
+limitations, it forms a reasonably well-understood abstraction which suffices
+for the purposes of our own research.
+
+An additional point of interest --- and one that perhaps may not be immediately
+obvious from the above diagrams --- is that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] encourages the creation of
+"multiple metamodels", each designed for a specific purpose, though ideally all
+conforming to the same metametamodel. As a result of this metamodel diversity
+--- as well as due to other scenarios described on the next section ---
+operations performed on models have become key to the modeling approach.
+
+* Models and Their Transformations
+  :properties:
+  :id: 707BD590-1E59-56B4-D333-33525E43A78A
+  :custom_id: ID-707BD590-1E59-56B4-D333-33525E43A78A
+  :end:
+
+The second most significant component of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] , after models, are Model
+Transformations (MTs) or just /transforms/. [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]]s are functions defined over
+metamodels and applied to their instance models. [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]]s receive one or more
+arguments, called the /source models/, and typically produce one or more models,
+called the /target models/. Source and target models must be formal models, and
+they may all conform to the same or to different metamodels.
+
+#+caption[Basic model transformation concepts]: Basic model transformation concepts. /Source/: Author's drawing based on diagrams by Brambilla /et al./ [cite:@brambilla2012model] (p. 18) and Czarnecki and Helsen [cite:@czarnecki2006feature].
+#+name: fig-model_transforms
+#+attr_latex: :scale 0.3
+[[../assets/images/model_transforms.png]]
+
+The literature has long considered [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] themselves as models
+[cite:@bezivin2005unification], thus formalisable by a metamodel and giving rise
+to the notion of /[[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages/; that is, modeling languages whose domain is
+model transformations. [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages are an important pillar of the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] vision
+because they enable the automated translation of models at different levels of
+abstraction. Figure [[fig-model_transforms]] provides an example of how [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages
+work, when transforming one type of model to another. However, these are not the
+only type of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] found in the literature.
+
+** Taxonomy
+   :properties:
+   :id: 93400D0B-2E1E-7244-D07B-DD8BCA98277A
+   :custom_id: ID-93400D0B-2E1E-7244-D07B-DD8BCA98277A
+   :end:
+
+The taxonomy of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] has been investigated in great detail in the literature,
+particularly by Mens and Van Gorp [cite:@mens2006taxonomy] as well as by
+Czarnecki and Helsen [cite:@czarnecki2006feature]. For the purposes of our
+dissertation we are primarily concerned with what Czarnecki and Helsen
+identified as the top-level categories of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]]: Model-to-Model (M2M) and
+Model-to-Text (M2T). These they describe as follows:
+
+
+#+begin_quote
+The distinction between the two categories is that, while a model-to-model
+transformation creates its target as an instance of the target metamodel, the
+target of a model-to-text transformation is just strings. [...] Model-to-text
+approaches are useful for generating both code and non-code artifacts such as
+documents.
+#+end_quote
+
+For completeness, there are also Text-to-Text (T2T) transforms, which merely
+convert one textual representation into another. Transforms of these three types
+are typically orchestrated into graphs --- often called /transform chains/ or [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]]
+chains[fn:transform_composition] --- with M2T typically being the ultimate
+destination. These relationships are illustrated in Figure
+[[fig-model_transforms_cd]], which portraits [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] in the wider [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] domain, including
+models and metamodels.
+
+[fn:transform_composition] Wagelaar's analysis of particular interest in this
+regard: "Composition of model transformations allows for the creation of
+smaller, maintainable and reusable model transformation definitions that can
+scale up to a larger model transformation." [cite:@wagelaar2008composition]
+
+
+#+caption[Relationships between [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]], metamodels and models.]: Relationships between [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]], metamodels and models. /Source:/ Author's drawing based on Stahl /et al./'s diagram [cite:@volter2013model] (p. 60).
+#+name: fig-model_transforms_cd
+#+attr_latex: :scale 0.3
+[[../assets/images/model_transforms_cd.png]]
+
+The importance of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] stems largely from their broad range of
+applications --- as discussed in the next section.
+
+** Applications
+  :properties:
+  :id: 556E49C7-AFBB-3244-3E9B-7BFEDE05BD43
+  :custom_id: ID-556E49C7-AFBB-3244-3E9B-7BFEDE05BD43
+  :end:
+
+The use of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is pervasive, as demonstrated by Czarnecki and Helsen's
+non-exhaustive list of intended applications [cite:@czarnecki2006feature]:
+
+- *Synchronisation*: The mapping and synchronisation of
+  models, either at the same level of abstraction or at different
+  levels, to ensure that updates are correctly propagated;
+- *Querying*: Using queries to generate views over a system;
+- *Evolution*: Tasks related to the evolution and management of models such as
+  refactoring, and metamodel updating;
+- *Reverse-Engineering*: The generation of high-level models from
+  either source code or lower-level models.
+- *Code Generation*: The refinement of high-level models into lower-level models
+  and ultimately to source code --- for some, a defining characteristic of the
+  [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] approach.[fn:code-generation-enabler]
+
+[fn:code-generation-enabler] In Jörges words [cite:@jorges2013construction] (p.
+19): "Code generation is thus an enabling factor for allowing real model-driven
+software development which treats models as primary development artifacts, as
+opposed to the approach termed model-based software development [...]."
+
+
+Given this large number of applications, it is unsurprising that a
+correspondingly large number of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages have emerged over time, including
+QVT (Query / View/ Transformation) [cite:@kurtev2007state], ATL (Atlas
+Transformation Language) [cite:@jouault2008atl], Epsilon
+[cite:@kolovos2008epsilon], Kermeta [cite:@jezequel2009model] and many others.
+Whilst it is undoubtedly a positive development that many different avenues are
+being actively explored, there are clearly downsides to this proliferation of
+solutions: the onus is now on the practitioner to choose the appropriate [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]]
+language, and often a deep knowledge of both [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and the [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages in
+question is required to make an informed decision. This apparent /paradox of
+choice/, at all levels, is one of the biggest challenges faced by [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], as
+evidenced by adoption research.
+
+A related problem is that, whilst [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages have many diverse applications,
+they are ultimately still computer languages and thus prone to suffer from the
+very same malaises already diagnosed in traditional software engineering. As
+their use grows, issues such as technical debt [cite:@lano2018technical],
+refactoring and difficulties around reuse [cite:@bruel2018model] will become
+increasingly pressing. Indeed, these and other similar issues are not specific
+to [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] languages, but shared by /all modeling languages/. It is therefore crucial
+to understand the /purpose/ of modeling languages and clarify their relationship
+with traditional programming languages.
+
+* Modeling Languages and Their Purposes
+  :properties:
+  :id: 1D15099E-7294-6724-3343-A6C71CB05BF9
+  :custom_id: ID-1D15099E-7294-6724-3343-A6C71CB05BF9
+  :end:
+
+The literature commonly distinguishes between two classes of modeling languages,
+according to their purpose [cite:@brambilla2012model] (p. 13):
+
+- *General Purpose Modeling Languages (GPML)*: These are languages that are
+  designed to target the modeling activity in the general case, and as such can
+  be used to model /any/ problem domain; the domain of these languages is the
+  domain of modeling itself. The UML [cite:@omg2017uml] is one such
+  language.[fn:uml]
+- *Domain Specific Language (DSL)*: These are languages which are designed for a
+  /specific purpose/, and thus target a well-defined problem domain. They may
+  have broad use or be confined to a small user base such as a company or a
+  single application. As an example, the authors report in
+  [cite:@marco_craveiro_2021] on the experiences and challenges of a financial
+  company creating their own modeling DSL.
+
+[fn:uml] A simplification; technically, UML is a /modeling language suite/
+rather than a modeling language because it is comprised of a number of modeling
+languages designed to be used together. Note also that not all UML models are
+formal models but UML models can be made formal through the use of /UML
+Profiles/ and a formal definition of static semantics.
+
+
+Figure [[fig-basic_model_driven_terms]] captures how modeling languages relate to
+the terminology introduced thus far.
+
+#+caption[Fundamental MDE terminology.]: Fundamental MDE terminology. /Source/: Author's drawing based on Stahl /et al./'s image [cite:@volter2013model] (p. 56)
+#+name: fig-basic_model_driven_terms
+#+attr_latex: :scale 0.3
+[[../assets/images/basic_model_driven_terms.png]]
+
+As with most [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] terminology, this classification is not universally accepted.
+For instance, Stahl /et al./ [cite:@volter2013model] (p.58) take the view that
+(/emphasis theirs/) "[often] the term /modeling language/ is used synonymously
+with DSL. We prefer the term DSL because it emphasizes that we always operate
+within the context of a specific domain." Somewhat unexpectedly, Jörges /et al./
+[cite:@jorges2013construction] (p. 15) agree with this stance. We are instead of
+the opinion that conflating DSL with modeling languages hinders precision
+unnecessarily and thus is not a useful development. For the remainder of this
+work, we shall use the three terms (modeling language, GPML and DSL) with
+specifically the above meanings.[fn:gpml_mbe] The crux of the problem is, then,
+in deciding /how/ a given modeling problem is to be tackled.
+
+[fn:gpml_mbe] In Stahl /et al./'s defence, most GPML require a degree of
+extensibility in order to support formal models --- /e.g./, in the case of UML,
+the creation of profiles are typically required, and thus considered a DSL. In
+this sense, /plain/ GPML appear to be of a limited use in a [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] context.
+Nonetheless, our point is that, even without further customisation, GPML provide
+a sufficient basis for simpler automation use cases. Therefore, in our opinion,
+it is incorrect to think of GPML as "merely" tools for some form of Model-Based
+Engineering (MBE).
+
+
+** Determining the Modeling Approach
+  :properties:
+  :id: 774F10EF-88EA-8054-A5E3-FB2FBCACA2D2
+  :custom_id: ID-774F10EF-88EA-8054-A5E3-FB2FBCACA2D2
+  :end:
+
+One of the first decisions faced by practitioners when when modeling a problem
+is the choice between using GPML or DSL. Mohagheghi and
+Aagedal's analysis highlights the kinds of trade-offs that must be considered
+[cite:@mohagheghi2007evaluating]:
+
+#+begin_quote
+A metamodel’s conceptual complexity should lead to greater expressive power, and
+thus smaller models in size. For example, modeling languages developed for a
+specific domain [e.g. DSL] have more expressive power and are closer
+to the experts’ knowledge of the domain than general-purpose modeling languages
+[GPML], but may be more complex to learn for a novice.
+#+end_quote
+
+If opting for DSL, their creation can be achieved either via extensibility
+mechanisms available in most GPML --- such as the before-mentioned
+UML profiles --- or by in-house language design. Regardless of the approach, the
+use of DSL is strongly encouraged within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] since, as Stahl /et al./ tell us
+(p. 58), "[a] DSL serves the purpose of making the key aspects of a domain ---
+but not all of its conceivable contents --- formally expressable and modelable."
+[cite:@volter2013model]
+
+A vital component of language design is choosing a notation and implementing its
+parsing. A simple alternative --- ideal for basic requirements ---is to use an
+existing markup language such as XML or JSON, in order to take advantage of
+their strong tooling ecosystem. In the XML case, an XML schema can be defined
+using XSD, so as to constrain XML concrete syntax. The abstract syntax will be
+dependent on how the XML processing is performed --- /i.e./ using DOM, SAX or
+any other XML APIs. The approach is commonly referred to as /XMLware/
+[cite:@arcaini2011model], but is not without its detractors
+[cite:@neubauer2016towards].[fn:xmlware_experience_report]
+
+[fn:xmlware_experience_report] An XMLWare-based stack was the solution used by a
+financial company, whose experiences are narrated in
+[cite:@marco_craveiro_2021].
+
+
+Yet another alternative, attractive for text-based notations, is to define a
+formal grammar for the concrete syntax (/cf./ Section [[id:B7990F6B-1138-4314-7B93-678974FB5E43][Model Syntax]]) using a
+parser generating tool such as YACC [cite:@johnson1975yacc] or Bison
+[cite:@donnelly1992bison], and then code-generate a parser for the grammar in a
+general purpose programming language. The parser is responsible for processing
+documents written in the concrete syntax and, if valid, instantiating an
+abstract syntax tree: a tree representation of the abstract syntax. This
+approach is called /grammarware/ in the literature [cite:@klint2005toward]
+[cite:@paige2012metamodelling], and has historically been used to define
+programming languages, but it is equally valid for modeling textual
+DSL.[fn:spirit_antlr]
+
+[fn:spirit_antlr] Several programming languages also offer modern parser
+libraries, such as C++'s Boost Spirit [cite:@BoostSpirit2018] or Java's ANTLR
+[cite:@parr2013definitive]. These are more appealing to typical software
+developers (as opposed to compiler writers) because they provide a better fit to
+their workflows.
+
+
+Finally, the more modern take on this problem is called /modelware/ because it
+relies on model-driven principles and tooling. It is implemented using tools
+such as XText [cite:@eysholdt2010xtext], which generate not just the parser but
+also customisable abstract syntax, as well as providing IDE support for the
+newly-designed language. Modelware is the preferred approach within the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+community because it embodies many of the core principles described in this
+document, and, in addition, some modelware stacks offer integrated support for
+graphical notations.[fn:gmf_eval]
+
+[fn:gmf_eval] Seehusen and Stølen 's evaluation report of GMF (Graphical
+Modeling Framework) serves as a typical example [cite:@seehusen2011evaluation].
+GMF is part of the vast EMF (Eclipse Modeling Framework) modelware stack; those
+specifically interested in EMF are directed instead to Steinberg /et al./
+[cite:@Steinberg:2009:EEM:1197540].
+
+
+Nonetheless, regardless of the specifics of the approach, there are clear
+similarities between traditional programming languages and modeling languages,
+as we shall see next.
+
+* Modeling Languages and Programming Languages
+  :properties:
+  :id: BF561E70-3586-DC44-AF3B-BDD2206E4196
+  :custom_id: ID-BF561E70-3586-DC44-AF3B-BDD2206E4196
+  :end:
+
+There are obvious advantages in clarifying the relationship between programming
+languages and modeling languages, because the latter can benefit from the long
+experience of the former. Predictably, the literature has ample material on this
+regard. Whilst discoursing on the unification power of models, Bézivin spoke of
+"programs as models" [cite:@bezivin2005unification]; France and Rumpe tell us
+that "[source] code can be considered to be a model of how a system will behave
+when executed." [cite:@france2007model] Indeed, from all that has been stated
+thus far, it follows that all general purpose programming languages such as C++
+and Java can rightfully be considered modeling languages too and their programs
+can be thought of as models implemented atop a grammarware stack.
+
+Here we are rescued by Stahl /et al./, who help preserve the distinction between
+programming languages and modeling languages by reminding us that they have
+different responsibilities (/emphasis ours/): "The means of expression used by
+models is geared toward /the respective domain’s problem space/, thus enabling
+abstraction from the programming language level and allowing the corresponding
+compactness." [cite:@volter2013model] (p. 15) That is, programming languages are
+abstractions of the machine whereas modeling languages are abstractions of
+higher-level problem domains --- a very useful and concise
+separation.[fn:programming_modeling] With this, we arrive at the taxonomy
+proposed by Figure [[fig-computer_languages]].
+
+[fn:programming_modeling] These camps are not quite as distinct as they may
+appear, and many are working to shorten the differences. On one hand, there are
+those like Madsen and Møller-Pedersen who propose a more direct integration of
+modeling concepts with programming languages themselves
+[cite:@madsen2010unified]. On the other hand, there are also those like
+Badreddin and Lethbridge, proponents of MOP (Model Oriented Programming), who
+defend making modeling languages more like programming languages
+[cite:@badreddin2013model]. Both approaches show a great deal of promise but,
+given their limited application at present, we declined to investigate them
+further.
+
+
+#+caption: Taxonomy of computer languages within MDE.
+#+name: fig-computer_languages
+#+attr_latex: :scale 0.3
+[[../assets/images/computer_languages.png]]
+
+A related viewpoint from which to look at the relationship between modeling
+languages and programming languages is on how information can be propagated
+between the two via [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] (/cf./ Section [[id:707BD590-1E59-56B4-D333-33525E43A78A][Models and Their Transformations]]). The
+simplest form is via /forward engineering/, whereby a model in a modeling
+language is transformed into a programming language representation, but changes
+made at the programming language level are not propagated back to the modeling
+language.
+
+#+caption[Propagating information between modeling languages and programming languages]: Propagating information between modeling languages and programming languages. /Source/: Author's drawing based on an image from Stahl /et al./ [cite:@volter2013model] (p. 74).
+#+name: fig-roundtrip_engineering
+#+attr_latex: :scale 0.3
+[[../assets/images/roundtrip_engineering.png]]
+
+The converse happens when using /reverse engineering/: a model in a modeling
+language is generated by analysing and transforming source code in a programming
+language. Clearly, there are difficulties in any such an endeavour due to the
+mismatch in abstraction levels, as explained above. Finally, the most difficult
+of all scenarios is RTE (Round Trip Engineering), in which both modeling and
+programming language representations are continually kept synchronised, and
+changes are possible in either direction. Figure [[fig-roundtrip_engineering]]
+illustrates these three concepts.
+
+As briefly alluded to in Section [[id:707BD590-1E59-56B4-D333-33525E43A78A][Models and Their Transformations]], these and
+other related topics fall under the umbrella of /model synchronisation/ within
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] literature. They are addressed in [[id:CA232302-65F9-6DE4-AD4B-6D24EE3E9D39][From Problem Space to Solution Space]],
+which starts to delve in more detail into [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s aspirations of matching modeling
+languages to different /abstraction levels/.
+
+* Bibliography
+
+#+print_bibliography:

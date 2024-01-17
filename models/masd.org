@@ -3,79 +3,13 @@
 :masd.technical_space: masd
 :end:
 #+title: masd
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
 #+tags: { package(p) technical_space(t) }
 
 * Technical spaces                                                  :package:
   :properties:
   :id: 935423FD-792F-1E74-58DB-250126C2B340
   :end:
-
-Kurtev /et al./ proposed acrshortpl:ts in their seminal paper
-cite:kurtev2002technological, defining them as follows: "A technological space
-is a working context with a set of associated concepts, body of knowledge,
-tools, required skills, and possibilities." Mens and Van Gorp subsequently
-\marginpar{Definition} updated the language and tightened the notion by
-connecting it to metametamodels: "A technical space is determined by the
-metametamodel that is used (M3-level)." cite:mens2006taxonomy Examples of
-acrshortpl:ts include acrshort:mde itself, acrshort:xml, Java and other such
-programming languages.
-
-#+begin_src bibtex :tangle yes
-@article{kurtev2002technological,
-  title={Technological spaces: An initial appraisal},
-  author={Kurtev, Ivan and B{\'e}zivin, Jean and Aksit, Mehmet},
-  journal={CoopIS, DOA},
-  volume={2002},
-  year={2002}
-}
-#+end_src
-
-In cite:bezivin2003first, Bézivin /et al./ outlines their motivation: "The
-notion of TS allows us to deal more efficiently with the ever-increasing
-complexity of evolving technologies. There is no uniformly superior technology
-and each one has its strong and weak points." The idea is then to engineer
-\marginpar{Motivation} bridges between technical spaces, allowing the importing
-and exporting of artefacts across them. These bridges take the form of adaptors
-called "projectors", as Bézivin explains (/emphasis ours/):
-
-#+begin_src bibtex :tangle yes
-@inproceedings{bezivin2003first,
-  title={First experiments with the ATL model transformation language: Transforming XSLT into XQuery},
-  author={B{\'e}zivin, Jean and Dup{\'e}, Gr{\'e}goire and Jouault, Fr{\'e}d{\'e}ric and Pitette, Gilles and Rougui, Jamal Eddine},
-  booktitle={2nd OOPSLA Workshop on Generative Techniques in the context of Model Driven Architecture},
-  volume={37},
-  year={2003}
-}
-#+end_src
-
-#+begin_quote
-/The responsibility to build projectors lies in one space/. The rationale to
-define them is quite simple: when one facility is available in another space and
-\marginpar{Projectors,\\ injectors,\\ extractors} that building it in a given
-space is economically too costly, then the decision may be taken to build a
-projector in that given space. There are two kinds of projectors according to
-the direction: /injectors/ and /extractors/. Very often we need a couple of
-injector/extractor to solve a given problem. cite:bezivin2005model
-#+end_quote
-
-acrshortpl:ts are a useful --- if somewhat imprecise[fn:ts_imprecise] ---
-conceptual device and bridging across them has been demonstrated to work in
-\marginpar{Challenges} practice cite:bezivin2003first. However, our position is
-that to fully fulfil their promise, an extraordinary engineering effort is
-required to model all significant features from existing acrshortpl:ts, to
-expose them to modeling languages and to keep those models updated. As we shall
-see in the next section, much of the same challenges apply to platforms.
-
-[fn:ts_imprecise] In the words of Bézivin /et al./
-cite:bezivin2003first (/emphasis ours/): "Although /it is difficult to
-give a precise definition of a Technological Space/, some of them can
-be easily identified, for example: programming languages concrete and
-abstract syntax (Syntax TS), Ontology engineering (Ontology TS),
-XML-based languages and tools (XML TS), Data Base Management Systems
-(DBMS TS), Model-Driven Architecture (MDA TS) as defined by the OMG as
-a replacement of the previous Object Management Architecture (OMA)
-framework."
 
 
 ** C++

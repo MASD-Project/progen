@@ -1,0 +1,392 @@
+:properties:
+:id: CA232302-65F9-6DE4-AD4B-6D24EE3E9D39
+:end:
+#+title: From Problem Space to Solution Space
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+tags: { package(p) technical_space(t) }
+#+cite_export: basic numeric numeric
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+In particular, current research in the area of model driven engineering (MDE) is
+primarily concerned with reducing the gap between problem and software
+implementation domains through the use of technologies that support systematic
+transformation of problem-level abstractions to software implementations. ---
+France and Rumpe [cite:@france2007model]
+#+end_quote
+
+Software engineering typically distinguishes between problem space (or problem
+domain) and solution space.[fn:wasson] The present document's objective is to
+clarify these two very important concepts, and to relate them to the practice of
+model-driven approaches.
+
+[fn:wasson] For a treatment of the subject in a system's engineering context,
+see Chapter 14 of Wasson [cite:@wasson2015system] (p. 135).
+
+
+* Spaces and Levels of Abstraction
+  :properties:
+  :id: B43F5826-FECD-31A4-EBEB-82A16098D282
+  :custom_id: ID-B43F5826-FECD-31A4-EBEB-82A16098D282
+  :end:
+
+The /problem space/ concerns itself with a business area or any other field of
+expertise a software system needs to be developed for, whereas the /solution
+space/ is made up of a set of technological choices with which a software system
+can be designed and implemented, and atop of which it will
+execute.[fn:volter_ps_definition] As we move from problem space towards solution
+space, the abstraction level is progressively lowered until the machine is
+ultimately reached. Figure [[fig-software_engineering]] illustrates this idea.
+
+[fn:volter_ps_definition] In the words of Groher and Völter's: "The problem
+space is concerned with end-user understandable concepts representing the
+business domain of the product line. The solution space deals with the elements
+necessary for implementing the solution, typically IT relevant artifacts
+(/sic/)." [cite:@groher2009aspect].
+
+
+#+caption[Phases of the software development lifecycle, abstraction levels and language types]: Phases of the software development lifecycle, abstraction levels and language types. /Source/: Author's drawing based on Berg /et al./'s [cite:@berg2005tracing] image.
+#+name: fig-software_engineering
+[[../assets/images/abstraction_levels.png]]
+
+One of the core objectives of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is to enable a smoother transition between
+abstraction levels, easing the gap between them. France and Rumpe lay out the
+motivation (/emphasis ours/):
+
+#+begin_quote
+A /problem-implementation/ gap exists when a developer implements software
+solutions to problems using abstractions that are at a /lower level/ than those
+used to express the problem. In the case of complex problems, bridging the gap
+using methods that rely almost exclusively on human effort will /introduce
+significant accidental complexities/.[fn:accidental_complexity]
+[cite:@france2007model]
+#+end_quote
+
+[fn:accidental_complexity] Whittle /et al./ define /accidental complexity/ as
+(/emphasis ours/): "[...] where the tools introduce complexity /unnecessarily/
+[cite:@whittle2017taxonomy]." What is meant by /unnecessarily/, of course, is
+left as an exercise to the reader.
+
+
+Hence, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] promotes the use of modeling languages (/cf./ [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][Modeling Languages and
+Their Purposes]]) at the appropriate level of abstraction for the task at hand;
+its ultimate goal is to allow software engineers to create a cascading set of
+abstractions of an arbitrary depth that closely matches software engineering
+activities over the various phases of the software development lifecycle, with
+each abstraction described by an adequate modeling language --- all the way to
+the general purpose programming language. This process is referred to as /model
+cascading/, and it is implemented by means of /model refinement/ (/cf./ [[id:556E49C7-AFBB-3244-3E9B-7BFEDE05BD43][Model
+Transform Applications]]).
+
+Whilst conceptually straightforward, model cascading poses awkward practical
+challenges because the existence of multiple models, possibly conforming to
+multiple metamodels, and representing disparate viewpoints leads to a need to
+keep all views integrated, synchronised and consistent[fn:model_synchronisation]
+--- a task of increasing difficulty, as [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] moves away from the simpler
+unidirectional model of transformations towards more complex
+topologies.[fn:model_networks] As we've already seen (/cf./ [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][Modeling Languages
+and Their Purposes]]), similar synchronisation and integration challenges are also
+present in the relationship between models and source code --- the traditional
+destination of the model refining process.[fn:model_execution]
+
+[fn:model_synchronisation] Much has been written in the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] literature about
+model synchronisation and integration, but it lays beyond the scope of the
+present study. The interested reader is directed to Giese /et al./
+[cite:@giese2010model] for an introductory overview of model integration and
+model synchronisation (Section 2, State of the Art), and to Hettel /et al./
+[cite:@hettel2008model] for an analysis of acrshort:rte in the context of
+acrshort:mda, but largely applicable to acrshort:mde in general. Czarnecki and
+Helsen's acrshort:mt Feature Model is also relevant (Section "Source-Target
+Relationship" [cite:@czarnecki2006feature]
+
+[fn:model_networks] Diskin /et al./ see beyond simple cascading and
+speak instead of networks of models (/emphasis ours/): "A pipeline of
+unidirectional model transformations is a well-understood architecture
+for model driven engineering tasks such as model compilation or view
+extraction. However, modern applications require a shift towards
+/networks of models related in various ways/, whose synchronization
+often needs to be incremental and bidirectional."
+[cite:@diskin2014towards]
+
+[fn:model_execution] The alternative to code generation is model-based
+execution, either via an interpreter or compilation. It is, however,
+outside the remit of the present work. For a treatment of the subject
+in the context of acrshort:uml, see Mellor /et al./
+[cite:@mellor2002executable]
+
+
+Difficulties in synchronising source code with models can be avoided if /full
+code generation/ is targeted, a task considered feasible by some --- such as
+Jörges /et al./ [cite:@jorges2013construction] (p. 33) --- and unfeasible by
+others, such as Greifenberg /et al./ [cite:@greifenberg2015integration], who
+state: "The prevailing conjecture, however, is that deriving a non-trivial,
+complete implementation from models alone is not feasible." From experience, we
+lean more towards Greifenberg /et al./ in this regard. The alternative is to use
+/partial code generation/, but then there is a requirement for one or more
+/integration strategies/ to allow handcrafted and generated code to coexist.
+Here, Greifenberg /et al./'s survey of integration mechanisms is extremely
+helpful [cite:@greifenberg2015integration] [cite:@greifenberg2015comparison].
+
+In our personal opinion, largely borne out of practical experience, model
+synchronisation remains a complex subject with thorny problems --- both
+engineering and theory-wise --- and one which is particularly difficult to
+address at a large, industrial scale. For these reasons, the present work
+recommends relying mainly on the simpler forward-only topology, with minimal use
+of cascading, and resorting to well defined integration strategies; and to adopt
+more complex approaches /solely/ when well-defined use cases emerge.
+
+Complexity notwithstanding, we have thus far only scratched the surface of the
+solution space. The next section identifies its key components and their
+properties.
+
+* The Structure of the Solution Space
+  :properties:
+  :id: 764D8447-0BE2-30E4-E47B-672B2B9D9E4A
+  :custom_id: ID-764D8447-0BE2-30E4-E47B-672B2B9D9E4A
+  :end:
+
+There are a few nuances to add to the simplified picture described in the
+previous section because the underlying process is of a fractal
+nature.[fn:composite_abstractions] That is, by looking in more detail at each
+step on our abstraction descend, we will likely find inside it yet another
+abstraction ladder. Consider the solution space. Within it, the literature
+typically defines two key concepts: /[[id:8077C481-01C0-4384-1AA3-5DA290362463][Technical Spaces (TS)]]/ and /Platforms/.
+Figure [[fig-problem_space_solution_space_platform]] illustrates how they relate to
+each other and to the problem and solution spaces. These two concepts are of
+vital importance to us, so read them for a detail analysis, including a
+discussion of the challenges they present.
+
+[fn:composite_abstractions] This is to be expected, given that abstractions can
+be composed of other abstractions by means of Stachowiak's mapping feature
+(/cf./ [[id:7D92A620-ED3E-D264-46A3-2A2597C59DC7][Why Model]]). In particular (/emphasis his/): "[models] are models of
+/something/, namely, [they are] reflections, representations of natural and
+artificial originals, that can themselves be models again."
+[cite:@stachowiak1973general]
+
+
+#+caption[Problem space, solution space, acrshort:ts and platforms]: Problem space, solution space, acrshortpl:ts and platforms. Author's drawing based on Brambilla /et al./'s image [cite:@brambilla2012model] (p. 13)
+#+name: fig-problem_space_solution_space_platform
+#+attr_latex: :scale 0.4
+[[../assets/images/problem_space_solution_space_platform.png]]
+
+** Technical Spaces
+  :properties:
+  :id: 8077C481-01C0-4384-1AA3-5DA290362463
+  :custom_id: ID-8077C481-01C0-4384-1AA3-5DA290362463
+  :roam_aliases: TS
+  :end:
+
+Kurtev /et al./ proposed [[id:8077C481-01C0-4384-1AA3-5DA290362463][Technical Spaces (TS)]] in their seminal paper
+[cite:@kurtev2002technological], defining them as follows: "A technological
+space is a working context with a set of associated concepts, body of knowledge,
+tools, required skills, and possibilities." Mens and Van Gorp subsequently
+updated the language and tightened the notion by connecting it to
+metametamodels: "A technical space is determined by the metametamodel that is
+used (M3-level)." [cite:@mens2006taxonomy] Examples of [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] include [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] itself,
+[[https://en.wikipedia.org/wiki/XML][XML]], [[https://en.wikipedia.org/wiki/Java_(programming_language)][Java]] and other such programming languages.
+
+In [cite:@bezivin2003first], Bézivin /et al./ outlines their motivation: "The
+notion of [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] allows us to deal more efficiently with the ever-increasing
+complexity of evolving technologies. There is no uniformly superior technology
+and each one has its strong and weak points." The idea is then to engineer
+bridges between technical spaces, allowing the importing and exporting of
+artefacts across them. These bridges take the form of adaptors called
+"projectors", as Bézivin explains (/emphasis ours/):
+
+#+begin_quote
+/The responsibility to build projectors lies in one space/. The rationale to
+define them is quite simple: when one facility is available in another space and
+that building it in a given space is economically too costly, then the decision
+may be taken to build a projector in that given space. There are two kinds of
+projectors according to the direction: /injectors/ and /extractors/. Very often
+we need a couple of injector/extractor to solve a given problem.
+[cite:@bezivin2005model]
+#+end_quote
+
+[[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] are a useful --- if somewhat imprecise[fn:ts_imprecise] --- conceptual device
+and bridging across them has been demonstrated to work in practice
+[cite:@bezivin2003first]. However, our position is that to fully fulfil their
+promise, an extraordinary engineering effort is required to model all
+significant features from existing [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]], to expose them to modeling languages and
+to keep those models updated. As we shall see in the next section, much of the
+same challenges apply to platforms.
+
+[fn:ts_imprecise] In the words of Bézivin /et al./ [cite:@bezivin2003first]
+(/emphasis ours/): "Although /it is difficult to give a precise definition of a
+Technological Space/, some of them can be easily identified, for example:
+programming languages concrete and abstract syntax (Syntax TS), Ontology
+engineering (Ontology TS), XML-based languages and tools (XML TS), Data Base
+Management Systems (DBMS TS), Model-Driven Architecture (MDA TS) as defined by
+the OMG as a replacement of the previous Object Management Architecture (OMA)
+framework."
+
+
+** Platforms
+  :properties:
+  :id: 6C44E7F3-4BEA-9524-810B-B1EE4EECF771
+  :custom_id: ID-6C44E7F3-4BEA-9524-810B-B1EE4EECF771
+  :end:
+
+The term /platform/ is employed within the software engineering profession in a
+broad a variety of contexts, from hardware to operative systems, compilers, IDE
+like the Eclipse Platform[fn:eclipse_url], virtual machines providing
+programming environments such as the JVM and the CLR, and in numerous other
+cases. It is also a core term within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], and a foundation upon which many other
+concepts build, so it is important to arrive at a clear understanding of its
+meaning.
+
+[fn:eclipse_url] https://projects.eclipse.org/projects/eclipse.platform
+
+
+The literature often uses the MDA definition as a starting point, stated as
+follows:
+
+#+begin_quote
+A platform is the set of resources on which a system is realized. This set of
+resources is used to implement or support the system. In the context of a
+technology implementation, the platform supports the execution of the
+application. Together the application and the platform constitute the system.
+[cite:@omg2014mda] (p. 9)
+#+end_quote
+
+From a software engineering standpoint, a platform is often seen as mechanism
+for reuse and abstraction, but [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] goes further and considers as particularly
+useful those that are "semantically rich" and "domain-specific",
+\marginpar{Versus MDE} made up of "prefabricated, reusable components and
+frameworks [because they] offer a much more powerful basis than a 'naked'
+programming language or a technical platform like J2EE." [cite:@volter2013model]
+(p. 15)
+
+Figures [[fig-problem_space_solution_space_platform]] and [[fig-platforms]] explore
+these ideas by depicting the relationship between platforms and [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]]. From this
+perspective, [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] provide the raw building materials and platform developers
+leverage their technical expertise to, in the words of Brambilla /et al./,
+"combine them into a coherent platform" [cite:@brambilla2012model] (p. 13). By
+sitting atop a platform, software engineers can abstract themselves from
+lower-level implementation details and focus on the problem at hand.
+
+#+caption[Platforms and associated concepts]: Platforms and associated concepts. /Source/: Author's drawing based on Stahl /et al./'s image [cite:@volter2013model (p. 59)
+#+name: fig-platforms
+#+attr_latex: :scale 0.4
+[[../assets/images/platforms.png]]
+
+In the presence of code generation, a tempting alternative may appear to be to
+bind the building blocks directly against a modeling language. Experience has
+however demonstrated the pitfalls of this approach, and here we are once more
+faced with the familiar theme of a need to /raise the abstraction level/. In
+practice, the building blocks found in [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] are at too low a level to make them
+suitable for direct integration with a modeling approach because, as already
+discussed (/cf./ Section [[id:764D8447-0BE2-30E4-E47B-672B2B9D9E4A][The Structure of the Solution Space]]), bridging the
+abstraction gap becomes /increasingly difficult as the gap widens/. Stahl /et
+al./ agree, but focus instead on the converse, stating that "[the] platform has
+the task of supporting the realization of the domain, that is, the
+transformation of formal models should be as simple as possible. [...] Clearly,
+the easier the transformations are to build, the more powerful is the platform."
+[cite:@volter2013model] (p. 61) France and Rumpe follow the same line of
+reasoning, positing that abstractions such as platforms are key, because "[the]
+introduction of technologies that effectively raise the implementation
+abstraction level can significantly improve productivity and quality with
+respect to the types of software targeted by the technologies."
+[cite:@france2007model]
+
+Unfortunately, not all is positive. On the same paper, France and Rumpe leave a
+decidedly stark warning about the challenges created by the very same process:
+"[the] growing complexity of newer generations of software systems can
+eventually overwhelm the available implementation abstractions, resulting in a
+widening of the problem-implementation gap." In other words, modeling languages
+close to a platform can only remain relevant if they are continually kept up to
+date with the constant changes to the platforms they depend on, or else risk
+becoming obsolete. This is a very difficult problem to tackle.
+
+An obvious way to mitigate issues that arise from the constant platform churn is
+to decouple platform-dependent concepts from those that are independent of a
+target platform. This partitioning --- originally popularised within MDA but now
+rightfully considered a part of mainstream [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- does not directly address the
+underlying causes but does have the advantage of reducing the overall impact
+surface. As a result, by classifying models with regards to their dependence on
+a platform, we arrive at the notion of Platform Independent Model (PIM) and
+Platform Specific Model (PSM). In [cite:@volter2013model] (p. 20), Stahl /et
+al./ explain that "[...] concepts are more stable than technologies [...]. The
+PIM abstracts from technological details, whereas the PSM uses the concepts of a
+platform to describe a system." A secondary advantage of this approach is that a
+single PIM can be mapped to multiple PSM, as demonstrated by Figure
+[[fig-pim_psm_mappings]].
+
+#+caption[Mapping between a acrshort:pim and three acrshort:psm.]: Mapping between a acrshort:pim and three acrshort:psm. /Source/: Author's drawing based on Stahl /et al./'s image [cite:@volter2013model] (p. 20)
+#+name: fig-pim_psm_mappings
+#+attr_latex: :scale 0.4
+[[../assets/images/pim_psm_mappings.png]]
+
+However, when one looks at these elegant solutions in more detail, the
+literature enters once more difficult terrain. First and most significantly,
+there are still looming challenges in establishing just what exactly a platform
+/is/. Bézivin explains the matter rather eloquently (/emphasis ours/):
+
+#+begin_quote
+There is a considerable work to be done to characterize a platform. How is this
+related to a virtual machine (/e.g./ JVM) or to a specific language (/e.g./
+Java)? How is this related to a general implementation framework (/e.g./ DotNet
+or EJB) or even to a class library? How to capture /the notion of abstraction
+between two platforms/, one built on top of the other one? /The notion of a
+platform is relative/ because, for example, to the platform builder, the
+platform will look like a business model. One may also consider that /there are
+different degrees of platform independence/, but here again no precise
+characterization of this may be seriously established before we have an initial
+definition of the concept of platform. [cite:@bezivin2005unification]
+#+end_quote
+
+Secondly, there is the question of how the mappings are to be achieved. In the
+same paper, Bézivin suggested employing Platform Definition Models (PDMs) as a
+way to bridge this gap --- that is, the use of models to describe the
+capabilities of platforms. This and several other ideas informed research, which
+became very active and produced a number of localised solutions, for example in
+the context of MDA [cite:@wagelaar2005explicit] and XML
+[cite:@neubauer2016towards]. Nonetheless, a general approach to the problem
+remains illusive, as Anjorin /et al./ explain (/emphasis theirs/):
+
+#+begin_quote
+Although there exist numerous strategies and mature tools for certain isolated
+subtasks or specific applications, a general /framework/ for designing and
+structuring model-to-platform transformations, which consolidates different
+technologies in a flexible manner, is still missing, especially when
+/bidirectionality/ is a requirement. [cite:@anjorin2012framework]
+#+end_quote
+
+Their work provides an informed summary of the state of the art on this regard,
+as well as proposing a promising direction for such a generalised framework;
+nevertheless, substantial research and engineering work remains, in order to
+address all of the issues highlighted above.
+
+Thirdly, there are those who question the need to make PSM explicitly visible,
+asking whether they are not best seen as a conceptual device and a (hidden)
+implementation detail. Stahl /et al./ report that "[p]ractical project
+experience has hitherto proved that this simplification [of foregoing explicitly
+visible PSMs] is usually more useful than the additional degrees of freedom
+gained with PSMs." [cite:@volter2013model] (p. 24) According to them, such a
+simplification permits more efficient development and reduces the thorny issues
+around model synchronisation, particularly from lower to higher levels of
+abstraction --- /i.e./, the propagation of changes from PSM to PIM (/cf./
+Section [[id:764D8447-0BE2-30E4-E47B-672B2B9D9E4A][The Structure of the Solution Space]]).[fn:rte_variation]
+
+[fn:rte_variation] These are, in effect, merely a variation of the RTE problem
+described in [[id:BF561E70-3586-DC44-AF3B-BDD2206E4196][Modeling Languages and Programming Languages]].
+
+
+In light of all of these difficulties, and even taking into account the
+Pragmatism Principle, one is nevertheless forced to conclude that Bézivin's
+words of warning still to loom large over the field: "Answering the question of
+what is a platform may be difficult, but until a precise answer is given to this
+question, the notion of platform dependence and independence (PSMs and PIMs) may
+stand more in the marketing than in the technical and scientific vocabulary."
+[cite:@bezivin2005unification]
+
+These stimulating words complete our sketch of the solution space and its
+challenges. Our attention shall now turn "upwards" once more, towards the bigger
+picture, as we investigate the interaction between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and the various
+methodologies and processes used for the development of software systems.
+
+* Bibliography
+
+#+print_bibliography:

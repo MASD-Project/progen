@@ -3,3 +3,4 @@ build/output
 # Emacs
 .packages
 .org-id-locations-file
+.org-roam.db

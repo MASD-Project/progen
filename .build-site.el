@@ -27,6 +27,7 @@
 (require 'package)
 (require 'org)
 (require 'org-id)
+(require 'oc-bibtex)
 (require 'ox-publish)
 (require 'org-element)
 
@@ -51,7 +52,7 @@
 (setq org-html-validation-link nil            ;; Don't show validation link
       org-html-head-include-scripts nil       ;; Use our own scripts
       org-html-head-include-default-style nil ;; Use our own styles
-      org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+      org-html-head "<link rel=\"stylesheet\" href=\"https://gongzhitaao.org/orgcss/org.css\" />")
 
 ;; Define the publishing project
 (setq org-publish-project-alist
@@ -71,8 +72,13 @@
          :base-extension "png\\|jpg"
          :publishing-directory "./build/output/site/assets/images"
          :publishing-function org-publish-attachment)
+        ("progen-site:css"
+         :base-directory "./assets/css"
+         :base-extension "css"
+         :publishing-directory "./build/output/site/assets/css"
+         :publishing-function org-publish-attachment)
         ( "progen-site:main"
-          :components("progen-site:images" "progen-site:pages"))
+          :components("progen-site:images" "progen-site:pages" "progen-site:css"))
        ))
 
 ;; Generate the site output

@@ -1,0 +1,416 @@
+:properties:
+:id: C29C6088-B396-A404-9183-09FE5AD2D105
+:roam_aliases: MDE
+:end:
+#+title: Towards a Definition of MDE
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+startup: inlineimages
+#+cite_export: basic numeric numeric
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+It is striking to see however, that though [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is supposed to be about precise
+modelling, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] core concepts are not defined through precise models. [...] In
+such conditions, it is very difficult to understand how the basic concepts of
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are related, and how they can be mapped to existing [[id:8077C481-01C0-4384-1AA3-5DA290362463][Technical Spaces]]. ---
+Jean-Marie Favre [cite:@@favre2004towards]
+#+end_quote
+
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering (MDE)]] is an established approach for the engineering of
+software systems. [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] distinguishes itself from related approaches due to its
+explicit focus on the /modeling/ of entities within a software system, and on
+the /transformations/ that can be applied to them. The first challenge facing a
+new [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner is in obtaining a rigorous definition of the discipline and
+its boundaries. The present document aims to guide the reader towards an
+understanding of the discipline, across a difficult landscape.
+
+The document is organised as follows. First, Section [[id:0EACD4CD-8453-F874-E693-6E27CA30E70A][What, if anything, is MDE?]]
+will get our bearings by positioning [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] against a number of computer science
+terms such as /paradigm/ and /methodology/. Section [[id:20CCFA8A-C691-E5F4-D63B-E2401CBB62AD][MDE as a "body of knowledge"]]
+will then home in on the aspects related to a /body of knowledge/, and it is
+followed by a discussion of the hierarchical model of modeling approaches
+(Section [[id:79EC741E-8818-3494-8B1B-2B27C182B160][A Hierarchy of Modeling Approaches]]). We will then discuss the
+complexities associated with the vast number of acronyms in the field (Section
+[[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][The Model-Driven Jungle]]), sketch out the boundaries of the discipline (Section
+[[id:28849189-513D-7224-A64B-CB92CED3BFC3][Conditions at the Boundaries]]) and understand the role of pragmatism in modeling
+(Section [[id:EF8AB73B-F189-7AE4-CD4B-9713E34AC63E][Pragmatism in a Fuzzy Discipline]]). The chapter concludes with a brief
+discussion outlining our conclusions on the role of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] (Section [[id:4872BDDC-CAE7-0F64-DD4B-86394DE946C4][Sketch of a
+Definition]]).
+
+* What, if anything, is MDE?
+  :properties:
+  :id: 0EACD4CD-8453-F874-E693-6E27CA30E70A
+  :custom_id: ID-0EACD4CD-8453-F874-E693-6E27CA30E70A
+  :end:
+
+Defining the nature of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering (MDE)]] is not quite as simple as
+it may appear. On one hand, informal characterisations abound, with most similar
+in spirit to what Cuesta proposes (/emphasis ours/):
+
+#+begin_quote
+[Within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], software] development processes are conceived as /a series of
+steps/ in which /specification models/, as well as those which describe the
+[[id:CA232302-65F9-6DE4-AD4B-6D24EE3E9D39][problem domain]], are /continually refined/, until implementation domain models
+are reached --- along with those which make up the verification and validation
+of each model, and the correspondence between them. In [[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]], the steps in the
+development process are considered to be /mere transformations/ /between
+models/.[fn:translation], [fn:nature_of_model]
+[cite:@cuesta2016metaherramientas] (p. 1)
+#+end_quote
+
+[fn:translation] This quote was translated from the original Spanish by the
+author. The reader is advised to consult the primary source.
+
+[fn:nature_of_model] The nature of models within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], as well as that of
+transformations, is analysed in greater detail on FIXME Chapter
+models-transformations.
+
+
+On the other hand, formal definitions are found wanting. To make matters worse,
+the literature remains unclear as to whether [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is an approach
+[cite:@favre2004towards], a methodology [cite:@brambilla2012model], a technical
+space [cite:@bezivin2005model], a paradigm [cite:@volter2013model]
+[cite:@giese2010model], all, some or neither of these. Furthermore, there is a
+degree of imprecision as to how most of these terms are generally used within
+computer science. As an example, Harper made known his dissatisfaction with the
+term /paradigm/ in his essay "What, if anything, is a programming paradigm?",
+stating:
+
+#+begin_quote
+The trouble with programming paradigms is that it is rather difficult to say
+what one is, or how we know we have a new one. Without precise definitions,
+nothing precise can be said, and no conclusions can be drawn, either
+retrospectively or prospectively, about language design. [cite:@harper2017if]
+#+end_quote
+
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] literature steers into similarly difficult terrain. In
+[cite:@brambilla2012model], Brambilla /et al./ call [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] a methodology but then
+hasten to qualify they (/emphasis ours/)
+
+#+begin_quote
+[...] realise that /methodology/ is an overloaded term, which may have several
+interpretations. In this context we are not using the term to refer to a formal
+development process, but instead as /a set of instruments and guidelines/ [...].
+[cite:@brambilla2012model] (p. 7)
+#+end_quote
+
+Those qualifications and the imprecision of the language raise concerns as to
+the usefulness of the term, so we choose instead to side with Matinnejad
+[cite:@matinnejad2011agile] as well as Asadi and Ramsin [cite:@asadi2008mda],
+who make a strong case for calling [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] an /approach/ or a /general framework/
+rather than a methodology.[fn:mde_as_methodology] With regards to the remaining
+terms: heeding Harper's warnings above, we feel one should refrain from using
+the term paradigm altogether; and, whilst agreeing with the notion of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] as a
+/technical space/, we address it in what we believe to be a more fitting context
+(/cf./ [[id:8077C481-01C0-4384-1AA3-5DA290362463][Technical Spaces]]).
+
+The matter does not rest here, though, for there are additional viewpoints that
+must be taken into account when attempting to characterise [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
+
+[fn:mde_as_methodology] This matter is argued further on Section FIXME
+soft-methodology, where we address the relationship between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and the software
+development process, and articulate a stronger argument as to why [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] should not
+be considered to be a methodology. Furthermore, we also provide additional
+context on software development methodologies.
+
+
+* MDE as a "body of knowledge"
+  :properties:
+  :id: 20CCFA8A-C691-E5F4-D63B-E2401CBB62AD
+  :end:
+
+In our opinion, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is /more/ than an approach. For our purposes, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is to be
+understood as a large /body of knowledge/ focused on the employment of modeling
+as the principal driver of software engineering activities. This choice of
+wording may appear controversial at first sight, given the position of
+Mussbacher /et al./ [cite:@mussbacher2014relevance] --- who stated that
+"[unlike] most other fields of engineering, model-driven engineering does not
+have a Body of Knowledge (BoK) as such." Nevertheless, both views can be
+reconciled by accepting a distinction between a formal /Body of Knowledge/ ---
+which [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] lacks --- and an informal /body of knowledge/ --- which we posit [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+/is/.
+
+The idea can perhaps be clarified by recourse to the words of Fairley and
+Chaffer (/emphasis ours/):
+
+#+begin_quote
+Every profession is based on /a body of knowledge/, although that knowledge is
+/not always defined in a concise manner/. In cases where no formality exists,
+the body of knowledge is /"generally recognized"/ by practitioners and may be
+codified in a variety of ways for a variety of different uses.
+[cite:@bourque2014guide]
+#+end_quote
+
+This, we believe, is an apt description of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] from the perspective of the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+practitioner. But in order for a practitioner to make sense of this vast and
+diverse body of knowledge, it is useful to arrange it into some form of
+structure.
+
+* A Hierarchy of Modeling Approaches
+  :properties:
+  :id: 79EC741E-8818-3494-8B1B-2B27C182B160
+  :custom_id: ID-79EC741E-8818-3494-8B1B-2B27C182B160
+  :end:
+
+One common method of overlaying structure into [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is by way of classifying the
+application of modeling within the software development process. Here,
+researchers often distinguish between three different "levels" of modeling use,
+with each level seen as a super-set of the preceding [cite:@ensad]
+[cite:@whittle2014state] [cite:@brambilla2012model]. At the lowest level sits
+Model Based Engineering (MBE), where models are employed as a form of inter and
+intra-team communication and documentation. Within MBE, models are an input to
+the development process but, typically, software engineers are responsible for
+manually translating them into source code.
+
+Next, at an intermediate level, sits Model Driven Development (MDD), where the
+software development process is driven entirely by models, and whose translation
+to code is performed by automated means. Finally, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is located at the highest
+level of the hierarchy; it orchestrates /all/ engineering activities of a
+software system via modeling, including its development, operation and
+maintenance.[fn:software_engineering] Figure [[fig-mde_mdd_mbe]] provides a
+graphical illustration of these relationships.
+
+[fn:software_engineering] Here we resort to Bourque /et al./'s definition of
+Software Engineering: "[...] the application of a systematic, disciplined,
+quantifiable approach to the development, operation, and maintenance of
+software; that is, the application of engineering to software."
+[cite:@abran2004software]
+
+
+#+caption[Hierarchy of modeling approaches]: Hierarchy of modeling approaches. /Source/: Author's drawing based on a diagram by Whittle /et al./ [cite:@whittle2014state]
+#+name: fig-mde_mdd_mbe
+#+attr_latex: :scale 0.4
+[[../assets/images/mde_mdd_mbe.png]]
+
+Whilst this hierarchy is conceptually convenient and appeals to the intuition of
+most software engineers --- possibly because it echoes earlier notions around
+Object-Based and Object Oriented (OO) programming[fn:adjectives] --- in
+practice, the layers are notoriously difficult to tease apart and are thus of
+limited use outside introductory material. Indeed, empirical observations such
+as those of Hutchinson /et al./ [cite:@hutchinson2011empirical] reveal that they
+are closer to a spectrum of possibilities rather than a set of well-defined
+categories. As a result, the terms MDD and [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are used interchangeably in much
+of the literature, and their presence often merely signifies "/a/ model-driven
+approach" instead of the more technical meaning intended by the hierarchy. And,
+sadly, this is just the end /of the beginning/ of the confusing terminology.
+
+[fn:adjectives] The adjectives /based/, /oriented/, and /driven/ are rife
+throughout computer science and software engineering, obscuring somewhat their
+intent and differences. For example, Meyer is not entirely convinced about how
+/oriented/ and /based/ are used in the OO context (/emphasis his/): "Because the
+English words /based/ and /oriented/ do not readily evoke the conceptual
+difference between encapsulation techniques and OO languages, 'object-based' is
+a little hard to justify, especially to newcomers." [cite:@meyer1988object]
+(p. 1100) The modeling community largely circumvented such difficulties by
+giving preference to /driven/ --- /e.g./ /model-driven/ --- over the arguably
+more obvious /oriented/ --- /e.g./ "model-oriented". As Stahl /et al./ put it,
+"The adjective 'driven' in 'Model-Driven Software Development' --- in contrast
+to 'based' --- emphasizes that this paradigm assigns models a central and active
+role: they are at least as important as source code." [cite:@volter2013model]
+(p. 4)
+
+
+* The Model-Driven Jungle
+  :PROPERTIES:
+  :id: 7FCC54A3-D2C3-0254-1C0B-103976AA8D87
+  :custom_id: ID-7FCC54A3-D2C3-0254-1C0B-103976AA8D87
+  :end:
+
+Matters are further complicated by the existence of a number of additional
+model-driven approaches and methodologies outside the hierarchy, similar in
+characteristics but differing in naming, such as Model-Driven Software
+Engineering (MDSE) [cite:@brambilla2012model], Model-Driven Software Development
+(MDSD) [cite:@volter2013model], Model Driven Architecture (MDA)
+[cite:@poole2001model], Model-Integrated Computing (MIC)
+[cite:@sprinkle2004model], Model Oriented Programming (MOP)
+[cite:@badreddin2013model], Model-Based Software Engineering (MBSE)
+[cite:@estefan2007survey] and many others. The literature customarily refers to
+these as /[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] variants/ [cite:@brambilla2012model] (p. 10) or /[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] flavours/
+[cite:@volter2013model] (p. 11), but these are not precise terms. Interestingly,
+our review did not uncover a much needed taxonomy or a detailed comparative
+study characterising variants and their relationships, in what appears to be a
+glaring gap in the literature.
+
+The need for grouping is certainly present, for it is cumbersome have to name
+variants individually when making arguments that apply to /model-driven/ in
+general. Völter sought to redress this shortcoming by grouping variants under
+the umbrella term /MD*/ [cite:@Vlter2009MDBP] and it quickly became established
+practice in the literature. However, it is not yet clear if the existence of
+this grouping has helped or hindered those seeking to understand what [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /is/,
+specially as there is no rigorous definition of the members of the group nor of
+its properties, much beyond Völter's original --- and uncharacteristically
+carefree --- comment: "I use MD* as a common moniker for MDD, MDSD, MDE, MDA,
+MIC, and all the other abbreviations for basically the same approach."
+[cite:@Vlter2009MDBP]
+
+With a hint of well-placed irony, Brambilia /et al./ spoke of the /MD* Jungle/
+[cite:@brambilla2012model] (p. 9), adding that (/emphasis ours/) "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] can be
+seen as the superset of all these variants, as /any/ [MD*] approaches could fall
+under the MDE umbrella." [cite:@brambilla2012model] (p. 10) It is in this sense
+that the term [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is to be understood within this context --- a sense, we
+believe, that is entirely consistent with its role as a [[id:20CCFA8A-C691-E5F4-D63B-E2401CBB62AD][body of knowledge]].
+However, questions are then raised as to how best determine what is /inside/ the
+informal [[id:20CCFA8A-C691-E5F4-D63B-E2401CBB62AD][body of knowledge]], as opposed to what remains /outside/.
+
+* Conditions at the Boundaries
+  :PROPERTIES:
+  :id: 28849189-513D-7224-A64B-CB92CED3BFC3
+  :custom_id: ID-28849189-513D-7224-A64B-CB92CED3BFC3
+  :END:
+
+Much like the boundaries from within, the boundaries from without are no less
+troublesome to isolate. Over time, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] has been integrated with a number of
+existing approaches and methodologies such as Software Product Line Engineering
+(SPLE) [cite:@pohl2005software], Agile [cite:@matinnejad2011agile], Generic
+Programming (GP) and Domain Engineering [cite:@czarnecki1998generative] --- to
+name but a few --- to an extent that its now difficult to determine whether
+certain concepts should be included as part of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s [[id:20CCFA8A-C691-E5F4-D63B-E2401CBB62AD][body of knowledge]] or are
+extraneous to it. A similar problem occurs with terms defined in its variants
+such as Model Driven Architecture (MDA), particularly for those which have wider
+applicability to modeling problems outside the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] variant itself.
+
+Our review of the literature did not uncover any adequate solutions to this
+thorny problem. Though by no means authoritative, our approach was to include in
+the present analysis all of the concepts that are relevant to our purposes and
+to use the notion of /integrations/ where the concepts are more obviously
+external to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- /e.g./, "Agile integration" (/cf./ Part FIXME integrations).
+But all the difficulties discussed thus far point out there may be a deeper
+malaise with the discipline itself.
+
+* Pragmatism in a Fuzzy Discipline
+  :PROPERTIES:
+  :id: EF8AB73B-F189-7AE4-CD4B-9713E34AC63E
+  :custom_id: ID-EF8AB73B-F189-7AE4-CD4B-9713E34AC63E
+  :END:
+
+Jörges /et al./ encapsulated all of these themes in a manner that could be
+construed as an indictment to the entire endeavour (/emphasis ours/):
+
+#+begin_quote
+This "fuzziness" or lack of precision can be observed for most of the vocabulary
+used in the context of MD*. /There is still no/ /established fundamental/
+/theory of modeling/ and related concepts that would be comparable to the
+maturity achieved in other disciplines of computer science, such as compiler
+construction. [cite:@jorges2013construction] (p. 14)
+#+end_quote
+
+However, behind the lack of precision lies method, as Bézivin's incisively
+explains: "[we] are not interested here by a theoretical definition [...] but by
+an engineering one, /i.e./ a definition that will help users to implement and
+maintain systems." [cite:@bezivin2005model] Citing Fowler [cite:@fowler2004uml],
+Brambilla /et al./ go as far as warning practitioners to "[b]eware of statements
+of pure principles: when it comes down to it, the real point of software
+engineering practice is to increase productivity, reduce errors, and cut code."
+[cite:@brambilla2012model] (p. 23) Translated to the software development
+vernacular, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] sees /fuzziness as a feature, not a bug/. This is a very
+significant statement of intent. For the remainder of this work we shall refer
+to it as the /Pragmatism Principle/, albeit restated in a slightly different
+form:[fn:pragmatism]
+
+[fn:pragmatism] The term /pragmatism/ was chosen as an allusion to one of
+Stachowiak's fundamental model properties (/cf./ Section FIXME why model)
+because we see [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /as a model too/. Alas, a detailed discussion of the topic
+would take us too far afield, befitting the philosophy of modeling in software
+development.
+
+
+#+begin_quote
+When defining terms within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]['s] body of knowledge, /engineering definitions/
+are preferred over /theoretical definitions/. That is, pragmatic definitions
+that help practitioners implement and maintain the systems of today, even when
+imprecise, are preferred over rigorous theoretical definitions that are either
+not yet completely formulated or that fail to meet the helpfulness criteria.
+#+end_quote
+
+In our opinion, the Pragmatism Principle helps explain the apparent fuzziness of
+a significant subset of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s vocabulary for, in an environment where
+operational definitions abound, there is a permanent danger of duplication,
+inconsistencies and misunderstandings. After all, what suffices for one use case
+may not do at all for others. Nonetheless, we view the Pragmatism Principle as
+an important factor in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s progress and find it to be consistent with our view
+of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] as a body of knowledge rather than a methodology or a paradigm, as we are
+no longer constrained by a need for rigour at all costs or even for overall
+consistency.
+
+Note that the Pragmatism Principle is not a /carte blanche/ to legitimise and
+empower sloppy reasoning. Rigour is still important to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], as are theoretical
+foundations, and the lack of fundamentals often appears in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] research roadmaps
+[cite:@france2007model] [cite:@mussbacher2014relevance]. The Pragmatism
+Principle merely justifies using an empiric approach to enable progress whilst
+the theoretic foundations are being laid, and presupposes the ability to make a
+trade-off between rigour and applicability where needed. And these trade-offs
+are not restricted to rigour and pragmatism either.
+
+* Sketch of a Definition
+  :properties:
+  :id: 4872BDDC-CAE7-0F64-DD4B-86394DE946C4
+  :custom_id: ID-4872BDDC-CAE7-0F64-DD4B-86394DE946C4
+  :end:
+
+Seen from the present vantage point, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering's (MDE)]] role ---
+/de facto/ if not /de jure/ --- has been to provide the building blocks from
+whence model-driven methodologies can be constructed, to the precise
+specifications of its practitioners. And, in this regard, it has been very
+successful. In our opinion, the main downside of the [[id:EF8AB73B-F189-7AE4-CD4B-9713E34AC63E][Pragmatism Principle]] ---
+and thus, of the approach as a whole --- is that it places a /great deal of
+responsibility/ on the practitioner to make the correct trade-offs, therefore
+requiring a /high-level of mastery/ of a large and complex
+cannon.[fn:when_to_model]
+
+[fn:when_to_model] Take the decision to use modeling in the first place. Whilst
+the enumeration of choices presented in Section FIXME modeling-approach appears
+to convey simplicity, experience says otherwise. In order to make an informed
+decision, one must first master /both/ the theory of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /as well as/ the thorny
+practical aspects of its application, and these only reveal themselves when
+applied to a /sufficiently large/ project during /sufficiently long/ timescales
+--- as we ourselves discovered.
+
+
+At this juncture we can now sketch out our understanding of the discipline,
+which is as follows:
+
+- [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is an /informal [[id:20CCFA8A-C691-E5F4-D63B-E2401CBB62AD][body of knowledge]]/ centred on the employment of modeling
+  as the principal driver of software engineering activities.
+- [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] promotes the /[[id:EF8AB73B-F189-7AE4-CD4B-9713E34AC63E][pragmatic]] application/ of a /family of related approaches/
+  to the development of software systems, with the intent of /generating
+  automatically/ a part or the totality of a software product, from one or more
+  /formal models/ and associated /transformations/ (/cf./ Section FIXME
+  models-transformations).
+- [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is best understood as a /vision/ rather than a /concrete destination/. A
+  vision /guides/ the general direction of the approach, but does not dictate
+  the solution, nor does it outline the series of steps required to reach
+  it.[fn:mde_vision_fail]
+
+[fn:mde_vision_fail] This vision is articulated clearly by France and Rumpe:
+
+#+begin_quote
+In the MDE vision, domain architects will be able to produce domain specific
+application development environments (DSAEs) using what we will refer to as MDE
+technology frameworks. Software developers will use DSAEs to produce and evolve
+members of an application family. A DSAE consists of tools to create, evolve,
+analyze, and transform models to forms from which implementation, deployment and
+runtime artifacts can be generated. Models are stored in a repository that
+tracks relationships across modeled concepts and maintains metadata on the
+manipulations that are performed on models. [cite:@france2007model]
+#+end_quote
+
+
+- It is the responsibility of the /[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner/ to select the appropriate
+  tools and techniques from the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] body of knowledge, in order to apply it
+  adequately to a /specific instance/ of the software development process. By
+  doing so, the practitioner will create --- /implicitly/ or /explicitly/ --- an
+  [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][variant]].
+
+Now that we have a basic understanding of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s reach[fn:intro_material], we
+can turn our attention towards its core concepts: [[id:C807836B-B1D6-1024-86E3-7D49BCF20D74][Models and Transformations]].
+
+[fn:intro_material] Those requiring a more thorough introduction to the subject
+matter are guided towards [cite:@brambilla2012model] and
+[cite:@volter2013model].
+
+
+* Bibliography
+
+#+print_bibliography:

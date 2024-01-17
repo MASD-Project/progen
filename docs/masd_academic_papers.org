@@ -1,0 +1,35 @@
+:properties:
+:id: 5FA85AF3-E55C-B174-D943-1E2246CAEB14
+:end:
+#+title: MASD Academic Papers
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+startup: inlineimages
+#+cite_export: basic author author-year
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+Please note that the bulk of this site is a reformatting of my PhD thesis, as
+well as of all of the supplemental material that was written to support it ---
+papers, research notes, article reviews /etc./ Though extensive bibliographical
+references were kept within the site --- and should be suitable for academic
+purposes /as is/ --- the same cannot be said about our own content. No efforts
+were made in tracing back our own material to their original papers because we
+are no longer in academia.
+
+If you are only interested in learning about the concepts or want to code in
+this project, you should /use only the content of the site/, because the papers
+are frozen in time. If, however, you need access to the originals for academic
+purposes, they are as follows:
+
+- [[https://zenodo.org/record/5812017#.YkmlftDMKXI][Notes on Model Driven Engineering]]: Background on MDE.
+- [[https://zenodo.org/record/5790875#.YkoSutDMKXI][Survey of Special Purpose Code Generators]]: Short survey of Open Source tools
+  dedicated to special purpose code generation.
+- [[https://zenodo.org/record/5767247#.YkoS6NDMKXI][Experience Report of Industrial Adoption of Model Driven Development in the
+  Financial Sector]]: Our prior experiences of using MDE on an industrial setting.
+- [[https://uhra.herts.ac.uk/handle/2299/25708][Model Assisted Software Development - a MDE-Based Software Development
+  Methodology]]: PhD thesis.
+
+Whilst the content of this site is based on these papers, it may have been
+modified a great deal since it was originally seeded from them, as our
+understanding of the subject matter improved. In addition, we also added to it
+all of the non-academic material created as part of the [[https://github.com/MASD-Project/dogen][Dogen project]].

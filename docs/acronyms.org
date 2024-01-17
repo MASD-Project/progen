@@ -1,0 +1,68 @@
+:properties:
+:id: 4B0DC013-F222-5BB4-33DB-C53414604801
+:end:
+#+title: Acronyms
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+name: acronyms
+#+caption: Commonly used acronyms.
+| Acronym   | Description                         |
+|-----------+-------------------------------------|
+| AC-MDSD   | [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][Architecture-Centric MDSD]]           |
+| AO        | Aspect Oriented                     |
+| AO-MD-PLE | Aspect-Oriented Model Driven PLE    |
+| AOP       | Aspect Oriented Programming         |
+| API       | Application Programming Interface   |
+| ATL       | Atlas Transformation Language       |
+| BDD       | Binary Decision Diagram             |
+| CLR       | Common Language Runtime             |
+| CNF       | Conjunctive Normal Form             |
+| CVL       | Common Variability Language         |
+| DOM       | Document Object Model               |
+| DSL       | Domain Specific Language            |
+| EMF       | Eclipse Modeling Framework          |
+| FODA      | Feature-Oriented Domain Analysis    |
+| FOP       | Feature-Oriented Programming        |
+| GMF       | Graphical Modeling Framework        |
+| GP        | Generative Programming              |
+| GPML      | General Purpose Modeling Language   |
+| IDE       | Integrated Development Environment  |
+| IPC       | Implicit Presence Conditions        |
+| J2EE      | Java Platform Enterprise Edition    |
+| JSON      | JavaScript Object Notation          |
+| JVM       | Java Virtual Machine                |
+| LDL       | Layer Definition Language           |
+| M2M       | [[id:707BD590-1E59-56B4-D333-33525E43A78A][Model-to-Model]]                      |
+| M2T       | [[id:707BD590-1E59-56B4-D333-33525E43A78A][Model-to-Text]]                       |
+| MASD      | Model Assisted Software Development |
+| MBE       | [[id:79EC741E-8818-3494-8B1B-2B27C182B160][Model Based Engineering]]             |
+| MBSE      | [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][Model-based Systems Engineering]]     |
+| MDA       | Model Driven Architecture           |
+| MDD       | [[id:79EC741E-8818-3494-8B1B-2B27C182B160][Model Driven Development]]            |
+| MDE       | [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering]]            |
+| MDSD      | [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][Model Driven Software Development]]   |
+| MDSE      | [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][Model Driven Software Engineering]]   |
+| MIC       | [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][Model-Integrated Computing]]          |
+| MOP       | [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][Model Oriented Programming]]          |
+| MT        | [[id:707BD590-1E59-56B4-D333-33525E43A78A][Model Transformation]]                |
+| OMG       | Object Management Group             |
+| OO        | Object-Oriented                     |
+| OVM       | Orthogonal Variability Modeling     |
+| PCL       | Product Configuration Language      |
+| PDM       | Platform Description Model          |
+| PIM       | Platform Independent Model          |
+| PM        | Physical Model                      |
+| PSM       | Platform Specific Model             |
+| QVT       | Query / View/ Transformation        |
+| RTE       | Round-Trip Engineering              |
+| SAX       | Simple API for XML                  |
+| SDLC      | Software Development Lifecycle      |
+| SDM       | Software Development Methodology    |
+| SPLE      | Software Product Line Engineering   |
+| T2T       | [[id:707BD590-1E59-56B4-D333-33525E43A78A][Text-to-Text]]                        |
+| TS        | [[id:8077C481-01C0-4384-1AA3-5DA290362463][Technical Space]]                     |
+| UML       | Unified Modeling Language           |
+| XML       | Extensible Markup Language          |
+| XSD       | XML Schema Definition Language      |

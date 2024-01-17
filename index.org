@@ -1,21 +1,61 @@
 :properties:
 :id: 11F938FF-2A01-4424-DBE3-16527251E747
-:masd.technical_space: masd
 :end:
 #+title: Progen, or Dogen v2
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+startup: inlineimages
+#+cite_export: basic author author-year
+#+bibliography: bibliography.bib
+
+[[./assets/images/masd_logo.png]]
 
 This site contains all of the product documentation for Progen. Progen is the
-second incantation of [[https://github.com/MASD-Project/dogen][Dogen]], the MASD code generator. MASD - Model Assisted
-Software Development - is a methodology to develop software systems based on
-MDE - Model Driven Development. Throughout this site you will find all the
+second incantation of [[https://github.com/MASD-Project/dogen][Dogen]], the Model Assisted Software Development (MASD) code
+generator. MASD is a methodology to develop software systems[fn:thesis] based on
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE - Model Driven Development]]. Throughout this site you will find all the
 information needed to make sense of these and many other terms, as well as the
 rationale for the existence of Progen. This project makes heavy use of the
-org-roam approach.
+[[https://www.orgroam.com/manual.html][org-roam]] approach, though if you are consuming it from within a web-browser, it
+should not make much difference.
 
-* Starting points
+[fn:thesis] MASD was developed as part of my PhD thesis. See [[id:5FA85AF3-E55C-B174-D943-1E2246CAEB14][MASD Academic
+Papers]].
 
-- [[id:BA763158-3DC5-E914-BF2B-5C9CABBC3676][readme]]: The project README in github.
-- [[id:26C11B63-95AE-D454-4663-0B147D32B568][progen]]: Details of the project itself.
-- models: Contains all of MASD's base models:
-  - [[id:4537C384-FB75-AE04-CC0B-92C4DC2EB4EC][masd]]: Core meta-model.
+
+* Content
+
+** General Pages
+
+| Page   | Description                    |
+|--------+--------------------------------|
+| [[id:BA763158-3DC5-E914-BF2B-5C9CABBC3676][Readme]] | The project README in github.  |
+| [[id:26C11B63-95AE-D454-4663-0B147D32B568][Progen]] | Details of the project itself. |
+
+** Domain Concepts
+
+This project was originally part of an academic research project, so a lot of
+documentation was created describing the domain which it covers. The sections
+that follow contain an overview of the main pages, which are then weaved
+together using the [[https://www.orgroam.com/manual.html][org-roam]] approach. To access the original material, see [[id:5FA85AF3-E55C-B174-D943-1E2246CAEB14][MASD
+Academic Papers]].
+
+*** Model Driven Engineering
+
+MASD is based on [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering (MDE)]], so its important to understand
+the basic concepts of this field and why we found it necessary to extend it.
+
+| Page                                 | Description                                                                |
+|--------------------------------------+----------------------------------------------------------------------------|
+| [[id:4B0DC013-F222-5BB4-33DB-C53414604801][Acronyms]]                             | List of commonly used TLAs.                                                |
+| [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Towards a Definition of (MDE)]]        | Exploration of the literature towards attaining a definition of this term. |
+| [[id:C807836B-B1D6-1024-86E3-7D49BCF20D74][Models and Transformations]]           | Definition of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s core concepts, and rationale for their usage.          |
+| [[id:CA232302-65F9-6DE4-AD4B-6D24EE3E9D39][From Problem Space to Solution Space]] | Characterisation of problem space and solution space.                      |
+
+** Models
+
+Contains all of MASD's base models.
+
+| Page       | Description      |
+|------------+------------------|
+| [[id:4537C384-FB75-AE04-CC0B-92C4DC2EB4EC][masd]]       | Core meta-model. |
+| [[id:02E29EFE-34EE-4614-882B-8EA856275D97][model.name]] |                  |
