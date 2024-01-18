@@ -64,8 +64,7 @@ models/.[fn:translation], [fn:nature_of_model]
 author. The reader is advised to consult the primary source.
 
 [fn:nature_of_model] The nature of models within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], as well as that of
-transformations, is analysed in greater detail on FIXME Chapter
-models-transformations.
+transformations, is analysed in greater detail in [[id:C807836B-B1D6-1024-86E3-7D49BCF20D74][Models and Transformations]].
 
 
 On the other hand, formal definitions are found wanting. To make matters worse,
@@ -109,8 +108,8 @@ the term paradigm altogether; and, whilst agreeing with the notion of [[id:C29C6
 The matter does not rest here, though, for there are additional viewpoints that
 must be taken into account when attempting to characterise [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
 
-[fn:mde_as_methodology] This matter is argued further on Section FIXME
-soft-methodology, where we address the relationship between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and the software
+[fn:mde_as_methodology] This matter is argued further in [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][Software Development
+Methodologies]], where we address the relationship between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and the software
 development process, and articulate a stronger argument as to why [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] should not
 be considered to be a methodology. Furthermore, we also provide additional
 context on software development methodologies.
@@ -152,6 +151,7 @@ structure.
   :properties:
   :id: 79EC741E-8818-3494-8B1B-2B27C182B160
   :custom_id: ID-79EC741E-8818-3494-8B1B-2B27C182B160
+  :roam_aliases: MBE MDD
   :end:
 
 One common method of overlaying structure into [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is by way of classifying the
@@ -216,6 +216,7 @@ role: they are at least as important as source code." [cite:@volter2013model]
   :PROPERTIES:
   :id: 7FCC54A3-D2C3-0254-1C0B-103976AA8D87
   :custom_id: ID-7FCC54A3-D2C3-0254-1C0B-103976AA8D87
+  :roam_aliases: MDSE MDSD MD* MIC MOP MBSE "MDE Variant"
   :end:
 
 Matters are further complicated by the existence of a number of additional
@@ -275,9 +276,9 @@ Our review of the literature did not uncover any adequate solutions to this
 thorny problem. Though by no means authoritative, our approach was to include in
 the present analysis all of the concepts that are relevant to our purposes and
 to use the notion of /integrations/ where the concepts are more obviously
-external to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- /e.g./, "Agile integration" (/cf./ Part FIXME integrations).
-But all the difficulties discussed thus far point out there may be a deeper
-malaise with the discipline itself.
+external to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- /e.g./, "Agile integration" (/cf./ [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][Software Development
+Methodologies]]). But all the difficulties discussed thus far point out there may
+be a deeper malaise with the discipline itself.
 
 * Pragmatism in a Fuzzy Discipline
   :PROPERTIES:
@@ -310,10 +311,9 @@ to it as the /Pragmatism Principle/, albeit restated in a slightly different
 form:[fn:pragmatism]
 
 [fn:pragmatism] The term /pragmatism/ was chosen as an allusion to one of
-Stachowiak's fundamental model properties (/cf./ Section FIXME why model)
-because we see [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /as a model too/. Alas, a detailed discussion of the topic
-would take us too far afield, befitting the philosophy of modeling in software
-development.
+Stachowiak's fundamental model properties (/cf./ [[id:7D92A620-ED3E-D264-46A3-2A2597C59DC7][Why Model?]]) because we see [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+/as a model too/. Alas, a detailed discussion of the topic would take us too far
+afield, befitting the philosophy of modeling in software development.
 
 
 #+begin_quote
@@ -360,12 +360,12 @@ requiring a /high-level of mastery/ of a large and complex
 cannon.[fn:when_to_model]
 
 [fn:when_to_model] Take the decision to use modeling in the first place. Whilst
-the enumeration of choices presented in Section FIXME modeling-approach appears
-to convey simplicity, experience says otherwise. In order to make an informed
-decision, one must first master /both/ the theory of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /as well as/ the thorny
-practical aspects of its application, and these only reveal themselves when
-applied to a /sufficiently large/ project during /sufficiently long/ timescales
---- as we ourselves discovered.
+the enumeration of choices presented in [[id:774F10EF-88EA-8054-A5E3-FB2FBCACA2D2][Determining the Modeling Approach]]
+appears to convey simplicity, experience says otherwise. In order to make an
+informed decision, one must first master /both/ the theory of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /as well as/
+the thorny practical aspects of its application, and these only reveal
+themselves when applied to a /sufficiently large/ project during /sufficiently
+long/ timescales --- as we ourselves discovered.
 
 
 At this juncture we can now sketch out our understanding of the discipline,
@@ -376,8 +376,8 @@ which is as follows:
 - [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] promotes the /[[id:EF8AB73B-F189-7AE4-CD4B-9713E34AC63E][pragmatic]] application/ of a /family of related approaches/
   to the development of software systems, with the intent of /generating
   automatically/ a part or the totality of a software product, from one or more
-  /formal models/ and associated /transformations/ (/cf./ Section FIXME
-  models-transformations).
+  /formal models/ and associated /transformations/ (/cf./ [[id:C807836B-B1D6-1024-86E3-7D49BCF20D74][Models and
+  Transformations]]).
 - [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is best understood as a /vision/ rather than a /concrete destination/. A
   vision /guides/ the general direction of the approach, but does not dictate
   the solution, nor does it outline the series of steps required to reach

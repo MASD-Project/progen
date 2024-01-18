@@ -1,0 +1,387 @@
+:properties:
+:id: E5EA2B40-5526-0E44-B6D3-8F817E21C984
+:end:
+#+title: MDE and the Software Development Process
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+startup: inlineimages
+#+cite_export: csl
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+One of the more controversial concepts in Agile Modeling is that agile models
+and agile documents are sufficient for the task at hand, or as I like to say
+they are "just barely good enough". For some reason people think that just
+barely good enough implies that the artifact isn't very good, when in fact
+nothing could be further from the truth. When you stop and think about it, if an
+artifact is just barely good enough then by definition it is at the most
+effective point that it could possibly be at. --- Ambler [cite:@ambler2007agile]
+#+end_quote
+
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][Model Driven Engineering]] is deeply intertwined with the software development
+lifecycle; and the shape of the software development lifecycle is a function of
+the prevailing [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][Software Development Methodology (SDM)]].[fn:sdlc] The present
+document provides and overview of this complex relationship, pointing out
+implications of this interleaving. [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] and related processes have themselves
+been treated extensively in the software engineering literature, including
+numerous comparative studies and surveys [cite:@despa2014comparative]
+[cite:@awad2005comparison] [cite:@svits2012comparative]
+[cite:@davis1988strategy] [cite:@estefan2007survey]. In the interest of
+maintaining focus, the objective of the present section is not to perform an
+exhaustive review across this vast field but to: a) supply a set of conceptual
+building blocks to be used within our research; and b) to investigate the
+relationship between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]s --- including a characterisation of the
+general challenges posed by [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] to the development process and vice-versa.
+
+The document is organised as follows. It begins by defining more precisely what
+is meant by an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] (Section [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][Software Development Methodologies]]). We then attempt
+to determine if [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] has a "preference" towards certain types of [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]s on Section
+"[[id:9A171CD4-61C9-07E4-8D63-221C63B374B5][Iterative or Structured?]]". The document concludes by looking at /[[id:CA10BF3B-5F12-D0B4-5C4B-32E4B0B87BBC][two-track
+development]]/, an approach commonly employed when in the presence of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
+
+[fn:sdlc] A distinction has been preserved in this document between the
+"software development lifecycle" and "SDLC (Software Development Life-Cycle)".
+The SDLC is considered a [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] by many authors such as Elliot
+[cite:@elliott2004global] (p. 86-87), who calls it the "oldest formalised
+methodology for building information systems". He states (/emphasis his/):
+
+#+begin_quote
+The traditional approach to information systems development was known as the
+/waterfall/ approach or /systems development life cycle/ approach --- the SDLC
+approach. [...] This methodology pursues the development of information systems
+in a very deliberate, structured and methodical way, requiring each stage of the
+life cycle, from inception of the idea to the delivery of the final system, to
+be carried out rigidly and sequentially."
+#+end_quote
+
+Conversely, this document employs "software development lifecycle" in a more
+informal manner, meaning /any/ lifecycle model --- often a property of the
+underlying [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]. For those interested in a more rigorous approach, Estefan /et
+al./ [cite:@estefan2007survey] provide a detailed discussion on the subject,
+defining these and other related terms. In particular, see Section 2 ---
+"Differentiating Methodologies from Processes, Methods, and Lifecycle Models".
+
+
+* Software Development Methodologies
+  :properties:
+  :id: 8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A
+  :custom_id: ID-8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A
+  :roam_aliases: SDM
+  :end:
+
+[[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]s have had a important role to play in the development of software systems
+from as early as the 1960's [cite:@elliott2004global] (p. 86). According to
+Ramsin and Paige, "[an] [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] is a framework for applying software engineering
+practices with the specific aim of providing the necessary means for developing
+software-intensive systems." [cite:@ramsin2008process] For their part, Avison
+and Fitzgerald see it as "a recommended collection of phases, procedures, rules,
+techniques, tools, documentation, management, and training used to develop a
+system." [cite:@avison2003now] Based on their analysis of earlier work,
+including that of OMG [cite:@omg2017uml], as well as Avison and Fitzgerald
+themselves [cite:@avison2003now], Ramsin and Paige decomposed an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] into three
+main parts:
+
+- *Philosophy*: a set of assumptions and beliefs made by the authors of the
+  methodology, as part of its motivation or with the intent of supporting and
+  rationalising it.
+- *Modeling conventions*: a set of modeling conventions designed to work
+  together as a modeling language. Within this dissertation, we choose to
+  interpret /modeling language/ in the sense defined by [[id:C807836B-B1D6-1024-86E3-7D49BCF20D74][Models and
+  Transformations]] --- though perhaps Ramsin and Paige's intention is to use the
+  term in a less formal manner.
+- *Processes*: a set of processes that provide guidance as to the activities to
+  take place, their order, the role played by different actors in those
+  activities and ways in which to monitor and evaluate the results of performing
+  them.
+
+Within this framework, the modeling language contains the vocabulary with which
+to model aspects of the development of the system, the processes cater for the
+temporal characteristics of how entities interact --- /i.e./ /who/ performs what
+activities /when/ --- and the philosophy supplies a overarching narrative that
+harmonises and justifies both. These three components come together as a
+/methodology/, providing a unified perspective from which to accomplish
+prescribed objectives.[fn:methodology_term] Therefore, an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] can be thought of
+as an /abstraction/ that orchestrates activities related to the development of
+software systems; and does so with the objective of making them easier to
+understand for all involved.
+
+[fn:methodology_term] There are those like as Brinkkemper
+[cite:@brinkkemper1996method] who vehemently disagree with how software
+engineers employ the terms /method/ and /methodology/. Though the points
+presented by Brinkkemper and others are valid, we have decided to remain aligned
+with the traditional software engineering usage, given that the meaning is now
+widely understood amongst practitioners. See also Estefan /et al./
+[cite:@estefan2007survey] for a thorough discussion of these and related terms.
+
+
+It is difficult to overestimate the importance of [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]s in modern software
+development. Ramsin and Paige [cite:@ramsin2008process] go as far as considering
+them an enabler of the software engineering discipline /itself/ (/emphasis
+ours/):
+
+#+begin_quote
+Software development methodologies are therefore considered an integral part of
+the software engineering discipline, since methodologies provide /the means for
+timely and orderly execution/ of the various finer-grained techniques and
+methods of software engineering.
+#+end_quote
+
+Whilst [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]s exact importance may be argued, what should nonetheless be clear
+from this exposition is that their organisational properties are simultaneously
+orthogonal and complementary to the characteristics of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] described thus far.
+It is for this reason that we sided earlier on with those that argue that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+/by itself/ cannot be considered a methodology, but methodologies can be
+developed with model-driven characteristics for particular purposes. Asadi and
+Ramsin [cite:@asadi2008mda] tackled this subject in an MDA context, but
+presented an argument which, in our opinion, is directly applicable to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+(/emphasis ours/):
+
+#+begin_quote
+[...] /MDA is not a methodology/, but rather an approach to software
+development. This fact forces organizations willing to adopt the MDA to either
+transform their software development methodologies into Model-Driven Development
+(MDD) methodologies, or use new methodologies that utilize MDA principles and
+tools towards the realization of MDA standards.
+#+end_quote
+
+It is for this reason that one finds numerous examples of model-driven
+methodologies in the literature, with differing characteristics
+[cite:@matinnejad2011agile] [cite:@ambler2008agile] [cite:@ambler2007agile]
+[cite:@guta2009lightweight] [cite:@estefan2007survey]. However, rather than
+delve into the specifics of each of these, the more pertinent question --- at
+least for the purposes of this dissertation --- is to determine whether [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+/demands/ a particular type of software development methodology, or has no
+sensitivity to it.
+
+* Iterative or Structured?
+  :properties:
+  :id: 9A171CD4-61C9-07E4-8D63-221C63B374B5
+  :custom_id: 9A171CD4-61C9-07E4-8D63-221C63B374B5
+  :end:
+
+The literature reveals a range of views with regards to the relationship between
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]. Ambler appears to suggest [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is more amenable to a structured
+environment, declaring that (/emphasis ours/) "MDD is an approach to software
+development where extensive models are created /before/ source code is written.
+With traditional MDD a serial approach to development is often taken where
+comprehensive models are created early in the lifecycle."
+[cite:@ambler2008agile] Stahl /et al./ are instead of the view that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+requires, by its very nature, an iterative process:
+
+#+begin_quote
+The iterative, dual-track process of [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MDSD]] [...], in which the infrastructure is
+developed in parallel to the application(s), must be clearly distinguished from
+traditional waterfall methods that are based on a 'big design up-front'
+philosophy. [cite:@volter2013model] (p. 375)
+#+end_quote
+
+Unfortunately, the disagreement may stem, at least in part, from imprecise
+definitions rather than due to profound ideological differences.
+
+A third view, and one which we align ourselves with, is that of Brambilia /et
+al./, who declare [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] to be /process-agnostic/, claiming "it neither provides
+nor enforces any specific development process but it can be integrated in any of
+them." [cite:@brambilla2012model] (p. 53) To be clear, Brambilia /et al./ are
+not suggesting that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] does not have a significant impact on a project's
+software development methodology and vice-versa. Instead, their argument is that
+the principles in the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] body of knowledge are compatible with /all/ [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] ---
+"traditional development processes" in their parlance --- and the onus is
+therefore on the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner to unify them into a whole, for any particular
+application.
+
+These integration efforts are not insignificant, so the literature has been
+active in developing specific strategies --- especially for iterative
+methodologies [cite:@matinnejad2011agile] [cite:@ambler2008agile]
+[cite:@ambler2007agile] [cite:@guta2009lightweight]. It is also important to
+understand that this stance does not have any implications with regards to the
+merits (or demerits) of structured versus iterative development methodologies,
+as these can be analysed independently of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. However, since models "are
+considered equal to code" [cite:@volter2013model] and, somewhat more arguably,
+since "programming is a modeling activity" [cite:@madsen2010unified], it is not
+surprising that many of the engineering practices that foster the development of
+high-quality code are equally desirable when the engineering is driven by
+modeling.
+
+It is then for these reasons that iterative methodologies should be preferred to
+structured methodologies, rather than due to any intrinsic property or
+requirement of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. The idea can be neatly summarised with the following dictum:
+"what is good for code is (generally) also good for models". Nonetheless,
+regardless of whether the approach is iterative or structured, there are
+specific factors related to model-driven software engineering that must be
+catered for, as the next section will explain.
+
+* Two-Track Development
+  :properties:
+  :id: CA10BF3B-5F12-D0B4-5C4B-32E4B0B87BBC
+  :custom_id: CA10BF3B-5F12-D0B4-5C4B-32E4B0B87BBC
+  :end:
+
+One of the most striking differences between traditional software development
+and the model-driven approach is the additional work required to develop the
+modeling infrastructure --- that which Stahl /et al./ call the /domain
+architecture/ [cite:@volter2013model] (p. 253); /i.e./ the set of modeling
+languages and their associated [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]]s, as well as the platforms upon which they
+depend on, in order to translate a set of instance models into a software
+system. The development of the domain architecture poses a challenge which
+straddles theory and application because there is a circular dependency between
+exploring problem and solution spaces /and/ creating the vocabulary with which
+to perform that exploration.
+
+Stahl /et al./ tackled the issue by proposing a two-track development process,
+composed of the following
+threads:[fn:two_track_stahl]^{,}[fn:analysis_simplicity]
+
+[fn:two_track_stahl] Interestingly, Stahl /et al./ first introduce the approach
+in the context of AC-MDSD [cite:@volter2013model] (p. 21) but later on
+generalise it to make it widely applicable to [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MDSD]] [cite:@volter2013model]
+(Chapter 13, p. 253).
+
+[fn:analysis_simplicity] For simplicity, we are not making the customary Domain
+Engineering separation between analysis and development (/cf./ Section FIXME
+ssec:sple). We do so partially because we take the iterative approach --- fusing
+development and analysis together --- but also because we believe the same
+argument applies to analysis and development.
+
+
+- *Domain Architecture Development Thread*: Responsible for developing all of
+  the modeling infrastructure that makes up the domain architecture. Abstracts
+  and generalises the requirements produced by the application thread into
+  infrastructure that can be reused for a number of similar applications.
+- *Application Development Thread*: Concerned with producing a concrete product
+  to satisfy the requirements of end users. Provides exemplars of needed
+  functionality to the domain architecture development thread to help shape its
+  direction and consumes the tooling it produces to implement the product.
+
+#+caption[Two-track development.]: Two-track development. /Source/: Author's drawing based on Stahl /et al./'s image [cite:@volter2013model] (p. 262).
+#+name: fig-application_development_domain_architecture_development
+#+attr_latex: :scale 0.3
+[[../assets/images/application_development_domain_architecture_development.png]]
+
+The relationship between these two threads is illustrated in Figure
+[[fig-application_development_domain_architecture_development]]. Two-track
+development is very useful as an idealised model because the approach evokes a
+clear separation of concerns. Nonetheless, our own personal experience has
+taught us that matters are not quite as clear cut in practice. On one hand, the
+basic principles are very easy to convey to experienced engineering teams ---
+even where [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] knowledge is lacking. On the other hand, many dangers
+lie in wait of a naïve application:
+
+- the before-mentioned circular nature of the problem is extremely challenging
+  --- and never more so than during the initial stages of development;
+- the development of the domain architecture ultimately demands a
+  /multidisciplinary skill-set/, entailing both good software engineering skills
+  as well as a mastery of the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] cannon;
+- there is great difficulty in demonstrating to management the need for
+  continued investment in domain architecture development and maintenance as the
+  project reaches maturity, and the lack of investment has severe consequences
+  for the long term;
+- there is a great difficulty in avoiding a disconnect between domain and
+  architecture development teams, and there are far-reaching repercussions when
+  such a disconnect occurs.
+
+The last factor is of great importance because it may lead to a phenomena we
+named /problem domain decoupling/, and which happens as the disconnect grows in
+size. In our opinion, this problem manifests itself more evidently with the
+application of AC-MDSD, but we do not believe it is solely limited to this use
+case. Figure [[fig-ac_mdsd_problem_domain_decoupling]] illustrates the issue by
+looking at four hypothetical /scenarios/ covering the application of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] to
+infrastructural code, which we shall now enunciate.
+
+#+caption: Problem domain decoupling.
+#+name: fig-ac_mdsd_problem_domain_decoupling
+#+attr_latex: :scale 0.3
+[[../assets/images/ac_mdsd_problem_domain_decoupling.png]]
+
+Scenario 1 typically happens at the first brush with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], where developers
+create a solution hard-wired to the core problem domain they are exploring, and
+is closely related to our own personal experiences [cite:@marco_craveiro_2021].
+From Scenario 2 to Scenario 4 there is a quest for /generalisation/, accompanied
+by a corresponding /growth in scope/ of the infrastructure problem domain.
+Scenario 2 represents a small decoupling of the infrastructure domain to make it
+useful to more than one product, though still fairly hard-wired. With Scenario 3
+we are now looking at providing infrastructure for a larger grouping of software
+products and their diverse needs, with a resulting ballooning in infrastructural
+scope. Finally, with Scenario 4, the infrastructure domain becomes a product on
+its own right, much larger than any one core problem domain; at this stage we
+are now considering products supplied by external vendors rather than in-house
+development.
+
+The /quantitative change/ in the size of the infrastructure problem domain
+produces /qualitative changes/ that may not be readily apparent to engineers, as
+they develop a system with a dual-track approach. This /phase transition/ is
+particularly problematic as one transitions from Scenario 1 through to
+Scenario 3. Let us perform a comparison between these two scenarios at the [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]
+level to better understand the problem. Figure [[fig-typical_mde_application]]
+illustrates the /state of the world/ for Scenario 1 via a two-track approach;
+the bold arched arrows represent the understanding of the problem as it
+materialises onto the domain and application development tracks and the dashed
+line represents the /synchronisation points/ between the two tracks. Though not
+obvious, the most noteworthy aspect of this diagram is the /natural alignment/
+between the two tracks and the problem domain.
+
+#+caption: Typical [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] application.
+#+name: fig-typical_mde_application
+#+attr_latex: :scale 0.3
+[[../assets/images/typical_mde_application.png]]
+
+This property is made clearer by performing a similar exercise for Scenario 3,
+as does Figure [[fig-ac_mdsd_mde_application]]. Even without a detailed analysis, it
+should be noticeable that the picture becomes /considerably more complex/; the
+previous natural alignment now gives way to a far more intricate set of
+relationships --- many of which bidirectional. The figure depicts the separation
+between the infrastructure problem domain and the /core/ problem domain, and the
+effect each of these have on each other as the exploration of both domains takes
+place. In hindsight, the increase in complexity should not be surprising
+because, as the scope of the infrastructural domain grows, it becomes a software
+product in its own right. Thus, there is an attempt to simultaneously engineer
+/two tightly interlocked/ software products, each already a non-trivial entity
+to start off with.
+
+#+caption: [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] application with AC-MDSD.
+#+name: fig-ac_mdsd_mde_application
+#+attr_latex: :scale 0.2
+[[../assets/images/ac_mdsd_mde_application.png]]
+
+At this juncture one may consider the ideal solution to be the use of vendor
+products as a way to insulate the problem domains. Unfortunately, experimental
+evidence emphatically says otherwise, revealing that isolation may be necessary
+/but only up to a point/, beyond which it starts to become detrimental. We name
+this problem /over-generalisation/. In our opinion, what is lacking is the /deep
+synchronisation/ needed between the two development tracks --- an ingredient
+that Stahl /et al./ had already identified as being crucial to the success of
+the entire endeavour. On the other hand, adoption literature shows that this
+close collaboration can be found in abundance within in-house development, but
+there we suffer from the opposite problem of /under-generalisation/. That is,
+solutions are /too specific/, catering only for internal use cases.
+
+What is called for is a highly cooperative relationship between infrastructure
+developers and end-users, in order to foster feature suitability --- a
+relationship which is not directly aligned with traditional customer-supplier
+roles; but one which must also maintain a clear separation of roles and
+responsibilities --- not the strong point of relationships between internal
+teams within a single organisation, striving towards a fixed goal. Any proposed
+approach must therefore aim to establish an /adequate/ level of generalisation
+by mediating between these actors and their diverse and often conflicting
+agendas. We named this generalisation sweet-spot /barely general enough/,
+following on from Ambler's footsteps [cite:@ambler2007agile][fn:barely_general],
+and created Figure [[fig-cooperative-tool-development]] to place the dilemma in
+diagrammatic form.
+
+[fn:barely_general] Ambler states that (/emphasis ours/) "[...] if an artifact
+is just /barely good enough/ then by definition it is at the most effective
+point that it could possibly be at." [cite:@ambler2007agile]
+
+
+#+caption: Different approaches to infrastructure development.
+#+name: fig-cooperative-tool-development
+#+attr_latex: :scale 0.3
+[[../assets/images/cooperative_tool_development.png]]
+
+and now that the need for the generalisation has been made clear, we must change
+our focus towards the machinery needed to implement it. and, at this juncture,
+the /management of variability/ takes centre stage.
+
+* bibliography
+
+#+print_bibliography:

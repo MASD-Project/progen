@@ -240,8 +240,7 @@ exception: it too must conform to a /metametamodel/. The metametamodel provides
 a generalised way to talk about metamodels and exists at a layer above that of
 the metamodel. Though in theory infinite, the layering process is typically
 curtailed at the metametamodel layer, since it is possible to create a
-metametamodel that conforms to
-itself.[fn:reflexive_metamodel],[fn:metalevels]
+metametamodel that conforms to itself.[fn:reflexive_metamodel],[fn:metalevels]
 
 #+caption[OMG four-layer metamodel architecture]: OMG four-layer metamodel architecture. /Source/: Author's drawing based on a diagram by Bézivin [cite:@bezivin2004search].
 #+name: fig-metamodel_archecture
@@ -344,6 +343,7 @@ operations performed on models have become key to the modeling approach.
   :properties:
   :id: 707BD590-1E59-56B4-D333-33525E43A78A
   :custom_id: ID-707BD590-1E59-56B4-D333-33525E43A78A
+  :roam_aliases: MT
   :end:
 
 The second most significant component of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] , after models, are Model
@@ -371,6 +371,7 @@ only type of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] found in the litera
    :properties:
    :id: 93400D0B-2E1E-7244-D07B-DD8BCA98277A
    :custom_id: ID-93400D0B-2E1E-7244-D07B-DD8BCA98277A
+   :roam_aliases: M2M M2T
    :end:
 
 The taxonomy of [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] has been investigated in great detail in the literature,
@@ -465,6 +466,7 @@ with traditional programming languages.
   :properties:
   :id: 1D15099E-7294-6724-3343-A6C71CB05BF9
   :custom_id: ID-1D15099E-7294-6724-3343-A6C71CB05BF9
+  :roam_aliases: GPML DSL
   :end:
 
 The literature commonly distinguishes between two classes of modeling languages,
@@ -526,8 +528,8 @@ Engineering (MBE).
   :end:
 
 One of the first decisions faced by practitioners when when modeling a problem
-is the choice between using GPML or DSL. Mohagheghi and
-Aagedal's analysis highlights the kinds of trade-offs that must be considered
+is the choice between using GPML or DSL. Mohagheghi and Aagedal's analysis
+highlights the kinds of trade-offs that must be considered
 [cite:@mohagheghi2007evaluating]:
 
 #+begin_quote

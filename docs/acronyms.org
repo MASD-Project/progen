@@ -49,7 +49,7 @@
 | MT        | [[id:707BD590-1E59-56B4-D333-33525E43A78A][Model Transformation]]                |
 | OMG       | Object Management Group             |
 | OO        | Object-Oriented                     |
-| OVM       | Orthogonal Variability Modeling     |
+| OVM       | [[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][Orthogonal Variability Modeling]]     |
 | PCL       | Product Configuration Language      |
 | PDM       | Platform Description Model          |
 | PIM       | Platform Independent Model          |
