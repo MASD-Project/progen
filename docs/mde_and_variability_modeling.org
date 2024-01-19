@@ -2,7 +2,7 @@
 :id: 3DD5C3FF-5BC2-F8A4-2A6B-4F037A78D8E6
 :end:
 #+title: MDE and Variability Modeling
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib
@@ -37,12 +37,12 @@ Thus, much stands to be gained by making the approach systematic, an aim often
 achieved in the literature by recourse to software diversity techniques such as
 variability modeling.[fn:software_diversity]
 
-The chapter is organised as follows. Section [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][Software Product Line Engineering]]
+This document is organised as follows. Section [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][Software Product Line Engineering]]
 introduces the notion of /product lines/ and connects it to domain engineering.
 Variability proper is then tackled ([[id:C9E5C482-E37B-AF14-4E3B-4FF92BB86C50][Variability Management and Variability
 Models]]), followed by a brief introduction on feature modeling ([[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][Feature
-Modeling]]). The chapter then concludes with Section [[id:7D780B3E-2821-2674-8F4B-AE29097B739D][Integrating Feature Modeling
-with MDE]], where feature modeling is then integrated with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
+Modeling]]). The document concludes with Section [[id:7D780B3E-2821-2674-8F4B-AE29097B739D][Integrating Feature Modeling with
+MDE]], where feature modeling is then related back to the model driven approaches.
 
 [fn:software_diversity] For a comprehensive analysis on the state of the art in
 software diversity, see Schaefer /et al./ [cite:@schaefer2012software]. There,
@@ -56,17 +56,17 @@ referred to as software diversity."
   :properties:
   :id: C1172AEA-F94B-73D4-FDAB-A105D7FEA389
   :custom_id: ID-C1172AEA-F94B-73D4-FDAB-A105D7FEA389
-  :roam_aliases: SPLE
+  :roam_aliases: SPLE "Domain Engineering" "Application Engineering" "Program Families"
   :end:
 
 The idea of abstracting commonalities between sets of programs has had a long
 history within computer science, starting as early as the 1970s with Dijkstra's
 notion of /program families/.[fn:program_families] A modern and systematised
-embodiment of Dijkstra's original insights can be found in [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][SPLE]]
-[cite:@pohl2005software] [cite:@clements2002software], which is of particular
-significance to the present work because its principles and techniques are often
-employed in an [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] context [cite:@groher2007expressing] [cite:@roth2015towards]
-[cite:@groher2009aspect].
+embodiment of Dijkstra's original insights can be found in [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][Software Product Line
+Engineering (SPLE)]] [cite:@pohl2005software] [cite:@clements2002software], which
+is of particular significance to the present work because its principles and
+techniques are often employed in a [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] context [cite:@groher2007expressing]
+[cite:@roth2015towards] [cite:@groher2009aspect].
 
 [fn:program_families] In [cite:@dijkstra1970notes], Dijkstra states: "If a
 program has to exist in two different versions, I would rather not regard (the
@@ -78,19 +78,19 @@ versions have in common."
 
 
 Pohl /et al./ define [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][SPLE]] as "a paradigm to develop software applications
-(software-intensive systems and software products) using platforms and mass
-customization." [cite:@pohl2005software] Roth and Rumpe add that "SPLE focuses
+(software-intensive systems and software products) using [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][platforms]] and mass
+customization." [cite:@pohl2005software] Roth and Rumpe add that "[[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][SPLE]] focuses
 on identifying commonalities and variability (the ability to change or customize
 a system in a predefined way) to create components that are used to develop
 software products for an area of application." [cite:@roth2015towards]
 
-The mechanics of [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][SPLE]] bring to mind Stahl /et al./'s dual track process (/cf./
-[[id:CA10BF3B-5F12-D0B4-5C4B-32E4B0B87BBC][Two-Track Development]]), in that /Domain Engineering/ is used to create a set of
-/core assets/ and /Application Engineering/ is applied to those core assets in
-order to develop a family of related products, called a /product line/ or a
-system family.[fn:domain_engineering] In this light, Domain Engineering defines
-the variation space available to all products within the product line, opening
-up possibilities in terms of variability, whereas the role of Application
+The mechanics of [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][SPLE]] bring to mind Stahl /et al./'s [[id:CA10BF3B-5F12-D0B4-5C4B-32E4B0B87BBC][dual track process]], in that
+/Domain Engineering/ is used to create a set of /core assets/ and /Application
+Engineering/ is applied to those core assets in order to develop a family of
+related products, called a /product line/ or a system
+family.[fn:domain_engineering] In this light, Domain Engineering defines the
+variation space available to all products within the product line, opening up
+possibilities in terms of variability, whereas the role of Application
 Engineering is to create specific /configurations/ or /variants/ for each
 product, reducing or eliminating variability. Figure
 [[fig-variability_domain_application_engineering]] illustrates this idea.
@@ -133,7 +133,7 @@ model-driven approach with the management of variability.
   :custom_id: ID-C9E5C482-E37B-AF14-4E3B-4FF92BB86C50
   :end:
 
-Like the /program families/ described in the previous section, variation itself
+Like the /[[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][program families]]/ described in the previous section, variation itself
 has long been a going concern in software development; but, traditionally, it
 has been handled by programmatic means via techniques such as configuration
 files, design patterns, frameworks and polymorphism --- that is, at a low-level
@@ -172,22 +172,23 @@ resulting from the explicit modeling of variability:
 - *Variability Abstraction*: By having a model of variability across the system
   --- "a more abstract representation", in Czarnecki's words --- it is now
   possible to reason about it independently of implementation mechanisms, which
-  facilitates the work of Domain Engineering.
-- *Variability Documentation*: From the perspective of Application Engineering,
+  facilitates the work of [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][Domain Engineering]].
+- *Variability Documentation*: From the perspective of [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][Application Engineering]],
   the variability space is made explicit and concise, therefore simplifying
   decisions around use and reuse.
 - *Variability Traceability*: Engineers can also have a better understanding of
   the inclusion or exclusion of functionality because the variability model can
   answer those questions independently of the implementation.
 
-These benefits help explain the abundance of variability modeling languages and
-notations in the literature, including AND/OR Tables [cite:@muthig2004gophone],
-Decision Modeling [cite:@schmid2011comparison], OVM (Orthogonal Variability
-Modeling) [cite:@pohl2005software], the CVL (Common Variability Language)
-[cite:@haugen2013cvl] and many others. A survey of all of these approaches lies
-beyond the scope of our work, given our needs --- which only makes use of a set
-of high-level concepts in the variability domain --- so we shall focus instead
-on only one approach: /feature modeling/.[fn:chen_variability]
+These benefits help explain the abundant literature on variability modeling
+languages, including AND/OR Tables [cite:@muthig2004gophone], Decision Modeling
+[cite:@schmid2011comparison], Orthogonal Variability Modeling (OVM)
+[cite:@pohl2005software], the Common Variability Language (CVL)
+[cite:@haugen2013cvl] and many more. A survey of all of these approaches lies
+beyond the scope of our work, given our requirement for a small set of
+high-level concepts from the variability domain. Instead, the focus shall be
+narrowed to a single approach which satisfies our needs: /[[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][feature
+modeling]]/.[fn:chen_variability]
 
 [fn:chen_variability] The interested reader is directed to Chen /et al./'s
 [cite:@chen2009variability] systematic literature review of 34 approaches to

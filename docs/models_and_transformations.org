@@ -622,13 +622,14 @@ can be thought of as models implemented atop a grammarware stack.
 Here we are rescued by Stahl /et al./, who help preserve the distinction between
 programming languages and modeling languages by reminding us that they have
 different responsibilities (/emphasis ours/): "The means of expression used by
-models is geared toward /the respective domain’s problem space/, thus enabling
+models is geared toward /the respective domain’s [[id:B43F5826-FECD-31A4-EBEB-82A16098D282][problem space]]/, thus enabling
 abstraction from the programming language level and allowing the corresponding
 compactness." [cite:@volter2013model] (p. 15) That is, programming languages are
 abstractions of the machine whereas modeling languages are abstractions of
-higher-level problem domains --- a very useful and concise
-separation.[fn:programming_modeling] With this, we arrive at the taxonomy
-proposed by Figure [[fig-computer_languages]].
+higher-level problem domains --- a very useful and concise separation (/cf./
+[[id:B43F5826-FECD-31A4-EBEB-82A16098D282][Spaces and Levels of Abstraction]]).[fn:programming_modeling]
+
+With this, we arrive at the taxonomy proposed by Figure [[fig-computer_languages]].
 
 [fn:programming_modeling] These camps are not quite as distinct as they may
 appear, and many are working to shorten the differences. On one hand, there are
