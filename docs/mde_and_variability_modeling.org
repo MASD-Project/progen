@@ -300,7 +300,7 @@ the literature, even in the context of feature modeling. Nonetheless, since
 features provide an adequate level of granularity for our needs, we need not
 concern ourselves with Pohl /et al./'s criticism. We do, however, require a
 clearer pictured of the relationship between feature models and the kinds of
-models that are typically found within acrshort:mde.
+models that are typically found within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
 
 * Integrating Feature Modeling with MDE
   :properties:
@@ -308,15 +308,15 @@ models that are typically found within acrshort:mde.
   :custom_id: ID-7D780B3E-2821-2674-8F4B-AE29097B739D
   :end:
 
-The crux of the problem is then on how to integrate ACRshortpl:mde modeling
-techniques with variability management --- or, more specifically for our
-purposes, with feature modeling. Clearly, having a feature model simply as a
-stand-alone artefact, entirely disconnected from the remaining engineering
-activities is just a form of acrshort:mbe, as Czarnecki and Antkiewicz explain
-(/emphasis ours/): "Although a feature model can represent commonalities and
-variabilities in a very concise taxonomic form, /features in a feature model are
-merely symbols/. Mapping features to other models, such as behavioral or data
-specifications, gives them semantics." [cite:@czarnecki2005mapping]
+The crux of the problem is then on how to integrate [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] modeling techniques with
+variability management --- or, more specifically for our purposes, with [[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][feature
+modeling]]. Clearly, having a feature model simply as a stand-alone artefact,
+entirely disconnected from the remaining engineering activities is just a form
+of [[id:79EC741E-8818-3494-8B1B-2B27C182B160][MBE]], as Czarnecki and Antkiewicz explain (/emphasis ours/): "Although a
+feature model can represent commonalities and variabilities in a very concise
+taxonomic form, /features in a feature model are merely symbols/. Mapping
+features to other models, such as behavioral or data specifications, gives them
+semantics." [cite:@czarnecki2005mapping]
 
 Therefore, the availability of concise and interlinked representations of
 variability across models is a prerequisite to attain this semantically rich
@@ -339,8 +339,8 @@ of variability found in models and proposed dividing it into two kinds,
 is described using creative construction DSLs, whereas non-structural
 variability can be described using configuration languages." We name these two
 kinds /input variability/ since they reflect variation within the input models.
-In their view, the feature model becomes a metamodel for the product
-line[fn:feature_model_as_meta_model], and their instances are the configuration
+In their view, the feature model becomes a [[id:8E393033-45DD-B9C4-1903-D99CB54BBBD1][metamodel]] for the [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][product
+line]][fn:feature_model_as_meta_model], and their instances are the configuration
 models for products, with the final aim being to "[...] use a configuration
 model to define variants of a structural model." According to them, these
 variants can be generated in two ways:
@@ -386,9 +386,9 @@ UML via a UML Profile, as suggested by Clauß's early work
 and variants. Ziadi /et al./ [cite:@ziadi2003towards] build on from this idea,
 expanding the focus to product line concepts. More recently, in
 [cite:@possompes2010uml] [cite:@possompes2011design], Thibaut /et al./ created a
-UML Profile for feature modeling concepts. Extending acrshort:uml is
-advantageous due to its universal nature, but alas, it also inherits all of the
-challenges associated with the modeling suite.
+UML Profile for feature modeling concepts. Extending UML is advantageous due to
+its universal nature, but alas, it also inherits all of the challenges
+associated with the modeling suite. FIXME link to adoption
 
 Others have looked elsewhere. In [cite:@czarnecki2005mapping], Czarnecki and
 Antkiewicz propose a template-based approach to map feature models to different
@@ -398,10 +398,10 @@ family/. The model template is written in the [[id:1D15099E-7294-6724-3343-A6C71
 be thought of as a superset of all possible models, containing model elements
 that are associated with features by means of /presence conditions/. Model
 templates can be instantiated given a feature configuration: "The instantiation
-process is a model-to-model transformation with both the input and output
+process is a [[id:707BD590-1E59-56B4-D333-33525E43A78A][model-to-model transformation]] with both the input and output
 expressed in the target notation." The approach is reminiscent of Groher and
 Völter's positive variability, in that the template provides the overall model
-and [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] are then responsible for pruning unwanted model elements on the basis of
+and [[id:707BD590-1E59-56B4-D333-33525E43A78A][MTs]] are then responsible for pruning unwanted model elements on the basis of
 the evaluation of presence conditions.
 
 An interesting feature of superimposed variants are IPC (Implicit Presence
@@ -426,16 +426,15 @@ largely on the availability of good tooling. Asking individual [[id:C29C6088-B39
 to extend their tools to support superimposed variants is not feasible due to
 the engineering effort required.
 
-As part of our review of the literature we also investigated the application of
-variability management techniques to code generators. In
-[cite:@roth2015towards], Roth and Rumpe motivate the need for the application of
-product line engineering techniques to code generation. Their paper provides a
-set of conceptual mechanisms to facilitate the product-lining of code
-generators, and outlines a useful set of requirements: "The main requirements
-for a code generator product line infrastructure are support for incremental
-code generation, specification of code generator component interfaces, support
-for validation of generated code, and support for individual semantics of a
-composition operator."
+The application of variability management techniques to code generators was also
+investigated, as part of this literature review. In [cite:@roth2015towards],
+Roth and Rumpe motivate the need for the application of [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][product line engineering]]
+techniques to code generation. Their paper provides a set of conceptual
+mechanisms to facilitate the product-lining of code generators, and outlines a
+useful set of requirements: "The main requirements for a code generator product
+line infrastructure are support for incremental code generation, specification
+of code generator component interfaces, support for validation of generated
+code, and support for individual semantics of a composition operator."
 
 For their part, Greifenberg /et al./ [cite:@greifenberg2016modeling] reflected
 on the role of code generators within [[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][SPLE]] --- particularly those that are

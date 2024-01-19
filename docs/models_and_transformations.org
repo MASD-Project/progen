@@ -199,6 +199,7 @@ dimensions:
   :properties:
   :id: 8E393033-45DD-B9C4-1903-D99CB54BBBD1
   :custom_id: ID-8E393033-45DD-B9C4-1903-D99CB54BBBD1
+  :roam_aliases: metamodel
   :end:
 
 Given these concepts, we can now elaborate further on Bezivin's definition
@@ -343,7 +344,7 @@ operations performed on models have become key to the modeling approach.
   :properties:
   :id: 707BD590-1E59-56B4-D333-33525E43A78A
   :custom_id: ID-707BD590-1E59-56B4-D333-33525E43A78A
-  :roam_aliases: MT
+  :roam_aliases: MT transform
   :end:
 
 The second most significant component of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] , after models, are Model
