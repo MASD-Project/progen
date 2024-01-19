@@ -180,15 +180,15 @@ resulting from the explicit modeling of variability:
   the inclusion or exclusion of functionality because the variability model can
   answer those questions independently of the implementation.
 
-These benefits help explain the abundant literature on variability modeling
-languages, including AND/OR Tables [cite:@muthig2004gophone], Decision Modeling
-[cite:@schmid2011comparison], Orthogonal Variability Modeling (OVM)
-[cite:@pohl2005software], the Common Variability Language (CVL)
-[cite:@haugen2013cvl] and many more. A survey of all of these approaches lies
-beyond the scope of our work, given our requirement for a small set of
-high-level concepts from the variability domain. Instead, the focus shall be
-narrowed to a single approach which satisfies our needs: /[[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][feature
-modeling]]/.[fn:chen_variability]
+These benefits may help explain the abundance of literature on variability
+modeling languages and notations, including the Common Variability Language
+(CVL) [cite:@haugen2013cvl], AND/OR Tables [cite:@muthig2004gophone], Decision
+Modeling [cite:@schmid2011comparison], Orthogonal Variability Modeling (OVM)
+[cite:@pohl2005software] --- to name just a few. A survey of all of these
+approaches lies beyond the scope of the present work, given our need for a small
+subset of high-level concepts from the variability domain. Therefore, the focus
+shall be narrowed instead to a single approach which meets our requirements:
+/[[id:76DC5C70-AAC0-86A4-3EEB-4187367002BA][feature modeling]]/.[fn:chen_variability]
 
 [fn:chen_variability] The interested reader is directed to Chen /et al./'s
 [cite:@chen2009variability] systematic literature review of 34 approaches to
@@ -202,7 +202,7 @@ as performing a detailed analysis of six variability modeling approaches.
   :properties:
   :id: 76DC5C70-AAC0-86A4-3EEB-4187367002BA
   :custom_id: ID-76DC5C70-AAC0-86A4-3EEB-4187367002BA
-  :roam_aliases: SPLE
+  :roam_aliases: Feature
   :end:
 
 Feature modeling was originally introduced by Kang /et al./'s work on FODA
@@ -212,15 +212,15 @@ many others.[fn:feature_orientation] As the name indicates, the concept central
 to their approach is the /feature/, which Groher and Völter define in the
 following manner: "[products] usually differ by the set of features they include
 in order to fulfill /(sic.)/ customer requirements. A feature is defined as an
-increment in functionality provided by one or more members of a product line."
-[cite:@groher2009aspect] Features are thus are associated with product lines ---
+increment in functionality provided by one or more members of a [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][product line]]."
+[cite:@groher2009aspect] Features are thus are associated with [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][product lines]] ---
 each feature a cohesive unit of functionality with distinguishable
 characteristics relevant to a stakeholder[fn:stakeholder] --- and the interplay
 between features then becomes /itself/ a major source of variability, as Groher
 and Völter go on to explain: "Variability of features often has widespread
 impact on multiple artifacts in multiple lifecycle stages, making it a
-pre-dominant (/sic./) engineering challenge in software product line
-engineering."
+pre-dominant (/sic./) engineering challenge in [[id:C1172AEA-F94B-73D4-FDAB-A105D7FEA389][software product line
+engineering]]."
 
 [fn:feature_orientation] Feature orientation attracted interest even outside the
 traditional modeling community, giving rise to approaches such as FOP
@@ -237,11 +237,6 @@ functional or non-functional characteristic at the requirements, architectural,
 component, platform, or any other level."
 
 
-#+caption[Symbols used in cardinality-based feature modeling.]: Symbols used in cardinality-based feature modeling. /Source:/ Author's drawing, based on Czarnecki and Helsen [cite:@czarnecki2006feature]
-#+name: tab-cardinality_fm
-#+attr_latex: :scale 0.3
-[[../assets/images/feature_modeling_symbols.png]]
-
 Features and their relationships are captured by /feature diagrams/ and /feature
 models/, as Czarnecki /et al./ tell us [cite:@czarnecki2005formalizing]: "A
 feature diagram is a tree of features with the root representing a concept
@@ -254,6 +249,13 @@ the present chapter we shall make use of cardinality-based feature models, as
 described by Czarnecki /et al./ in [cite:@czarnecki2005formalizing] and whose
 notation Figure [[tab-cardinality_fm]] summarises.
 
+#+caption[Symbols used in cardinality-based feature modeling.]: Symbols used in cardinality-based feature modeling. /Source:/ Author's drawing, based on Czarnecki and Helsen [cite:@czarnecki2006feature]
+#+name: tab-cardinality_fm
+#+attr_latex: :scale 0.3
+[[../assets/images/feature_modeling_symbols.png]]
+
+
+
 [fn:feature_variations] An in-depth analysis of these variants would take too
 far afield with regards to the scope of the present work. The interested reader
 is directed to Czarnecki /et al./ [cite:@czarnecki2005staged], Section 2.2
@@ -262,10 +264,10 @@ variants is provided.
 
 
 The notation is perhaps made clearer by means of an example (Figure [[tab-car_fm]]),
-which builds on from the example in [[id:1405A531-73F5-E094-04A3-F08451EC02BC][Metamodelling Hierarchy]]. The top-most node
-of the feature diagram (/i.e./ =Car=) is called the /root feature/. Nodes
-=Body=, =Engine=, =Gear= and =Licence Plate= describe mandatory features whereas
-node =Keyless Entry= describes an optional feature. =Engine= contains a set of
+which builds on the example from [[id:1405A531-73F5-E094-04A3-F08451EC02BC][Metamodelling Hierarchy]]. The top-most node of
+the feature diagram (/i.e./ =Car=) is called the /root feature/. Nodes =Body=,
+=Engine=, =Gear= and =Licence Plate= describe mandatory features whereas node
+=Keyless Entry= describes an optional feature. =Engine= contains a set of
 grouped features that are part of a /xor-group/, whereas =Gear= contains a set
 of features in a /or-group/. Or-groups differ from xor-groups in that they
 require that at least one feature from the group needs to be selected whereas

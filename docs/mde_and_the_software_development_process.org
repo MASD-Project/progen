@@ -2,7 +2,7 @@
 :id: E5EA2B40-5526-0E44-B6D3-8F817E21C984
 :end:
 #+title: MDE and the Software Development Process
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib

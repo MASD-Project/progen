@@ -3,7 +3,7 @@
 :roam_aliases: MDE
 :end:
 #+title: Towards a Definition of MDE
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib
