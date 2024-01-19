@@ -2,7 +2,9 @@
 :id: 3DD5C3FF-5BC2-F8A4-2A6B-4F037A78D8E6
 :end:
 #+title: MDE and Variability Modeling
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil <:nil H:7 ^:{}
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib

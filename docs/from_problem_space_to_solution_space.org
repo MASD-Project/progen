@@ -2,8 +2,9 @@
 :id: CA232302-65F9-6DE4-AD4B-6D24EE3E9D39
 :end:
 #+title: From Problem Space to Solution Space
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
-#+tags: { package(p) technical_space(t) }
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil <:nil H:7 ^:{}
 #+cite_export: csl
 #+bibliography: ../bibliography.bib
 

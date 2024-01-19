@@ -2,7 +2,9 @@
 :id: C807836B-B1D6-1024-86E3-7D49BCF20D74
 :end:
 #+title: Models and Transformations
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil <:nil H:7 ^:{}
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib

@@ -2,8 +2,9 @@
 :id: 5FA85AF3-E55C-B174-D943-1E2246CAEB14
 :end:
 #+title: MASD Academic Papers
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil
-#+startup: inlineimages
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil <:nil H:7 ^:{}
 
 /[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
 

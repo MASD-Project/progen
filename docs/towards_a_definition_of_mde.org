@@ -3,7 +3,9 @@
 :roam_aliases: MDE
 :end:
 #+title: Towards a Definition of MDE
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil <:nil H:7 ^:{}
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib
