@@ -4,12 +4,28 @@
 #+title: Survey of Special Purpose Code Generators
 #+author: Marco Craveiro <marco.craveiro@gmail.com>
 #+email: marco.craveiro@gmail.com
-#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:t html-postamble:nil <:nil H:7 ^:{}
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil <:nil H:7 ^:{}
 #+startup: inlineimages
 #+cite_export: csl
 #+bibliography: ../bibliography.bib
 
 /[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_abstract
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is an approach to software engineering centred around modeling. Code
+generators are an important component of the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] toolset because they bridge the
+gap between models and their implementation. Studies have demonstrated that
+deficiencies in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling are a common cause of failure in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption,
+highlighting the need for research to identify and address inadequacies.
+
+This paper has two contributions. First, it performs a survey of Open Source
+tools dedicated to special purpose code generation. Second, it identifies a core
+set of properties that characterise their approach, which we argue have
+application to code generation in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. These properties can be leveraged to
+guide new tool development as well as for evaluating existing tooling.
+#+end_abstract
+
+#+TOC: headlines 3
 
 * Introduction
 
@@ -107,16 +123,14 @@ identified, the users face significant usability challenges, /e.g./, steep
 learning curves, arduous user interfaces, and difficulty with migrating models
 from one version of a tool to the next." The paper then goes on to analyse ---
 and propose solutions to --- the broader problems with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], curtailing its
-relevance to the present work.
-
-These difficulties are echoed by Whittle /et al./ in the aforementioned study
-[cite:@whittle2017taxonomy]. As part of their intriguing diagnostic of usability
-and tool design, they state: "Most MDE tools are developed by those with a
-technical background but without in-depth experience of human-computer
-interaction or business issues. This can lead to a situation where good tools
-force people to think in a certain way." In addition to this call to arms
-towards usability research, the paper also defines a taxonomy of tool-related
-issues, a subset of which is used by this paper.
+relevance to the present work. These difficulties are echoed by Whittle /et al./
+in the aforementioned study [cite:@whittle2017taxonomy]. As part of their
+intriguing diagnostic of usability and tool design, they state: "Most MDE tools
+are developed by those with a technical background but without in-depth
+experience of human-computer interaction or business issues. This can lead to a
+situation where good tools force people to think in a certain way." In addition
+to this call to arms towards usability research, the paper also defines a
+taxonomy of tool-related issues, a subset of which is used by this paper.
 
 Finally, a number of experience reports related to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling development were
 analysed, and these did contain brief incursions on the topic but lacked
@@ -167,21 +181,22 @@ more general notion of code generation in [[id:C29C6088-B396-A404-9183-09FE5AD2D
    :END:
 
 [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] research expanded and generalised informal notions by framing code
-generation as an instance of a class of [[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][M2T]] transforms[fn:Czarnecki_transforms],
-leading Brambilla /et al./ to state [cite:@brambilla2012model] that, "[...] in
-[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], code generation is the process of transforming models into source code".
-From this perspective, code generation is one of potentially several steps of a
-chain of model transformations required to produce a running system, and the
-design and implementation of code generators exist as part of the broader
-development activities that include the creation of [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] and the refinement of
-models at different levels of abstraction --- from platform independent to
-platform specific representations. Thus, the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner makes use of a
-plethora of code generation technologies and techniques[fn:rose] and integrates
-those with other modeling tools to meet specific code generation requirements.
-These tools and techniques provide the flexibility required for model-driven
-software development --- at the expense of increased complexity --- and so we
-categorise them as /general purpose/ code generation tooling because they are
-designed to be adapted to open-ended requirements.
+generation as an instance of a class of [[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][Model-to-Text (M2T)]]
+transforms[fn:Czarnecki_transforms], leading Brambilla /et al./ to state
+[cite:@brambilla2012model] that, "[...] in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], code generation is the process
+of transforming models into source code". From this perspective, code generation
+is one of potentially several steps of a chain of model transformations required
+to produce a running system, and the design and implementation of code
+generators exist as part of the broader development activities that include the
+creation of [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] and the refinement of models at different levels of abstraction
+--- from platform independent to platform specific representations. Thus, the
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner makes use of a plethora of code generation technologies and
+techniques[fn:rose] and integrates those with other modeling tools to meet
+specific code generation requirements. These tools and techniques provide the
+flexibility required for model-driven software development --- at the expense of
+increased complexity --- and so we categorise them as /general purpose/ code
+generation tooling because they are designed to be adapted to open-ended
+requirements.
 
 [fn:Czarnecki_transforms] See Czarnecki and Helsen
 [cite:@czarnecki2003classification] [cite:@czarnecki2006feature] for a detailed
