@@ -43,7 +43,7 @@ within the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] domain.[fn:jorges_so
 
 [fn:mde_family] [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is member of a family of closely related approaches that
 share a /model-driven/ focus, leading Völter to group them under the moniker of
-/MD*/ [cite:@Vlter2009MDBP] (/cf./ [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][The Model-Driven Jungle]]). The present paper
+/[[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]]/ [cite:@Vlter2009MDBP] (/cf./ [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][The Model-Driven Jungle]]). The present paper
 refers only to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] for the sake of simplicity, but the argument made is believed
 to be relevant to [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]] in general. The interested reader is directed to Brambilla
 /et al./ [cite:@brambilla2012model] for a broader treatment of [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]].
@@ -73,15 +73,16 @@ summarised by their dictum: "[m]atch tools to people, not the other way around"
 viewpoint of prospective users rather than the experts in the field who are
 developing them, and revealing a deficit in usability and Human-Computer
 Interaction (HCI) research. Where usability efforts have been made, they
-typically have focused on graphical modeling tools and the
-UML.[fn:yosser_harald] Clearly, from a usability perspective, the requirements
-of a modeling tool are very different from those of a code generator, so this
-paper argues instead for a corresponding separation of concerns between code
-generation and modeling. If this separation is accepted, then the established
-practices in the wider field of code generation --- /i.e./ outside of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] ---
-become available as a source of lessons and best practices for [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling.
-Starting from this premise, the objective of the present study is to identify
-and analyse one such source --- "special purpose code generators".
+typically have focused on graphical modeling tools and the Unified Modeling
+Language (UML).[fn:yosser_harald] Clearly, from a usability perspective, the
+requirements of a modeling tool are very different from those of a code
+generator, so this paper argues instead for a corresponding separation of
+concerns between code generation and modeling. If this separation is accepted,
+then the established practices in the wider field of code generation --- /i.e./
+outside of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- become available as a source of lessons and best practices
+for [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling. Starting from this premise, the objective of the present study
+is to identify and analyse one such source --- "special purpose code
+generators".
 
 [fn:yosser_harald] The reader is directed to Yosser /et al./
 [cite:@el2015enhancing] and Harald [cite:@storrle2014impact] for a sample of
@@ -145,7 +146,7 @@ required a textual interface to any tools (the intended users preferred a
 textual interface instead of a graphical one). It was also perceived that a
 textual interface, and textual MDD languages, were preferred for fine-grained
 tasks such as specifying how models were navigated, evaluating expressions,
-etc." [cite:@paige2012lessons]
+/etc./" [cite:@paige2012lessons]
 
 
 In summary, this study is motivated by our findings in the literature. On one
@@ -188,8 +189,8 @@ of transforming models into source code". From this perspective, code generation
 is one of potentially several steps of a chain of model transformations required
 to produce a running system, and the design and implementation of code
 generators exist as part of the broader development activities that include the
-creation of [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] and the refinement of models at different levels of abstraction
---- from platform independent to platform specific representations. Thus, the
+creation of [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSLs]] and the refinement of models at different levels of abstraction
+--- from [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][platform independent]] to [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][platform specific]] representations. Thus, the
 [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioner makes use of a plethora of code generation technologies and
 techniques[fn:rose] and integrates those with other modeling tools to meet
 specific code generation requirements. These tools and techniques provide the
@@ -211,16 +212,20 @@ XML, /etc./
 
 A very different use of code generation is made by a class of /special purpose/
 tools, typically designed for a single, well-defined objective. These tools tend
-to focus on domains such as XML serialisation support, generation of Object
-Relational Mappings (ORM) for relational databases, binary serialisation of data
-structures and the like, all of which are functions of a structural definition.
-In contrast to the open-ended approach promoted by [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling, these special
-purpose tools usually generate code not meant for modification --- in cases, not
-even inspection --- and with a limited and well-defined use.
+to focus on domains such as XML (Extensible Markup Language) serialisation
+support, generation of Object Relational Mappings (ORM) for relational
+databases, binary serialisation of data structures and the like, all of which
+are functions of a structural definition. In contrast to the open-ended approach
+promoted by [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling, these special purpose tools usually generate code not
+meant for modification --- in cases, not even inspection --- and with a limited
+and well-defined use.
 
 As a representative example, Protocol Buffers[fn:protobuf_url] --- a
 serialisation framework for structured data --- states in its documentation
 (/emphasis theirs/):
+
+[fn:protobuf_url] https://developers.google.com/protocol-buffers
+
 
 #+begin_quote
 Protocol buffer classes are basically dumb data holders (like structs in C);
@@ -233,15 +238,10 @@ anyway." [cite:@Protobuf2018]
 #+end_quote
 
 Thus, these special purpose tools are designed to satisfy the requirements of
-one use case only.
-
-[fn:protobuf_url] https://developers.google.com/protocol-buffers
-
-
-It is important to note that the ideas ascribed above to special purpose code
-generators are not entirely new within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- though the packaging may
-be. As an example, the term /cartridge/ has been used to denote a similar
-concept though, arguably, a lack of a formal definition hindered its
+one use case only. It is important to note that the ideas ascribed above to
+special purpose code generators are not entirely new within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- though the
+packaging may be. As an example, the term /cartridge/ has been used to denote a
+similar concept though, arguably, a lack of a formal definition hindered its
 spread.[fn:cartridge]
 
 [fn:cartridge] In [cite:@volter2013model], Völter /et al./ states that "a cartridge
@@ -256,14 +256,14 @@ generate?"
 ** Constrained Variability
 
 Another viewpoint from which to contrast these two approaches is that of
-variability, where we can make use of Groher and Völter's work
+[[id:3DD5C3FF-5BC2-F8A4-2A6B-4F037A78D8E6][variability]], where we can make use of Groher and Völter's work
 [cite:@groher2007expressing]. Though not a necessary condition, special purpose
-code generators typically support /structural variability/ --- that is, the
+code generators typically support /[[id:7D780B3E-2821-2674-8F4B-AE29097B739D][structural variability]]/ --- that is, the
 creative construction of arbitrary data structures --- but are often designed to
 restrict variants of structural models quite aggressively, when at all
-allowed.[fn:build_file] [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] takes the opposing view by treating it as
-an important concern, giving rise to concepts such as negative and positive
-variability and to techniques for handling them. [cite:@groher2007expressing]
+allowed.[fn:build_file] [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] takes the opposing view by treating it as an
+important concern, giving rise to concepts such as [[id:7D780B3E-2821-2674-8F4B-AE29097B739D][negative and positive
+variability]] and to techniques for handling them. [cite:@groher2007expressing]
 [cite:@groher2009aspect]
 
 [fn:build_file] As an example of a special purpose code generator that can
