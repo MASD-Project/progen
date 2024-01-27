@@ -1,0 +1,1081 @@
+:properties:
+:id: EE673330-E634-3294-54E3-BBE3A4D741BE
+:roam_aliases: MASD
+:end:
+#+title: The MASD Methodology
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: toc:nil date:nil <:nil c:nil todo:nil H:7 ^:{}
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil <:nil H:7 ^:{}
+#+cite_export: csl
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+Use computer-based tools to mechanize those facets of software development that
+do not depend on human ingenuity. --- Booch /et al./ [cite:@booch2004mda]
+#+end_quote
+
+The present chapter outlines the fundamental characteristics of the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+methodology, and it is organised as follows. Section [[id:94FA9BC7-AEF5-C874-8CFB-D9A399B03280][Motivation for a new SDM]]
+starts by arguing that the multifaceted list of requirements set out by
+[[id:8EFC0922-AD38-9514-538B-88C0EF9F730E][Requirements for a New Methodology]] can only be addressed by a new [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]], and
+explains how our methodology differs from typical [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] use cases. Attention is
+then turned towards the three canonical [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] components: the core philosophy
+(Section [[id:94FA9BC7-AEF5-C874-8CFB-D9A399B03280][Motivation for a new SDM]]), the modeling conventions (Section [[id:B5C091AD-227A-3E94-A9A3-244E64051FD4][Modeling
+Conventions]]) and the methodology's processes and actors (Section [[id:2B373291-9FD5-FAA4-B193-55507FBFCB2E][Processes and
+Actors]]). The chapter ends with Section [[id:7AD836E7-CD20-4FD4-6E6B-5C14771A7988][Comparison with Other Approaches]], where a
+comparison of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] against like-minded approaches is performed. Let us begin
+then by establishing our motivation.
+
+* Motivation for a new SDM
+  :properties:
+  :id: 94FA9BC7-AEF5-C874-8CFB-D9A399B03280
+  :custom_id: ID-94FA9BC7-AEF5-C874-8CFB-D9A399B03280
+  :end:
+
+After combining literature review with personal experience[fn:sdm_analysis], it
+is our position that Stahl /et al./'s two-track iterative software development
+model (/cf./ [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]]) did not advance far enough for our needs. In our opinion,
+problem domain decoupling becomes a significant factor in the context of the
+requirements gathered in [[id:8EFC0922-AD38-9514-538B-88C0EF9F730E][Requirements for a New Methodology]]. This happens
+because the infrastructure problem domain we've set out to explore is
+simultaneously sufficiently complex and sufficiently distinct from the core
+problem domain to warrant a clearer demarcation of responsibilities between the
+two.[fn:acmdsd_requirements]
+
+[fn:sdm_analysis] The traditional notion of an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] was examined in
+[cite:@marco_craveiro_2021_2] (Chapter 5), as well as its integration with
+model-driven approaches. [cite:@marco_craveiro_2021_1] covers our personal
+experiences.
+
+[fn:acmdsd_requirements] /n.b./, we are not attempting to make a general
+argument about [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]]; instead, the discussion is restricted to an application
+of [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]] that targets our specific requirements (/cf./ [[id:8EFC0922-AD38-9514-538B-88C0EF9F730E][Requirements for a New
+Methodology]]). Simpler uses need not share this level of complexity, and for
+those, this analysis would not be relevant.
+
+
+Accordingly, we argue instead for the logical consequence of Stahl /et al./'s
+ideas, which is to have a dual-[[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] approach, because one can only mediate such
+complex interactions by means of an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]], crafted specifically to handle the
+infrastructure problem domain, and to ensure it is kept it at arms length from
+the core problem domain.[fn:interactions] However, it does not suffice to merely
+isolate the two problem domains with two distinct [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]. Using tool vendor
+offerings as a proxy, our analysis demonstrated they tend to fall in what we
+named the over-generalisation trap.[fn:requirements_proxy] Therefore, in order
+to avoid this fate, it is also crucial for the [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] to explicitly target the
+"barely general enough" generalisation sweet-spot described towards the end of
+Section [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]].
+
+
+[fn:interactions] For details of the complex interactions alluded to here,
+please see [cite:@marco_craveiro_2021_2] (p. 46-47).
+
+[fn:requirements_proxy] [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] vendor tooling is deemed to be a good proxy
+for the level of complexity of our requirements because they target a
+generalised problem domain, in the same fashion as we intend to tackle the
+infrastructure problem domain.
+
+
+It is in this sense that the application we put forward differs from the typical
+integration of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] with [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]; its purpose is not to manage the entirety of the
+software development lifecycle but merely a small but well-defined subset of its
+activities: those related to the management of SRPP, which take central stage in
+the methodology. SRPP are a furthering of Stahl /et al./'s ideas around
+schematic and repetitive code (/cf./ Section [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]]), but generalised to other
+kinds of patterns within the physical space[fn:lakos_definitions]; they result
+from a deep interrogation on the nature of physical and logical dimensions
+within a software project, and are discussed in great detail in FIXME domain
+architecture. This approach is believed to hold the key in shielding end-users
+from many of the complex themes discussed in [[id:6EBDB35D-8892-8964-6D03-393E013B74BA][State of the Art in Code
+Generation]], allowing the methodology's modeling conventions --- and consequently
+its domain architecture --- to be reduced to only those concepts needed in order
+to realise its objectives.[fn:uml_physical]
+
+[fn:lakos_definitions] [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] employs the terms /physical/ and /logical/ in the
+same manner as put forward by Lakos in his systematic study of development
+artefacts in a software system. He states (/emphasis ours/):
+
+#+begin_quote
+Developing successful software on a large scale demands a thorough understanding
+of two distinct but highly interrelated aspects of design: /logical/ design and
+/physical/ design. Logical design, as we will use the term, address all
+/functional/ aspects of the software we develop. [...] Physical design [...]
+addresses issues surrounding the placement of logical entities, such as classes
+and functions, into physical ones, such as files and libraries. /All design has
+a physical aspect/. That is because all of the source code that makes up a
+typical C++ program resides in files, which are physical. [cite:@lakos2019large]
+(p. 44)
+#+end_quote
+
+Lakos appears to be quite unique within the literature for his incessant
+questioning of compile time physical design, and its implications to logical
+design. Regrettably, a literature review of Lakos' copious material is
+unfeasible, given the space and time constraints of the present work. The
+interested audience is directed to Lakos multi-volume opus as our preferred
+recommendation [cite:@lakos2019large]. However, as far as this dissertation is
+concerned, the essence of the argument had already been made in the prior
+incarnation of the work [cite:@lakos1996large], of a more modest size.
+
+[fn:uml_physical] It may be argued that the UML has long had provisions for a
+physical view, distinct from the logical view --- /e.g./,
+[cite:@stevens1999using] (p. 155), [cite:@booch1999UserGuide] (p. 343).
+Nonetheless, in stark contrast to our intentions, the physical view has often
+been relegated to deployment as well as runtime concerns, whereas our focus is
+on compile-time artefacts. This disconnect forced [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] to turn its gaze towards
+Lakos.
+
+The endeavour can now be summarised in a more concrete fashion. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is a new
+[[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] designed to aid in the engineering of software systems by fulfilling the
+requirements previously gathered in [[id:8EFC0922-AD38-9514-538B-88C0EF9F730E][Requirements for a New Methodology]]. An [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]
+is needed in order to orchestrate the many complex moving parts into an
+organised form of collaboration towards a common, well-established goal. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+makes use of a well-defined subset of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] techniques, and applies them to the
+problem domain of infrastructure, striving to attain an adequate level of
+generalisation. Significantly, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] has not been designed as a replacement for
+the application of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] to the core problem domain, but as a complementary
+approach with which it can be integrated.
+
+We shall now build upon this motivational framework, and tackle the
+philosophical considerations that underpin the methodology.
+
+* Philosophy
+  :properties:
+  :id: 56A7B12E-71BF-9DC4-A3C3-4CE0E18D468B
+  :custom_id: ID-56A7B12E-71BF-9DC4-A3C3-4CE0E18D468B
+  :end:
+
+In order to plot a clear and concise narrative for [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]], we have divided its
+philosophy into three distinct but interdependent concerns: a /vision/, a
+/mission statement/ and a set of fundamental /core
+values/.[fn:vision_literature]^{,}[fn:vision_importance] The vision provides
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] with a overarching purpose, setting the overall direction for the
+methodology. The mission statement is comprised of a set of actions that will be
+taken to fulfil the vision. Finally, the core values are the basic principles
+that act as guides or sign-posts for all decision making on the long road
+towards making the vision a reality. The next three sections describe these
+elements in detail.
+
+[fn:vision_literature] A literature review on vision and mission statements is
+deemed to be beyond the scope of the present work. The interested reader is
+directed to Stallworth Williams [cite:@stallworth2008mission] for an accessible
+treatment.
+
+[fn:vision_importance] In our opinion, setting out a clear vision and mission
+statement for [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is crucial due to the deficit in clarity that surrounds [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s
+variants [cite:@marco_craveiro_2021_2] (p. 10).
+
+
+** Vision
+   :properties:
+   :id: 09B63698-B090-93D4-A32B-D29EA60861BA
+   :custom_id: ID-09B63698-B090-93D4-A32B-D29EA60861BA
+   :end:
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s vision is as follows:
+
+#+begin_quote
+To accelerate [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption by traditional software engineers for the generation
+of infrastructural code.
+#+end_quote
+
+**** Mission Statement
+     :properties:
+     :id: AD972FDE-5EFA-BE64-78DB-A9E6888B2494
+     :custom_id: ID-AD972FDE-5EFA-BE64-78DB-A9E6888B2494
+     :end:
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s mission is to provide a systematic and integrated approach to the
+lifecycle management of SRPP, a class of patterns found in software systems. The
+lifecycle management of these patterns calls for:
+
+- their identification, capture and classification in a open, centralised and
+  continuously evolving library;
+- the analysis and characterisation of their inter-dependencies and variability
+  requirements;
+- their generation by automated means;
+- the associated conformance testing, required to empirically verify and
+  validate their generation;
+- their evolution, as related use cases are considered; and, ultimately,
+- their decommission, once no longer required.
+
+** Core Values
+   :properties:
+   :id: 931D0476-B804-BD84-B36B-D77173D60239
+   :custom_id: ID-931D0476-B804-BD84-B36B-D77173D60239
+   :end:
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s core values are anchored on six complementary principles, all centred
+around increasing automation, as depicted in Figure [[fig-masd_basic_tenets]]. The
+next six sections discuss each principle in turn, anti-clockwise, supplying
+context and a rationale for their inclusion. Each principle is composed of a
+numbered /principle definition/ for cross-referencing purposes, a list of the
+associated requirements it addresses (/cf./ [[id:8EFC0922-AD38-9514-538B-88C0EF9F730E][Requirements for a New Methodology]])
+and an overview detailing the objective of the principle. Note that the
+principles are stated in imperative form by design, as they are intended as
+exhortations to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] actors (/cf./ [[id:E49032A0-B932-6BB4-AFA3-AD53670C76B0][Actors]]).
+
+#+caption: [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] principles.
+#+name: fig-masd_basic_tenets
+#+attr_latex: :scale 0.35
+[[../assets/images/masd_basic_tenets_new.png]]
+
+*** First Principle: Focus Narrowly
+    :properties:
+    :id: 4A4A244E-438B-F714-CF83-B969F0F987E5
+    :custom_id: ID-4A4A244E-438B-F714-CF83-B969F0F987E5
+    :roam_aliases: P-1
+    :end:
+
+#+name: principle-narrow
+#+begin_principle
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] has a /narrow focus/ on its problem domain, with well-defined identity,
+boundaries, audience and responsibilities.
+
+*Related Requirements*: [[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]], [[id:7B9439C4-DF6D-15D4-9F23-483CFA520E1C][RQ-02]], [[id:F328F253-223B-45E4-604B-97A93F54DFD3][RQ-03]], [[id:DF8F82C6-36A4-E044-7223-9C701F610F7B][RQ-12]], [[id:5F450D39-B621-A904-816B-7C0B403F8BF8][RQ-13]].
+#+end_principle
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] has a single focus on solution space concepts --- given that's
+where software infrastructure resides --- and commits itself to only serving one
+set of users: software engineers. With a narrower focus comes a smaller
+conceptual framework and hence a smaller cognitive load, making it suitable for
+new practitioners. In addition, a well-defined scope also provides a more
+straightforward filtering function with which to circumscribe the methodology's
+boundaries.[fn:special_purpose]
+
+[fn:special_purpose] Besides the lessons learned from [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s narrow focus
+is also a product of our research into special purpose code generators
+[cite:@marco_craveiro_2021_3] (Section 3.1), as well as the incredibly
+insightful comments by Clark and Muller regarding the industry's search for a
+"shrink-wrapped black-box process" that hides its [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] internals
+[cite:@clark2012exploiting] (/cf./ [[id:0A799746-01F2-8C94-DB6B-68ABEFB4B205][Technical Factors]])
+
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is able to externalise a large subset of modeling concerns because its only
+focus is the code generation of infrastructural code. Therefore, all other
+functionality related to modeling is deemed to be external to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s domain,
+such as support for graphical notations, [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]], [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]], model evolution, model
+synchronisation, reverse engineering and many other aspects of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. Where
+required, these must be addressed elsewhere; and their integration with [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is
+the role of the next tenet.
+
+*** Second Principle: Integrate Pervasively
+    :properties:
+    :id: F1FAD624-B7B7-1384-CA8B-FB203FB8B468
+    :custom_id: ID-F1FAD624-B7B7-1384-CA8B-FB203FB8B468
+    :roam_aliases: P-2
+    :end:
+
+#+name: principle-integration
+#+begin_principle
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] adapts to users' tools and workflows, not the converse. Adaptation is
+achieved via a strategy of /pervasive integration/.
+
+*Related Requirements*: [[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]], [[id:5F450D39-B621-A904-816B-7C0B403F8BF8][RQ-13]], [[id:1EC48874-83C9-B274-D403-3948B18D8E13][RQ-06]].
+#+end_principle
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] promotes tooling integration: developers preferred tools and workflows must
+be leveraged and integrated with rather than replaced or subverted. First and
+foremost, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s integration efforts are directly aligned with its mission
+statement (/cf./ [[id:AD972FDE-5EFA-BE64-78DB-A9E6888B2494][Mission Statement]]) because integration infrastructure is
+understood to be a key source of SRPP.[fn:belief_justification] Secondly,
+integration efforts must be subservient to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s narrow focus ([[id:4A4A244E-438B-F714-CF83-B969F0F987E5][P-1]]); that is,
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is designed with the specific purpose of being continually extended, but
+only across a fixed set of dimensions. For the purposes of integration, these
+dimensions are the projections in and out of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s acrshort:ts, as Figure
+[[fig-masd_projections]] illustrates.[fn:projection_ts]
+
+[fn:belief_justification] In other words, much of the machinery required for
+integration is believed to be schematic and repetitive in nature. This belief is
+justified empirically via the author's two decades of industrial software
+development, as well as the experiences in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] application
+[cite:@marco_craveiro_2021_2].
+
+[fn:projection_ts] See Chapter 4 of [cite:@marco_craveiro_2021_2] (p. 31) for
+details on acrfullpl:ts and associated projections.
+
+
+#+caption: [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Pervasive integration strategy.
+#+name: fig-masd_projections
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_projections.png]]
+
+Within these boundaries, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s integration strategy is one of pervasive
+integration. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] encourages mappings from any tools and to any programming
+languages used by developers --- provided there is sufficient information
+publicly available to create and maintain those mappings, and sufficient
+interest from the developer community to make use of the functionality.
+Significantly, the onus of integration is placed on [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] rather than on the
+external tools, with the objective of imposing minimal changes to the tools
+themselves. To demonstrate how the approach is to be put in practice, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s
+research includes both the integration of org-mode (/cf./ FIXME Chapter
+chap:literate-modeling), as well as a survey on the integration strategies of
+special purpose code generators [cite:@marco_craveiro_2021_3]; subsequent
+analysis generalised these findings so that [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] tooling can benefit from these
+integration strategies. Undertakings of a similar nature are expected as the
+tooling coverage progresses.
+
+Clearly, if left to its own devices, pervasive integration could be construed as
+an unachievable target due to its overly ambitious scope --- particularly given
+the very large size of the pool of potential integration candidates. Moreover,
+this is a problem that affects the capture of SRPP in general. It is the role of
+the next principle to provide direction for the exploration of such an immense
+problem space.
+
+*** Third Principle: Evolve Gradually
+    :properties:
+    :id: E07F2FE3-047F-B294-009B-83E9B5C6F124
+    :custom_id: ID-E07F2FE3-047F-B294-009B-83E9B5C6F124
+    :roam_aliases: P-3
+    :end:
+
+#+name: principle-gradual
+#+begin_principle
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is designed to grow gradually and deliberately over time, covering
+an increased surface area of its problem domain.
+
+*Related Requirements*: [[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]], [[id:A338D17B-F00B-0124-CE9B-AE2E8E693804][RQ-05]], [[id:CE3A551A-4CE1-CE84-6993-CC580A970F2F][RQ-10]], [[id:4676F4D9-3DD0-DCE4-1DDB-07C632D440FF][RQ-11]].
+#+end_principle
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] sets out to create a conceptual framework for the exploration of the
+problem space of infrastructural code; in the limit, it views all
+infrastructural code as part of one single but extremely large problem domain
+--- allowing for a globalised view --- and its objective is to identify and
+model its entities along with their associated variability. Thus, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] sees the
+processes related to the continual discovery of the shape of the problem domain
+as a indissoluble part of the methodology, as is the resulting library of
+patterns of infrastructural code, and strives for comprehensive coverage over
+long timescales.
+
+#+caption: Interrelationship between discovery and application.
+#+name: fig-masd_application_development
+#+attr_latex: :scale 0.4
+[[../assets/images/masd_application_development.png]]
+
+The exploration of infrastructural code is made through empirical and iterative
+means, and guided by pragmatism. In this manner, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] expects to fulfil its
+vision through a very large number of gradual steps over a long period of time,
+slowly and incrementally building up its SRPP library in a cohesive
+manner --- which also includes integrations (P-[[principle-integration]]). The
+driver for changes is /practice/; that is, in general, features in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] must be
+driven by concrete use cases from users in the field rather than through the
+inclusion of speculative
+features.[fn:masd-reference-implementation]^{,}[fn:too-many-features]
+
+[fn:masd-reference-implementation] Nonetheless, there is a significant caveat:
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s reference implementation is a key end-user of the methodology, meaning
+that features will be specifically added for this purpose, even if they have no
+external use cases.
+
+[fn:too-many-features] [[id:3310548C-2A30-0FA4-71F3-6E31EB98D498][The State of MDE Adoption]] alluded to the challenges posed
+by making "too many" features available to end users. For a more specific
+example of the dangers in adding speculative features to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling, see our
+own experience report [cite:@marco_craveiro_2021_1] (Section 6.3).
+
+
+However, even taking long timescales into account, such a large undertaking can
+only be performed by leveraging an equally large and motivated group of
+individuals. This in turn raises issues of community and organisation, addressed
+by next principle.
+
+*** Fourth Principle: Govern Openly
+    :properties:
+    :id: 6913901E-B345-2334-8B8B-7802BE1265C8
+    :custom_id: ID-6913901E-B345-2334-8B8B-7802BE1265C8
+    :roam_aliases: P-4
+    :end:
+
+#+name: principle-governance
+#+begin_principle
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] promotes an open governance model because a thriving community is a
+necessary condition to fulfil its vision.
+
+*Related Requirements*: [[id:A338D17B-F00B-0124-CE9B-AE2E8E693804][RQ-05]], [[id:9989CB52-6283-1E04-BBDB-B53D57DBDD44][RQ-07]], [[id:0B2736E7-8886-4974-3D43-98C66612DF73][RQ-14]].
+#+end_principle
+
+Whilst all work on [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] thus far was performed by the dissertation's author,
+careful consideration has been given to creating a governance model that will
+allow external parties to contribute.[fn:governance] These contributions are
+viewed as an essential ingredient for the fulfilment of the methodology's vision
+(/cf./ Section [[id:09B63698-B090-93D4-A32B-D29EA60861BA][Vision]]), because, from a end-user perspective, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s usefulness
+is closely related to the breadth and depth of its SRPP pattern library, and the
+library can only grow if the methodology is pitted against the full breadth and
+depth of its target problem domain.
+
+[fn:governance] Availing themselves of Renz's ideas on the matter
+[cite:@renz2007project], Capra /et al./ define governance in this context as
+follows: "The governance of software projects is defined as the complex process
+that is responsible for the control of project scope, progress, and continuous
+commitment of developers. Governance is recognized to have a key role in
+enabling software project success [...]." [cite:@&capra2008empirical]
+
+
+These lofty aspirations are not without precedent. [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] has a long-standing
+experience with FOSS development in leading projects such as
+acrshort:emf [cite:@steinberg2008emf], acrfull:gme [cite:@davis2003gme] and many
+others; in the most successful cases, the approach has yielded several positive
+results such as a growing and diverse community as well as source code reuse ---
+characteristics which we seek to emulate.
+
+Benefiting from their experience, we thought important to structure [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] in a
+fashion similar to a FOSS project, in anticipation of its expected
+future.[fn:foss_development] Once chosen, the governance model had implications
+on actors and processes, so that we could mirror more closely the structures
+typically found in FOSS --- /i.e./ roles such as /maintainer/,
+/contributor/, /end-user/ and so forth can be directly mapped to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s actors
+and processes defined in Section [[id:2B373291-9FD5-FAA4-B193-55507FBFCB2E][Processes and Actors]].
+
+[fn:foss_development] A review of the available literature was carried out
+before embarking in this direction, but it is deemed to lay outside the scope of
+the dissertation. For those interested, we relied mainly on Crowston /et al./'s
+comprehensive survey of the literature on FOSS development, spanning
+over 135 published empirical studies and including both quantitative and
+qualitative methods [cite:@crowston2012free]. The review highlighted several
+points of interest, but the findings most relevant to the present work relate to
+the different roles in FOSS projects. Once these were identified, Lee
+and Cole's analysis was used to attain an increased understanding of their
+properties [cite:@lee2003firm].
+
+
+A plurality of voices has benefits but is not without its hazards, requiring
+careful orchestration to ensure all involved pull in the same direction.
+Therefore, in addition to P-[[principle-narrow]], we also set a clear stance on the
+use of standards, as the next principle will demonstrate.
+
+*** Fifth Principle: Standardise Judiciously
+    :properties:
+    :id: 6B23A878-E8BF-A144-453B-0A19310D24A2
+    :custom_id: ID-6B23A878-E8BF-A144-453B-0A19310D24A2
+    :roam_aliases: P-5
+    :end:
+
+#+name: principle-standard
+#+begin_principle
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] employs /de facto/ standardisation at its core to promote
+agility, and /de jure/ standardisation at the edges to ensure
+stability.
+
+*Related Requirements*: [[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]], [[id:7B9439C4-DF6D-15D4-9F23-483CFA520E1C][RQ-02]], [[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]], [[id:4676F4D9-3DD0-DCE4-1DDB-07C632D440FF][RQ-11]].
+#+end_principle
+
+After reflecting on the [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][MDA]] experience with international standards (/cf./ [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][Model
+Driven Architecture]]), we decided to limit the use of /de jure/ standards in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+to projections in and out of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] ([[id:F1FAD624-B7B7-1384-CA8B-FB203FB8B468][P-2]]), as that is where we see them
+adding most value. Projections from and to the outside world are expected to
+remain stable, and are aligned to the target of the projection, so it makes
+sense to use well-known standards where those are available. Conversely, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s
+core shall be restricted to /de facto/ standards because, there, empiricism and
+agility are deemed more important than stability.
+
+Within the core, /de facto/ standards are based on two pillars: this
+dissertation, as the basis for the definition of the methodology in a future
+document called the acrfull:mss; and the acrfull:mri (/cf./ FIXME Chapter
+chap-mri) as the single source of truth of everything else --- tooling
+interfaces, the SRPP library of patterns and associated variability, and the
+like. The duality is justified as follows. In order to remain relevant to its
+users, the acrshort:mri is expected to undergo constant change ([[id:E07F2FE3-047F-B294-009B-83E9B5C6F124][P-3]]), making it
+a good candidate for an Agile process [cite:@beck2001manifesto].
+
+On the other hand, the [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] itself is expected to experience only minor
+revisions, reconcilable with the vision and principles here put forward. This
+does not mean the acrshort:mss is frozen; change is strongly encouraged in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+and the philosophy is itself liable to change just as much as any other of its
+components --- provided there is sufficient justification. However, it is
+important to understand that, by design, the identity of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is deeply embedded
+within its philosophy. Therefore, we anticipate it to change in a small and
+incremental manner, maintaining a similar direction to what has been proposed by
+this document --- or else for a completely new (and distinct) [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] to be put
+forward in its place.
+
+This multi-layered approach with regards to standards is designed to provide an
+adequate support for the speed of change of each of these aspects, in order to
+better serve the target audience. That said, the target audience is
+multi-layered as well, and thus demands support for distinct levels of usage.
+And that is the role of the next and final principle.
+
+*** Sixth Principle: Assist and Guide
+    :properties:
+    :id: 1B7D33C3-6BE7-9854-B233-C99DD4341C4A
+    :custom_id: ID-1B23A878-E8BF-A144-453B-0A19310D24A2
+    :roam_aliases: P-6
+    :end:
+
+#+name: principle-assistance
+#+begin_principle
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s role is to /continually assist/ its end users in choosing the appropriate
+level of automation for their projects.
+
+*Related Requirements*: [[id:1EC48874-83C9-B274-D403-3948B18D8E13][RQ-06]], [[id:ABE6F956-F44E-9874-6823-556FF007CE4D][RQ-08]], [[id:F6E37D65-F879-8694-2EBB-5D55148BA63C][RQ-09]], [[id:CE3A551A-4CE1-CE84-6993-CC580A970F2F][RQ-10]], [[id:DEEB98C0-FF5A-75D4-98E3-94DD4EFAFF2D][RQ-16]].
+#+end_principle
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is designed from the ground up to support both top-down and bottom-up
+approaches, and is focused on identifying a set of levels of usage that mirror
+the behaviour uncovered from adoption literature and personal experience. As a
+result, instead of enforcing a model-driven view of software engineering, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+views the use of automation in the development of a software system as a
+spectrum of possibilities (Figure [[fig-masd_automation_spectrum]]), ranging from no
+automation to the automated generation of all infrastructural code, as the full
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] vision is eventually realised.[fn:variability_continuum] All points in the
+spectrum are equally valid and a system may be composed of an heterogeneous mix
+of automation approaches, both from within and outside of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] --- though
+hopefully orchestrated via its strategy of pervasive integration ([[id:F1FAD624-B7B7-1384-CA8B-FB203FB8B468][P-2]]).
+
+[fn:variability_continuum] The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] automation spectrum is inspired on Groher
+and Völter's's analysis of variability and their modeling of it as a continuum
+[cite:@groher2007expressing]. Figure [[fig-masd_automation_spectrum]] in particular
+is our take on their idea of the "Expressive power of DSLs" as a spectrum of
+possibilities. The automation gradient was inspired on Bosch /et al./'s work on
+variability [cite:@bosch2001variability].
+
+
+#+caption: The automation spectrum and the automation gradient.
+#+name: fig-masd_automation_spectrum
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_automation_spectrum.png]]
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] aims to empower its practitioners in determining the adequate level of
+automation for a given context, as a function of their prior experience. Over
+time, as they master methodology and tooling, practitioners are expected --- but
+not forced --- to progressively climb the automation gradient, though always
+remaining within the narrow confines of an [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]] approach. Crucially, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+does not promote the use of automation as a uniquely positive development
+regardless of context, but rather views it as a set of engineering trade-offs
+that must be made during the software development process. Though /assisted/ by
+the methodology, it is ultimately the practitioner's responsibility to make
+those trade-offs.[fn:assisted] [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] views software engineering not as driven by
+modeling but by the manual writing of code; modeling is considered a subsidiary
+activity that can be of assistance to the development process in distinct but
+well-defined capacities, within the scope of infrastructural
+code.[fn:masd_mde_differences]
+
+[fn:masd_mde_differences] At this juncture, one can begin to see the key
+differences between [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] and model-driven methodologies emerging, and it is
+certainly a topic worthy of further elaboration; it is addressed at the end of
+the chapter (/cf./ [[id:7AD836E7-CD20-4FD4-6E6B-5C14771A7988][Comparison with Other Approaches]]).
+
+[fn:assisted] Hence why the adjective /assisted/ was chosen, as opposed to the
+more traditional choices such as /oriented/, /driven/, /based/ and the like, as
+touched upon in [cite:@marco_craveiro_2021_2] (p. 10, note 5).
+
+
+And it is with this message of end-user focus that we conclude our incursion
+through [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s philosophy. It's also worthwhile noting that the methodology's
+philosophy has had far reaching implications to all the work carried out; for
+one, it was instrumental in shaping [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s modeling language and other related
+aspects of its domain architecture. And it is to these we shall turn our
+attentions to next.
+
+** Modeling Conventions
+   :properties:
+   :id: B5C091AD-227A-3E94-A9A3-244E64051FD4
+   :custom_id: ID-B5C091AD-227A-3E94-A9A3-244E64051FD4
+   :end:
+
+The second aspect of an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] are its conventions with regards to modeling. In our
+view, the notion carries additional weight within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] application, because
+modeling conventions manifest themselves as a modeling language, and the
+modeling language is but one component of the domain architecture. All
+components of the domain architecture must be designed to work in concert and
+cannot be understood in isolation, leading us to defer their wholesale
+exposition to FIXME Chapter chap:domain-architecture. Therefore, the present
+section is tasked exclusively with painting the backdrop with which to
+understand the domain architecture --- /i.e./, elucidating the conventions and
+motivation in the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s modeling landscape. And it is here that DDD, as
+championed by Evans [cite:@evans2004domaindriven], takes central stage.
+
+Though making selective use of the approach, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] was nonetheless greatly
+influenced by DDD, particularly with regards to modeling conventions. A clear
+example is [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s ubiquitous language[fn:ubiquitous_language]: it is explicitly
+composed of both an informal model and a formal model, as depicted in Figure
+[[fig-masd_modeling_language]], and we view it as a significant statement of intent
+with regards to the limits of a formal modeling approach. As does Evans, we do
+not believe it is possible --- or even desirable --- to express all entities in
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s problem domain formally. Furthermore, when an entity is captured
+formally, effort must be made to ensure only those aspects needed to recreate
+the associated SRPP are modeled. That is, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] seeks to keep the footprint of
+the formal model as small as possible because, from experience, we have found
+its maintenance to be costly [cite:@marco_craveiro_2021_2]. Since the formal
+model does not tell the whole story, the informal model is then responsible for
+weaving an all-encompassing narrative that imbues entities with meaning.
+
+[fn:ubiquitous_language] Evans states (/capitalisation his/):
+
+#+begin_quote
+The vocabulary of that UBIQUITOUS LANGUAGE includes the names of classes and
+prominent operations. The LANGUAGE includes terms to discuss rules that have
+been made explicit in the model. It is supplemented with terms from high-level
+organising principles imposed on the model [...]. Finally, this language is
+enriched with the names of patterns the team commonly applies to the domain
+model. [cite:@evans2004domaindriven] (p. 23)
+#+end_quote
+
+
+#+caption: [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] modeling language.
+#+name: fig-masd_modeling_language
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_modeling_language.png]]
+
+That said, the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] modeling landscape is somewhat convoluted at present; due to
+this, its distinct moving parts and their relationships are perhaps best
+explained from a high vantage viewpoint.[fn:conventions_order] Figure
+[[fig-masd_components]] provides a birds-eye view of the top-level components and
+their associations, which we shall now describe. As mentioned previously (/cf./
+[[id:6B23A878-E8BF-A144-453B-0A19310D24A2][P-5]]), the acrshort:mss is a subset of the present document, containing only the
+aspects relevant to the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]. The acrshort:mri (/cf./ FIXME Chapter
+#chap-mri) is a software product family composed of several software products: a
+code generator and a set of reference products --- at present, one per supported
+[[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]]. There is only one implementation of the code generator, called /Dogen/ and
+described in FIXME Section mri-dogen. The formal model is specified and
+implemented within the code generator and it is used to document and generate
+the code generator itself, as well as for testing its functionality. The
+reference products (/cf./ FIXME Section mri-rm) also serve a dual purpose, being
+used for both conformance testing as well as canonical instances of the domain
+architecture for demonstrative purposes. Finally, the informal model is
+scattered across the acrshort:mss and the acrshort:mri --- in particular, the
+developer documentation included in the code generator's source code repository.
+
+[fn:conventions_order] Brining order to this complex picture will be
+part of our future work.
+
+
+#+caption[[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] top-level components]: acrshortpl:masd top-level components.
+#+name: fig-masd_components
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_components.png]]
+
+Given this context, it should by now be clear that [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] views the determination
+of its modeling conventions as a dynamic process. Consequently, the manner in
+which the domain is explored is of key importance to the methodology, as are
+those responsible for performing the exploration; and it is to them we shall
+turn to in the next section.
+
+** Processes and Actors
+   :properties:
+   :id: 2B373291-9FD5-FAA4-B193-55507FBFCB2E
+   :custom_id: ID-2B373291-9FD5-FAA4-B193-55507FBFCB2E
+   :end:
+
+The third and final component of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] as an [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] are its processes and associated
+actors. Accordingly, both the application of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] as well as its internal
+development are governed by well-defined processes and their corresponding
+actors playing well-defined roles. This section provides an overview of both
+actors (Section [[id:E49032A0-B932-6BB4-AFA3-AD53670C76B0][Actors]]) and processes (Section [[id:0AECB82C-4816-F9D4-BFC3-99D9279D3B78][Processes]]), linking them back to
+the concepts defined thus far.
+
+*** Actors
+    :properties:
+    :id: E49032A0-B932-6BB4-AFA3-AD53670C76B0
+    :custom_id: ID-E49032A0-B932-6BB4-AFA3-AD53670C76B0
+    :end:
+
+Within [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]], there are three distinct personas with different
+responsibilities: the /maintainer/, the /developer/ and the
+/user/.[fn:user_prefix] These represent the canonical roles available in
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] software development. The next three sections shed light on these
+actors.
+
+[fn:user_prefix] To avoid conflating these names with the more general usage of
+the terms in a FOSS context, we have henceforth prefixed them with [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] (/e.g./,
+the /[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] maintainer/).
+
+
+**** MASD Maintainer
+     :properties:
+     :id: 3D626F2E-B8B4-9344-127B-098103B91A26
+     :custom_id: ID-3D626F2E-B8B4-9344-127B-098103B91A26
+     :end:
+
+The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer is the gatekeeper of the acrshort:mss and the acrshort:mri.
+Its role is to review change requests, often made as pull requests to the
+desired component, ensuring they are consistent with the methodology's
+philosophy (/cf./ Section [[id:56A7B12E-71BF-9DC4-A3C3-4CE0E18D468B][Philosophy]]) and fit the acrshort:mri codebase. All
+changes that impact the acrshort:mri must have a set of tests that specify and
+validate empirically the new behaviours, in order to be considered for
+inclusion; they must therefore update all relevant reference products. Once the
+changes have been reviewed and approved, the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer is responsible for
+merging them and releasing new versions of the affected components.
+
+#+caption: Use case diagram for [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer.
+#+name: fig-maint_uc
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_maintainer_use_case.png]]
+
+Since [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is continuously evolving, the management of backwards and forwards
+compatibility is a significant challenge for the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer. In general,
+maintaining compatibility should be the main priority, unless there are explicit
+technical reasons not to do so. In cases where compatibility must be broken, the
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer will communicate the change to its users by means of semantic
+versioning [cite:@preston2013semantic], supplying detailed examples on how to
+update legacy models to the newest version.[fn:legacy_versioning] The reference
+products are used for this purpose, demonstrating the before and after states.
+
+[fn:legacy_versioning] Stahl /et al./ suggest avoiding this problem altogether
+by always maintaining backwards compatibility: "The DSL typically continues to
+be developed in the course of one (or more) projects. The knowledge and
+understanding of the domain grows and deepens, so the DSL will thus be extended.
+To make life simpler, one must make sure that the DSL remains
+backwards-compatible during its evolution." However, this approach limits the
+evolution of the [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] so [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] forfeits it. Nevertheless,
+breaking compatibility should be seen as the alternative of last resort.
+
+
+**** MASD Developer
+     :properties:
+     :id: 2FA6355B-857F-B814-DE2B-0310BDBFBB08
+     :custom_id: ID-2FA6355B-857F-B814-DE2B-0310BDBFBB08
+     :end:
+
+The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developer is responsible for creating change requests for the
+acrshort:mss and the acrshort:mri, in response to demands for new features or
+fixes to existing features. The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developer is expected to be
+familiar with state of the art approaches in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] as well as
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] itself, and to use those selectively, in accordance with the
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] vision.
+
+#+caption: Use case diagram for [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developer.
+#+name: fig-dev_uc
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_developer_use_case.png]]
+
+As an example, the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developer can create mappings for new platforms, add new
+injectors or extend existing ones with new functionality, add new modeling
+elements to the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] metamodels, target new [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] or augment the features on the
+already supported [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]] and so forth. All changes must be submitted and reviewed by
+the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer.
+
+**** MASD User
+     :properties:
+     :id: BB04D9A8-6B3F-C534-A38B-4E4534562488
+     :custom_id: ID-BB04D9A8-6B3F-C534-A38B-4E4534562488
+     :end:
+
+As a consumer of the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] methodology, the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] User is a
+traditional software developer who applies [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] to the development of a
+software system. The typical use cases for the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] User is to create
+new models and to transform them into code. However, as [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is
+continuously evolving, users are also encouraged to identify limitations and
+opportunities to extend it.
+
+#+caption: Use case diagram for [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] User.
+#+name: fig-user_uc
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_user_use_case.png]]
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Users communicate their requests for new features to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developers, who
+are then responsible for its development. Change requests must include a
+acrfull:mwe demonstrating the proposed change. The acrshort:mwe is used as a
+target for the reference products and will form the basis of the conformance
+tests used to ensure the new change was implemented correctly. The acrshort:mwe
+will make its way into the code base via the appropriate processes, as described
+in the next section.
+
+*** Processes
+    :properties:
+    :id: 0AECB82C-4816-F9D4-BFC3-99D9279D3B78
+    :custom_id: ID-0AECB82C-4816-F9D4-BFC3-99D9279D3B78
+    :end:
+
+There are three processes within [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] catering for both the internal development
+of the methodology as well as its application: the /acrshort:mri Development
+Process/ (Section [[id:A85E515C-6004-AAB4-6BF3-D6E9D4953191][MRI Development Process]]), the /acrshort:mss Development
+Process/ (Section [[id:83E60DE2-2C2B-F754-6763-37D8ABB9FE09][MSS Development Process]]) and the /[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Application Process/
+(Section [[id:669F44F7-8448-F8F4-EF73-F61A1BC4C1D3][MASD Application Process]]). All these processes are then combined under
+the /[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Composite Process/ (Section [[id:9998EC01-7A14-4D84-97EB-8880BFF1E579][MASD Composite Process]]). The next four
+sections describe these processes in more detail.
+
+**** MRI Development Process
+     :properties:
+     :id: A85E515C-6004-AAB4-6BF3-D6E9D4953191
+     :custom_id: ID-A85E515C-6004-AAB4-6BF3-D6E9D4953191
+     :end:
+
+The acrshort:mri is a dynamic software product family whose evolution takes
+place via the /acrshort:mri Development Process/. A simplified version of the
+process is shown on Figure [[fig-dev_process]]. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Users and [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developers are
+responsible for identifying patterns in source code deemed to be SRPP. The
+identification process must include a distilling of the schematic and repetitive
+structure into a acrshort:mwe so that the fundamental characteristics of the
+pattern can be isolated from irrelevant content. If the isolated patterns are
+not yet covered by the acrshort:mri, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developers act according to
+Test-Driven practices and start by updating the impacted reference products to
+match the desired result.
+
+#+caption: acrshort:mri Development Process.
+#+name: fig-dev_process
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_development_process.png]]
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developers then attempt the automated generation of the reference products,
+which now incorporate the acrshort:mwe, by making changes to the acrshort:mri
+until all tests pass. Often, the code generation of the requested changes forces
+a cascading set of modifications across the acrshort:mri metamodels, in order to
+reflect the introduction of the new feature throughout the stack. However,
+simpler cases may be able to make use of the existing infrastructure.
+
+Once the acrshort:mwe has been successfully reproduced and both [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] User and
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Developer are in agreement with how the feature has been implemented ---
+/e.g./ configuration settings, impact on existing features, and so on --- the
+changes are then proposed to the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer as a change request to the
+affected acrshort:mri repositories. The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer reviews and validates
+the changes and, once approved, publishes the new versions of the impacted
+software products. Via this process, the acrshort:mri is expected to evolve and
+grow over time, eventually providing a rich SRPP library of out of the box.
+
+**** MSS Development Process
+     :properties:
+     :id: 83E60DE2-2C2B-F754-6763-37D8ABB9FE09
+     :custom_id: ID-83E60DE2-2C2B-F754-6763-37D8ABB9FE09
+     :end:
+
+As described in Section [[id:A338D17B-F00B-0124-CE9B-AE2E8E693804][RQ-05]], changes to the acrshort:mss are expected to be
+few and far between. Nonetheless, for completeness, a process catering for these
+changes is provided --- as illustrated by figure
+[[fig-masd_mss_development_process]]. Once a shortcoming to the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] methodology is
+located and discussed with the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Maintainer, the instigator of the change is
+expected to create a patch to the acrshort:mss as a change request. The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+Maintainer will then apply the change and release a new version of the
+acrshort:mss.
+
+#+captionp[acrshort:mss Development Process]: acrshort:mss Development Process.
+#+name: fig-masd_mss_development_process
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_mss_development_process.png]]
+
+**** MASD Application Process
+     :properties:
+     :id: 669F44F7-8448-F8F4-EF73-F61A1BC4C1D3
+     :custom_id: ID-669F44F7-8448-F8F4-EF73-F61A1BC4C1D3
+     :end:
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Users apply the methodology in the development of software systems by using
+the acrshort:mri to generate code for their system. Before they can do so, they
+must first settle on the appropriate injector to use --- /e.g./ acrshort:ide or
+preferred modeling tool support if those injectors are available in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]], or
+otherwise a simpler format such as JSON --- and on a [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] /application level/.
+The application level will determine how much [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] will influence the
+development process, via P-[[principle-assistance]]. There are four levels of
+application, with an increasing level of dependency in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]:
+
+- *Level 0: Stub and Skeleton Generation*. The acrshort:mri is used as a one-off
+  generator to create stubs for methods, skeletons for classes and the like.
+  Once the code is generated, it must be manually maintained.
+- *Level 1: Artefact Generation*. The acrshort:mri acts like a special purpose
+  code generator [cite:@marco_craveiro_2021_3], albeit with a potentially wider
+  remit given the feature set of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] (/cf./ FIXME Chapter
+  chap:domain-architecture). The project structure, integration of generated
+  artefacts and other development decisions are unaffected by [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]].
+- *Level 2: Component Generation*. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is used to model and generate one or
+  more components in a larger system, such as a library or an executable. The
+  component follows the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] component directory structure layout and may use
+  [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] generated build files. However, the remaining system remains unaffected.
+- *Level 3: Product Generation*. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is used to model and generate an entire
+  product --- /i.e./ a complete software system, composed of executables and
+  libraries. In this case, all (or most) components that make up a product are
+  modeled and generated using [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]], with the user writing code to implement
+  problem space specific behaviour. The product follows all of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s
+  conventions, including its product directory structure layout.
+- *Level 4: Product Line Generation*. [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is used to model and generate a
+  family of related products.
+
+Typically, new [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Users start at /Level 0/ and explore the methodology
+incrementally --- use more features, model different types of elements, /etc./
+Over time, as they gain experience, they are expected (but not required) to
+progress towards /Level 4/. Experienced [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Users may then decide that [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is
+too limiting for them and move to a more traditional [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] modelware stack, or
+work on integrating existing [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling with [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]].
+
+Once the level of application has been decided upon, the process of application
+itself is straightforward, as Figure [[fig-app_process]] depicts. It works as
+follows: [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Users identify the elements to model and the features that are of
+interest. If those features are already available in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] --- as implemented by
+the acrshort:mri, and explored in more detail in FIXME Chapter
+chap:domain-architecture --- users can freely create their models, generate code
+and consume the generated code from handcrafted artefacts. As with most
+development today, the process is an iterative one, with identification and
+modeling progressing side-by-side with traditional programming. If the required
+features are not available, the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] User is encouraged to report it via the
+acrshort:mri Development Process (/cf./ Section [[id:A85E515C-6004-AAB4-6BF3-D6E9D4953191][MRI Development Process]]).
+
+#+caption[[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Application process]: [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Application process.
+#+name: fig-app_process
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_application_process.png]]
+
+The simplicity of the workflow described above may not adequately convey its
+significance within the methodology, so it is worthwhile stating explicitly that
+all moving parts of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] exist solely to service the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] application process.
+Furthermore, application and empiricism are the main drivers for [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] --- an
+ideal we tried to enshrine within its core values (/cf./ [[id:931D0476-B804-BD84-B36B-D77173D60239][Core Values]]). This
+notion of interconnectivity between processes in [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] can be modeled at a higher
+level of abstraction, giving rise to a composite process.
+
+**** MASD Composite Process
+     :properties:
+     :id: 9998EC01-7A14-4D84-97EB-8880BFF1E579
+     :custom_id: ID-9998EC01-7A14-4D84-97EB-8880BFF1E579
+     :end:
+
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s development has been characterised by severe resource constraints ---
+more so than any of our previous experiences with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+[cite:@marco_craveiro_2021_2]. Due to this, there has been an emphasis on doing
+more with less, forcing us to apply a strategy of bootstrapping --- that is,
+using the acrshort:mri to develop the acrshort:mri itself --- and dogfooding ---
+a generalisation of bootstrapping, applying it not just tooling but to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+itself; in other words, using the methodology to develop the
+methodology.[fn:dogfooding] The next obvious step in this generalisation ladder
+is the notion of a /[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Composite Process/, using [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s processes for its own
+development.[fn:meta-process] Figure [[fig-composite-process]] illustrates the idea.
+
+[fn:dogfooding] Harrison states: "[T]he idea that someone would use the products
+they were making became known as 'eating your own dog food.' [...] Regardless of
+its genesis, the software industry has adopted the phrase to mean that a company
+uses its own products. Somewhere along the line, the noun 'dog food' appears to
+have morphed into a verb." [cite:@harrison2006eating]
+
+[fn:meta-process] Further theoretical work is required with regards to the
+classification of this composite process. An argument could be made in favour of
+naming it a meta-process, which Rolland /et al./ define as "[...] a process for
+the construction of a process model." [cite:@rolland1999multi] The composite
+process could be said to drive the underlying processes, but as it is not acting
+as a constructor for its components, we decided against this approach.
+
+
+#+caption[[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Composite Process]: [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Composite Process.
+#+name: fig-composite-process
+#+attr_latex: :scale 0.3
+[[../assets/images/masd_meta_process.png]]
+
+The centrepiece of the flowchart is the use of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Application Process (/cf./
+Section [[id:669F44F7-8448-F8F4-EF73-F61A1BC4C1D3][MASD Application Process]]) to drive the development of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] (/i.e./, the
+acrshort:mri and the acrshort:mss). Since the acrshort:mri is a non-trivial
+software product, it allows us to realistically emulate the traditional
+two-track environment one would find in the industry, without having to absorb
+the cost of simultaneously developing two distinct software
+products.[fn:mri_as_a_model] In addition, by forcing the acrshort:mri to travel
+through the same four levels of the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Application Process we expect end users
+to travel, we obtain first-hand knowledge of the benefits and pitfalls of the
+process. More generally, this recursive application forces us to gain direct
+experience on the roles enacted by all actors (/cf./ Section [[id:E49032A0-B932-6BB4-AFA3-AD53670C76B0][Actors]]), as well as
+all processes (/cf./ Section [[id:0AECB82C-4816-F9D4-BFC3-99D9279D3B78][Processes]]), meaning we can ensure they are fit for
+purpose.[fn:compiler_bootstrapping]
+
+[fn:mri_as_a_model] Using the acrshort:mri as /a model/ for a typical software
+product is in the Rothenberg spirit [cite:@marco_craveiro_2021_2] (p. 16), for
+he had stated: "Modeling, in the broadest sense, is the cost-effective use of
+something in place of something else for some cognitive purpose. It allows us to
+use something that is simpler, safer or cheaper than reality instead of reality
+for some purpose." [cite:@rothenberg1989nature] This is precisely our intent.
+
+[fn:compiler_bootstrapping] The [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Composite Process is a translation of
+compiler bootstrapping to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]. On the former, Sjölund /et al./ explain:
+
+#+begin_quote
+One of the advantages [of compiler bootstrapping] is assumed to be higher
+quality since the designers and developers of a language and its compiler will
+be major users, and therefore will be highly motivated to correct possible
+design flaws and errors. Another advantage is portability --- the bootstrapped
+compiler is primarily dependent on itself, not on other languages, once it has
+been bootstrapped. [...] Bootstrapping means that the language and its compiler
+is defined and implemented using itself.
+#+end_quote
+
+The nature of the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] Composite Process means that all of our application case
+studies will have two distinct levels of application:
+
+- *Application level*: that is, the use of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] as a regular user. Conclusions
+  at this level will be applicable to any user of the methodology and/or the
+  acrshort:mri.
+- *Meta-Application level*: that is, the impact of this particular application
+  on the methodology itself.
+
+Finally, the Composite Process also supplies a very useful fitness function with
+which to measure progress for both the methodology and acrshort:mri: the
+objective of the acrshort:mri is to be able to generate itself, via the [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]
+Application Process, at Level 4 (product line generation), without requiring
+further changes to [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]. Achieving this milestone marked the end of the
+development of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s basic framework.
+
+With this words we complete our analysis of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s processes and actors. The
+picture painted thus far is quite distinct from typical applications of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. The
+next section will bring the chapter to a close by elaborating on these
+differences.
+
+*** Comparison with Other Approaches
+    :properties:
+    :id: 7AD836E7-CD20-4FD4-6E6B-5C14771A7988
+    :custom_id: ID-7AD836E7-CD20-4FD4-6E6B-5C14771A7988
+    :end:
+
+The previous sections have outlined a system of beliefs which underlies all
+thinking within [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]. Before proceeding, it is worthwhile comparing [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s
+beliefs against others already analysed in [[id:6EBDB35D-8892-8964-6D03-393E013B74BA][State of the Art in Code Generation]],
+with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] being the obvious starting point.[fn:many_philosophy] In contrast with
+the latter, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s vision is carefully designed to be compact in scope. One
+might go as far as saying it is only small subset of the overall [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] vision, and
+with a different direction of travel: where [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] shows a tendency towards
+increased rigour, abstraction and completeness[fn:rumpe_roadmap], [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] tilts the
+balance towards empiricism and engineering. This focus on the small is a
+fundamental characteristic of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] and is also in line with our findings about
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s state of practice (/cf./ [[id:3310548C-2A30-0FA4-71F3-6E31EB98D498][The State of MDE Adoption]]). In this sense, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s
+use of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is seen mostly as an implementation detail. This is a subtle but
+crucial point so perhaps worthy of further elaboration.
+
+[fn:many_philosophy] In so far as only one philosophy exists for [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. For the
+purpose of this exercise, we can consider the statements by France and Rumpe in
+[[id:8B3C9C5A-4DE5-95C4-751B-694E07648465][How Widely Adopted is MDE?]] as representative of the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] vision. However, the
+subject is by no means uncontroversial. This, we posit, is yet another
+side-effect of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s role as a diverse and constantly evolving body of knowledge
+[cite:@marco_craveiro_2021_2] (Chapter 2).
+
+[fn:rumpe_roadmap] As inferred by looking at research roadmaps such as France
+and Rumpe's [cite:@france2007model], as well as Mussbacher /et al./'s
+[cite:@mussbacher2014relevance].
+
+
+Just as [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s vision is to insulate domain experts from the intricacies of the
+implementation details, allowing them to focus on the problem space and
+narrowing the problem-implementation gap, so does [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] use [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] itself to
+insulate its domain experts --- /i.e./, software engineers --- from the
+implementation details --- that is, the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] techniques used by [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]], as well as
+the solution space implementation details --- in order to allow them to focus on
+their problem space --- the engineering of software systems --- therefore
+reducing their problem-implementation gap: the distance between models of
+infrastructural code and infrastructure code itself.
+
+On the face of it, this distinctive focus on software engineers and the solution
+space may appear to confront [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][MDA]]'s calls for direct representation (/cf./ [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][Model
+Driven Architecture]]). [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]]'s intent is not to make any statements with regards
+to the validity of either of these approaches, but merely to clarify the
+distinctiveness of their scopes. There is thus a need to integrate [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] with
+other [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] based approaches, such as [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][MDA]], in order to cater for direct
+representation and the problem space.
+
+The relationship between [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] and [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]] is also of great relevance. Whilst
+[[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] can be thought of as one possible realisation of the [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]] principles, it
+is also designed to address our deep-seated concerns with naive applications of
+the approach (/cf./ Section [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]]). What is novel about [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]], when compared
+against [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]], is its view of infrastructural code as a problem domain on its
+own right, worthy of study by employing [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] techniques. That is, unlike typical
+[[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]] solutions, which are customised for the specifics of a given problem,
+the objective of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] is to find solutions that are applicable to the problem of
+infrastructural code in general.
+
+This is a very important conceptual leap because we no longer view
+infrastructure code as a system-specific attribute, with perhaps some aspects
+that are generalisable; instead, we view it as a completely generalisable
+problem domain, which requires a degree of customisation for specific systems.
+Where [[id:AA611197-6A81-98B4-771B-3ADD903003B9][AC-MDSD]] sees a localised solution that may only share few commonalities
+with other localised solutions, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] sees it merely as the expression of
+variability between two different [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] models. As all quests for generality are
+fraught with difficulties, [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] has taken special care to temper these efforts
+via its core values (/cf./ [[id:931D0476-B804-BD84-B36B-D77173D60239][Core Values]]).
+
+And so ends our exploration of [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] as a methodology for the
+development of software systems. The next chapter's focus is on exploring the
+conceptual model imposed by [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][MASD]] and all of its associated machinery.
+
+* Bibliography
+
+#+print_bibliography:

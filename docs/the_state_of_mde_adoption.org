@@ -1,0 +1,923 @@
+:properties:
+:id: 3310548C-2A30-0FA4-71F3-6E31EB98D498
+:end:
+#+title: The State of MDE Adoption
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: toc:nil date:nil <:nil c:nil todo:nil H:7 ^:{}
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil <:nil H:7 ^:{}
+#+cite_export: csl
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+But, as we look to the horizon of a decade hence we see no silver bullet. There
+is no single development, in either technology or management technique, which by
+itself promises even one order of magnitude improvement within a decade in
+productivity, in reliability, in simplicity. --- Brooks (p. 181)
+[cite:@brooks1974mythical]
+#+end_quote
+
+#+begin_quote
+You cannot reduce the complexity of your problem by increasing the complexity of
+your language. --- Wirth (/attributed/)
+#+end_quote
+
+One of the most critical aspects of any new technological approach is the
+evaluation of its performance on the field --- that is, an evidence-based
+analysis of the impact of its application under real-world conditions. It is
+particularly important to those embarking on the design of a new software
+development methodology, itself based on model-driven principles, to understand
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s benefits and drawbacks from a practical standpoint. This chapter combines
+a review of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption literature with a limited amount of new research,
+highlighting lessons learned and barriers to entry, with the objective of
+clarifying [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s current state of practice. As with theory (/cf./ [[id:6EBDB35D-8892-8964-6D03-393E013B74BA][State of the
+Art in Code Generation]]), these findings will be used as input to MASD's
+requirements gathering process (/cf./ FIXME Chapter).[fn:theory_practice]
+
+[fn:theory_practice] It may be argued that our deep interrogation of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is
+excessive. However, it is our firm opinion that its application --- and the
+definition of methodologies based on it --- can only be done successfully once
+its key strengths and weaknesses are well understood, and this requires looking
+at both theory and practice. To our knowledge, this is an undertaking thus far
+absent from the literature.
+
+
+The document is organised as follows. Section [[id:66251FED-9382-1064-37F3-E14160524F03][Limitations]] sets out the reach of
+the analysis to be presented. The analysis proper is composed of two sections:
+Section [[id:8B3C9C5A-4DE5-95C4-751B-694E07648465][How Widely Adopted is MDE?]] characterises the popularity of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] within
+the software industry while Section [[id:7425D89D-D22D-28C4-364B-371BA929B183][Empirical Analysis of Adoption Literature]]
+teases out the broad themes that emerge from its adoption. Lastly, the chapter
+concludes with a brief discussion that summarises our findings (Section
+[[id:28291C36-E8C6-7564-66D3-90D2D83436A6][Discussion]]). Let us begin by laying out the scope and limits of the effort.
+
+* Limitations
+  :properties:
+  :id: 66251FED-9382-1064-37F3-E14160524F03
+  :custom_id: ID-66251FED-9382-1064-37F3-E14160524F03
+  :end:
+
+Our analysis is constrained by two types of impediments: intrinsic limitations
+of the model-driven approach, and shortcomings related to the way adoption
+research has been conducted. The next two sections delve into each of these
+categories respectively.
+
+** Intrinsic Limitations to MDE
+   :properties:
+   :id: D231EF47-5A3F-EB64-E21B-C58151016833
+   :custom_id: ID-D231EF47-5A3F-EB64-E21B-C58151016833
+   :end:
+
+As recently as 2011, Hutchinson /et al./ [cite:@hutchinson2011empirical] warned
+that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] had historically lacked evidence to back many of its claims
+[cite:@hutchinson2011empirical].[fn:hutchinson_wording] These difficulties led
+Whittle /et al./ to admit that "[...] there remains a lack of clarity on whether
+or not model-driven engineering (MDE) is a good way to develop software." Their
+wariness is not entirely unjustified. In the previously mentioned paper,
+Hutchinson /et al./ identified three key reasons for why, in practice, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] may
+have a detrimental effect in the development of software systems:
+
+[fn:hutchinson_wording] The original wording by Hutchinson /et al./ is rather
+more intriguing (/emphasis ours/): "Although MDE claims many potential benefits
+in terms of gains in productivity, portability, maintainability and
+interoperability, it has been developed largely /without empirical support/ for
+these claims."
+
+
+1. *Higher abstraction levels may not lead to better software.* Citing
+   experiments in psychology and psychology of programming, they point out that
+   individuals find thinking in abstract terms hard and, in general, there is a
+   tendency to prefer exemplars over abstract conceptualisations.
+2. *[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] activities may have both positive and negative effects.* Code generation
+   is offered as an example, as it may have a positive effect on productivity
+   but also negative consequences --- including the time required to develop the
+   models for code generation as well as the possible need to integrate manual
+   code with generated code.[fn:positive_negative_personal] Nor is code
+   generation the only [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] activity with this conflicting property, making it a
+   very thorny issue: "How the balance between these two effects is related to
+   context, and what might lead to one outweighing the other, is simply not
+   known." [cite:@hutchinson2011model]
+3. *Determining the right approach is hard.* Given the proliferation of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+   variants, tools and frameworks[fn:proliferation], it is very hard to evaluate
+   benefits and drawbacks in a rigorous way. Choices are highly dependent on
+   context and thus difficult to compare in a fair manner. This is a theme we
+   will return to in the next section.
+
+[fn:positive_negative_personal] Our personal experience mirrors this effect
+quite closely [cite:@marco_craveiro_2021_1] (Section 6 and 7).
+
+[fn:proliferation] As detailed in [cite:@marco_craveiro_2021_2], Chapter 2 ---
+and Section 2.4 in particular.
+
+
+Torchiano /et al./ [cite:@torchiano2012benefits] are even more critical of the
+/status quo/, managing to combine the challenges of practice with those of
+theory into one clear and incisive diagnosis (/emphasis ours/):
+
+#+begin_quote
+[[[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]]] is considered to be still evolving and not yet completely mature. The
+first success stories were heard a long time ago but /the/ /knowledge to make/
+/those successes consistently repeatable is still missing/. Being the discipline
+not yet fully understood, and the underlying knowledge not yet codified,
+/expertise is the only resource we can rely on when a [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]] solution is designed/.
+#+end_quote
+
+Their criticism evokes the idea of a practitioner mastering a body of knowledge,
+as we have defended [cite:@marco_craveiro_2021_2] (Section 2.2) --- a scenario
+that is inherently unsuitable for repeatable and comparative analysis as it is
+highly dependent on context.[fn:software_craftsmanship] When taken together, all
+of these open questions raise even further the significance of adoption
+research. Unfortunately, it too faces several challenges.
+
+[fn:software_craftsmanship] Indeed, in this sense we are closer to McBreen's
+Software Craftsmanship [cite:@mcbreen2002software] rather than to Software
+Engineering. There is much to be said for McBreen's idea that, on the main, the
+creation of high-quality software may not be amenable to repeatable engineering
+processes, but sadly such discussion falls outside the remit of this
+dissertation.
+
+
+** Adoption Literature Limitations
+   :properties:
+   :id: 80D45898-7073-38C4-B203-A7F9E2E0CF68
+   :custom_id: ID-80D45898-7073-38C4-B203-A7F9E2E0CF68
+   :end:
+
+The literature reveals a litany of experience reports and empirical studies on
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] application [cite:@andolfato2014experiences] [cite:@shirtz2007adopting]
+[cite:@paige2012lessons] [cite:@clark2012exploiting], and to these we have added
+our own [cite:@marco_craveiro_2021_1]. Taken together, they form a useful but
+somewhat fractious breeding ground from which to extract universal answers as to
+the suitability of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. Hutchinson /et al./ had already raised red flags when
+performing a similar exercise (/emphasis ours/):
+
+#+begin_quote
+As many of our respondents admit, /quantification of the benefits and/ /failures
+of MDE is complex and difficult/. [...] [The] evidence for our understanding of
+MDE at this stage derives from the /quality and perceptiveness of our
+descriptions and our analysis/ rather than any simple mathematization.
+[cite:@hutchinson2011model]
+#+end_quote
+
+Much the same said Mohagheghi and Dehlen [cite:@mohagheghi2008proof], who,
+whilst identifying threats to the validity of their own work, inadvertently
+enumerated the challenges faced by anyone risking a similar undertaking. These
+are as follows:
+
+- *Small sample size.* Though not lacking on variety, the number of reports
+  found in the literature is insufficient to reach a "generalization to a
+  population or theory." [cite:@mohagheghi2008proof]
+- *Survivorship bias.* In their opinion --- which is also ours --- successes are
+  more likely to be reported than failures; therefore, the literature may
+  portrait an inaccurate picture of the most likely outcome of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] projects.
+- *Incentives for biased reporting.* Research projects with external financing
+  may report biased results, downplaying negative outcomes. Companies may also
+  behave in a similar fashion to avoid negative publicity. Incentives amplify
+  the survivorship bias.
+- *Interference from competitive advantages.* Conversely, companies may avoid
+  publishing results in order to keep a competitive advantage against their
+  peers.
+- *Large-scale projects are under-reported.* The success of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] on small-scale
+  projects such as academic research may not be indicative of its success on
+  large industrial projects. Results for large-scale projects are not as
+  frequent as those of small-scale projects.
+- *Lack of baseline data.* Most companies do not report baseline data, which
+  makes evaluations subjective. In addition, it is very difficult to obtain
+  relevant and unbiased baseline data.
+- *Lack of quantitative data.* Most studies focus on the qualitative aspects of
+  the experience and neglect a quantitative analysis. More generally, there is a
+  lack of well-defined dimensions for the gathering of quantitative data, for
+  reasons such as those outlined by Hutchinson /et al./ above.
+
+From what has been stated thus far, it seems clear that it is very difficult to
+use the literature to make universal statements about [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption with any
+degree of confidence.[fn:universal_statements] Indeed, we argue that most
+universal statements about [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are devoid of meaning from a scientific
+perspective because they must be localised to the specifics of a context and can
+only be extrapolated to other contexts with a great deal of care; even then,
+they would still be riddled with reservations. In other words, it is extremely
+difficult to compare [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] projects because they are highly sensitive to local
+conditions --- conditions which are not readily replicable --- much less lend
+themselves to easy aggregation at an industry-wide level. The essence of the
+problem was captured by Rumpe earlier, who had stated:
+
+[fn:universal_statements] By "universal statements" we mean blanket statements
+such as "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] improves productivity", "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] improves software quality", and
+suchlike.
+
+
+#+begin_quote
+The pressing problems that we tackle in the software and system modeling
+research domain can be classified as "wicked problems": we learn more about the
+nature of the problems we tackle through experimentation with proposed
+solutions. Rigorous evaluation of these solutions invariably entails costly and
+lengthy experimentation in industrial contexts. Experiments that seek to
+evaluate solutions based on novel or radically different ideas are particularly
+difficult to sell to potential industrial partners because the risks are not
+well-understood by all involved. Even with committed industrial partners, the
+wide variations in industrial development environments makes it difficult (if
+not foolhardy) to extrapolate the results beyond the specific industries.
+Despite the difficulties, there is no getting away from the reality that
+evaluation is key to developing progressively better solutions to wicked
+problems. [cite:@france2008fair]
+#+end_quote
+
+In this light, even though empirical studies are not particularly useful in
+proving or disproving universal claims, they are still extremely valuable
+because they capture the themes emerging from within application. From these we
+can build conceptual tooling to augment [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s body of knowledge --- best
+practices, patterns, guidelines and the like[fn:best_practices] --- and, for the
+purposes of MASD, these observations can guide the requirements gathering
+process (/cf./ FIXME Chapter). On the main, it is in this spirit that the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+adoption literature is to be understood within this dissertation. All of that
+said, we shall start by attempting to tackle one universal question ---
+limitations described here notwithstanding. We will do so for two reasons.
+Firstly, because we believe it offers far-reaching insights into the application
+of modeling in general and therefore to MASD. Secondly, because it can be
+answered --- even if only broadly. So it is to that pivotal question we turn to
+next.
+
+[fn:best_practices] Manuscripts such as Völter's "MD* Best Practices"
+[cite:@Vlter2009MDBP] capture well the idea.
+
+* How Widely Adopted is MDE?
+  :properties:
+  :id: 8B3C9C5A-4DE5-95C4-751B-694E07648465
+  :custom_id: ID-8B3C9C5A-4DE5-95C4-751B-694E07648465
+  :end:
+
+High expectations were set out in a seminal presentation by Bézivin
+[cite:@bezivin2003mda], where he ambitiously declared model engineering to be
+the future of object technology, and outlined a twenty year horizon for its
+maturing. As we sail at speed towards Bézivin's evaluation date, it is
+increasingly clear that the adoption curves of object technology and model
+technology are distinct: the former became the mainstay of software engineering
+within less than twenty years of its inception, whereas the latter is yet to
+achieve similar levels of exposure. These thoughts are echoed by Mussbacher /et
+al./, who lamented that (/emphasis ours/):
+
+#+begin_quote
+[...] /[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is arguably still a niche technology/. It has not been adopted as
+widely as popular programming languages such as Java and C#, and, whilst some
+modeling languages like the UML have become widespread, they are often not used
+to their full potential and /the use of models to automatically generate systems
+is still relatively rare/. [cite:@mussbacher2014relevance]
+#+end_quote
+In sharp contrast with the hopeful tone of the past[fn:timeline_mde], the
+literature now has a downcast mood[fn:uml_fever], perhaps reflecting the
+realisation that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] "[...] is currently not as widespread in industry as the
+modeling community hoped for." [cite:@mussbacher2014relevance] This state of
+affairs is all the more surprising when one considers that the claims associated
+with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are often decisive factors in an industrial setting.[fn:mda_automation]
+There is therefore a clear disconnect between promises and adoption, perchance
+not unrelated to the difficulties in evidencing grandiose universal assertions
+(/cf./ Section [[id:66251FED-9382-1064-37F3-E14160524F03][Limitations]]).
+
+[fn:timeline_mde] For a partial timeline of events related to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], see Clark and
+Muller [cite:@clark2012exploiting], Section 2, "The MDD Landscape".
+
+[fn:uml_fever] Articles such as Bell's "Death by UML Fever"
+[cite:@bell2004death], Thomas' "MDA: Revenge of the Modelers or UML Utopia?"
+[cite:@thomas2004mda] and France /et al./'s "Model-driven development using UML
+2.0: promises and pitfalls" [cite:@france2006model] accurately depict the
+zeitgeist.
+
+[fn:mda_automation] The MDA Guide is well aware of this, stating (/emphasis
+ours/): "Automation /reduces the time and cost/ of realizing a design, /reduces
+the time and cost/ for changes and maintenance and produces results that ensure
+consistency across all of the derived artefacts." [cite:@omg2014mda]
+
+
+Our objective for this section is twofold. First, we want to substantiate or
+disprove Mussbacher /et al./'s claims by representing, however broadly, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s
+state of practice, because we believe it offers considerable insights as to the
+applicability of its vision to the reality of industrial software engineering.
+Second, we want to perform Bézivin's evaluation by characterising the direction
+of travel of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption --- again, in broad
+strokes[fn:hype_cycle_model]^{,}[fn:broad_strokes] --- because it gauges
+industry's reaction to it. The next two sections analyse evidence from multiple
+sources to position [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] within this frame. Evidence was collected at two
+different scales: the macro-scale --- that is, across the software engineering
+profession --- and the micro-scale --- that is, small samples and empirical
+studies. With this in mind, let us start our analysis from a high vantage point.
+
+[fn:hype_cycle_model] The Hype Cycle Model [cite:@linden2003understanding] is
+often deployed in this context --- /e.g./ [cite:@brambilla2012model] (p. 22),
+Torchiano /et al./ [cite:@torchiano2012benefits] --- and understandably so, for,
+in the words of Torchiano /et al./, "[h]ype is frequently associated to software
+development processes/techniques until (/sic./) they are not yet mainstream and
+fully understood; we think it is also the case for modeling and MD*." We opted
+for a dissenting view nonetheless, siding instead with those with concerns about
+the model such as Dedehayir and Steinert [cite:@dedehayir2016hype]. Our main
+qualm is the difficulty in determining whether we are in the model's final
+moment (/i.e./ the so-called "plateau of productivity") or if we have entered a
+perpetual descent in the "through of disillusionment". Without adequate
+quantitative datasets, statements on this regard are problematic to substantiate
+and therefore we do not believe the model brings any additional clarity towards
+the evolution of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption.
+
+[fn:broad_strokes] Note that due to the limitations already described (/cf./
+Section Section [[id:66251FED-9382-1064-37F3-E14160524F03][Limitations]]), the purpose of this analysis is not a rigorous
+determination, but merely the use of multiple sources to get a sense of where
+the theory has led us thus far.
+
+
+** Analysis of Evidence at a Macro-Scale
+   :properties:
+   :id: 00120B1F-7E38-1924-CD63-B59FBA55DA52
+   :custom_id: ID-00120B1F-7E38-1924-CD63-B59FBA55DA52
+   :end:
+
+Whilst the literature does provide detailed quantitative data for [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption
+at small sample sizes (/cf./ Section [[id:4810E0EC-2436-5AF4-21E3-E4FA496C22B6][Analysis of Evidence at a Micro-Scale]]),
+measurements that place the approach in an industry-wide context are harder to
+come by. In the above cited paper, Mussbacher /et al./ used data from search
+engine queries to demonstrate, somewhat amusingly, that "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is simply not
+considered cool". Unfortunately, their dataset was insufficient for our
+purposes; however, their methodology was promising, so we extended it to other
+large data sources freely available on the Internet.
+
+Two such sources were used for our analysis. The first, Google
+Trends[fn:google_trends], allows measuring interest over time from a search
+engine perspective.[fn:google_interest] We started by gathering evidence to
+support Mussbacher /et al./'s claim of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] being a niche technology by comparing
+interest in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and UML to interest in the suggested programming languages ---
+Java and C#.[fn:tiobe_index] Figure [[fig-google_trends_java_uml_csharp_mde]] does
+imply that, compared to Java and C#, both UML and [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are fairly niche from the
+perspective of search engine querying.
+
+[fn:tiobe_index] These languages rank 2^{nd} and 5^{th} respectively in the
+TIOBE Index, at the time of writing [cite:@tiobe2017tiobe]. The TIOBE Index
+offers a measure of popularity for programming languages.
+
+[fn:google_trends] https://trends.google.com
+
+[fn:google_interest] Google Trends defines /interest over time/ as follows:
+"Numbers represent search interest relative to the highest point on the chart
+for the given region and time. A value of 100 is the peak popularity for the
+term. A value of 50 means that the term is half as popular. A score of 0 means
+that there was not enough data for this term."
+
+
+#+caption[Google searches for Java, C#, UML and [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].]: Google searches for Java, C#, UML and [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. /Source:/ Author's plot using Google Trends data (January 2004 to August 2018)
+#+name: fig-google_trends_java_uml_csharp_mde
+#+attr_latex: :scale 0.6
+[[../assets/images/google_trends_java_uml_csharp_mde.png]]
+
+Next, we analysed how queries related to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] have evolved in the time dimension.
+For this we plotted interest over time for six different search terms related to
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], with the results captured by Figure [[fig-google_trends_mde]]. The data allows
+us to make some general observations, as the graph clearly shows a marked
+decline from a peak around 2004, and a sharp descent soon thereafter;
+furthermore, it lacks any obvious upticks during the latter years, which would
+indicate some form of revival as the industry gets to grips with the approach.
+
+It is important to understand that there are numerous limitations with our
+analysis, such as the clipped time horizon (available data excludes the period
+from 2000 to 2004), the reliance on Google as the sole data source (searches may
+have been performed on other search engines, though Google's dominant market
+position mitigates this risk), the exclusion of queries using acronyms (adding
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], MDA, /etc./ to the report caused false positives), and so forth.
+Nonetheless, in the absence of better data, it serves as a coarse approximation.
+
+#+caption[Google searches related to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].]: Google searches related to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. /Source/: Author's plot using Google Trends data (January 2004 to August 2018).
+#+name: fig-google_trends_mde
+#+attr_latex: :scale 0.6
+[[../assets/images/google_trends_mde.png]]
+
+Our second data source was Stack Overflow[fn:so_url], a question and answer
+website popular with software engineers[fn:so_popularity], which provides access
+to statistical data via its /Insights/ query interface.[fn:so_insights_url]
+Questions in Stack Overflow are tagged by its users to facilitate searching and
+aggregation[fn:so_tags], and the distribution of tags can be analysed via
+Insights. The absence of evidence was informative in itself, as no tags could be
+located with regards to "model-driven", "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]", "[[id:79EC741E-8818-3494-8B1B-2B27C182B160][MDD]]", "[[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MDSE]]" or any other [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+variant described in this dissertation. UML was the only available tag related
+to modeling, and the resulting data is plotted in Figure
+[[fig-stack_overflow_uml_2009_2018]]. The number of questions for UML as a
+percentage of total questions reached a maximum of 0.12% and has declined to
+around 0.02%.
+
+[fn:so_url] https://stackoverflow.com
+
+[fn:so_popularity] According to internal data, Stack Overflow has a total of 16
+million questions, 25 million answers, 9.2 million active users and over 9.8
+million visits per day [cite:@StackExchangeUsers].
+
+[fn:so_insights_url] https://insights.stackoverflow.com
+
+[fn:so_tags] Stack Overflow defines /tags/ as follows: "A tag is a word or
+phrase that describes the topic of the question. Tags are a means of connecting
+experts with questions they will be able to answer by sorting questions into
+specific, well-defined categories." [cite:@StackOverflowTags]
+
+
+#+caption[Questions tagged with UML on Stack Overflow.]: Questions tagged with UML on Stack Overflow. /Source/: Stack Overflow Insights from 2009 to July 2018.
+#+name: fig-stack_overflow_uml_2009_2018
+#+attr_latex: :scale 0.7
+[[../assets/images/stack_overflow_uml_2009_2018.png]]
+
+We then tried to establish UML's position when compared to Java and C#. The
+results, plotted in Figure [[fig-stack_overflow_java_csharp_uml_2009_2018]], are in
+line with the findings from Google Trends: UML is quite niche when compared to
+popular programming languages.
+
+As with Google Trends, it is important to highlight the limitations of Stack
+Overflow as a data source, since it excludes software engineers who need not ask
+questions about [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] (/e.g./ experienced practitioners) as well as those who use
+other sources of information (commercial product support, other web forums),
+questions may be incorrectly classified, questions may be tagged against
+specific tools rather than modeling terms, the data range is narrow (only covers
+the period from 2009 to 2018) and so forth. Similarly to Google Trends, these
+limitations were deemed acceptable for our purposes.
+
+#+caption[Questions tagged with Java, C# or UML on Stack Overflow.]: Questions tagged with Java, C# or UML on Stack Overflow. /Source/: Stack Overflow Insights from 2009 to July 2018.
+#+name: fig-stack_overflow_java_csharp_uml_2009_2018
+#+attr_latex: :scale 0.7
+[[../assets/images/stack_overflow_java_csharp_uml_2009_2018.png]]
+
+In summary, the picture emerging from the analysed data is in overall agreement
+with those who view [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] as a niche technology, facing a trend of decreasing
+interest in industry. We shall now contrast these findings with evidence at the
+opposite end of the scale.
+
+** Analysis of Evidence at a Micro-Scale
+   :properties:
+   :id: 4810E0EC-2436-5AF4-21E3-E4FA496C22B6
+   :custom_id: ID-4810E0EC-2436-5AF4-21E3-E4FA496C22B6
+   :end:
+
+A change of perspective is often revealing when addressing wicked problems
+(/cf./ Section [[id:66251FED-9382-1064-37F3-E14160524F03][Limitations]]). On what the authors claimed was the first
+wide-range industry study of its kind, Whittle /et al./ [cite:@whittle2014state]
+surveyed 450 [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioners with the objective of characterising [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+practice, and their findings are in stark contrast to those described thus far.
+The authors were already aware of this discrepancy, stating (/emphasis ours/):
+
+#+begin_quote
+Some claim that the application of MDE to software engineering is minimal. MDE,
+they argue, is only used by specialists in /niche/ /markets/. Our data refutes
+such claims, however. We have found that /some form of MDE is practised widely/,
+across a diverse range of industries (including automotive, banking, printing,
+web applications /etc./
+#+end_quote
+
+The unmistakable conclusion of Whittle /et al./'s study is that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] /is/ widely
+used in industry, but in ways that are extremely difficult to quantify in the
+aggregate. For example, their analysis points out that practitioners prefer
+creating [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] over using general purpose modeling languages such as UML, and
+implement these [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] using a dizzying array of tools, techniques and frameworks
+(/emphasis ours/): "We found no consensus on which modeling languages or tools
+developers use --- they cited over /40 modeling languages/ and /over 100 tools/
+as 'regularly used' in our survey." Whittle /et al./'s analysis builds upon
+earlier work from Petre [cite:@petre2013uml], who showed that, in a sample of 50
+software designers, very few used UML, and those that did --- a total of 11 ---
+used it only for "selective" purposes.[fn:selective_purpose] Petre's findings
+are in agreement with the evidence from our macro-analysis. The picture that
+emerges from both of these studies is one of great diversity and fragmentation,
+which further reinforces our own views of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] as a diffused body of knowledge
+[cite:@marco_craveiro_2021_2] (Chapter 2). Furthermore, these results are not
+isolated; a related study by Hutchinson /et al./, with 250 respondents
+[cite:@hutchinson2011empirical], found similar heterogeneous patterns.
+
+[fn:selective_purpose] Petre defines /selective/ in the following, somewhat
+recursive, manner: "UML is used in design in a personal, selective, and informal
+way, for as long as it is considered useful, after which it is discarded."
+[cite:@petre2013uml]
+
+
+One can, of course, question the exact meaning of the expression "practised
+widely", given the small sample size and the fact that Whittle /et al./ surveyed
+only [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioners --- all of which makes it rather difficult to place their
+work in the context of the wider industry. In addition, as previously
+demonstrated, the boundaries of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] are rather porous
+[cite:@marco_craveiro_2021_2] (Chapter 2) so the criteria for classifying any
+given project as an "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] project" --- in their words, "some form of MDE" --- is
+not entirely free of ambiguity; in the limit, any project using code generation
+or a [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]] could be construed as a "[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] project", though that, perhaps, may not be
+in the spirit of the endeavour.[fn:scope_of_mde] Nonetheless, even when taking
+these validity threats into consideration, it is clear that their work provides
+undeniable evidence of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption across a variety of scenarios; more so than
+its niche status would imply.
+
+[fn:scope_of_mde] A small sample of the inclusion criteria in the reviewed
+material should suffice to give a flavour of this dilemma. Hutchinson /et al./
+stated [cite:@hutchinson2011empirical]: "The study takes a deliberately broad
+interpretation of MDE, as it is intended to be exploratory. Therefore, all
+variants of MDE are covered, including both domain-specific modeling languages
+(DSMLs) and UML-based methods. [...] The only hard criterion for
+excluding/including data was that the company must have been using models as a
+primary development artifact (/sic/)." For their part, Mohagheghi and Dehlen
+[cite:@mohagheghi2008proof] limit their study to approaches that generate
+"models, code and other artifacts from models".
+
+
+Clark and Muller [cite:@clark2012exploiting] uncover a second reason that may
+help explain why it is difficult to find evidence of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] use in the large, when
+they conclude that "the spirit of model-driven technology is very alive,
+although absorbed by mainstream programming environments [...]." In their view,
+there has been a steady flow of ideas and concepts from [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s body of knowledge
+to traditional programming environments, and this, they suggest, is a trend that
+is set to continue or even accelerate due to commercial demands (/emphasis
+ours/): "The next generation of companies making use of model-driven
+technologies might be more successful if they manage to /hide model-driven
+technology/, embedding it as a competitive advantage."[fn:masd_inspirational]
+
+[fn:masd_inspirational] These very words were inspirational to the MASD
+approach.
+
+
+Taking all of these views into account, the evidence at the micro-scale is
+consistent with the idea of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s body of knowledge being digested and
+repurposed into a series of technological changes that are fit for specific
+purposes. And, now that both macro and micro cases have been presented with
+contradictory results, we must attempt to reconcile these viewpoints.
+
+** Discussion
+   :properties:
+   :id: 0C5D73FA-9869-F794-7E1B-A23DED304438
+   :custom_id: ID-0C5D73FA-9869-F794-7E1B-A23DED304438
+   :end:
+
+The evidence at a macro-level reinforces Mussbacher /et al./'s intuition of
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s niche status, whilst the evidence at the micro-level provides support for
+the idea that [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is in widespread use but, crucially, not in accordance to its
+original vision.[fn:mde_vision_fail] Both statements are not incompatible. Our
+opinion is that this vision is yet to come to pass, and its now unlikely to do
+so within the Bézivin horizon. Further: the limited available data seems to
+point out that the industry is moving away from that direction altogether, and
+is instead choosing the path of dispersing the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] body of knowledge into small
+and localised solutions, and this may ultimately prove to be the enlightenment
+that has been long sought. If so, Cook's words now sound eerily prophetic
+[cite:@cook2006object] (/emphasis ours/):
+
+[fn:mde_vision_fail] This vision is articulated clearly by France and Rumpe:
+
+#+begin_quote
+In the MDE vision, domain architects will be able to produce domain specific
+application development environments (DSAEs) using what we will refer to as MDE
+technology frameworks. Software developers will use DSAEs to produce and evolve
+members of an application family. A DSAE consists of tools to create, evolve,
+analyze, and transform models to forms from which implementation, deployment and
+runtime artifacts can be generated. Models are stored in a repository that
+tracks relationships across modeled concepts and maintains metadata on the
+manipulations that are performed on models. [cite:@france2007model]
+#+end_quote
+
+
+#+begin_quote
+The notion that all of software development will somehow be replaced by
+modelling is at least as mistaken as "objects are just there for the picking".
+[...] /Specific kinds of models are useful in specific tasks/; the modelling
+language used for a specific task must be designed to be fit for that task.
+Today’s increasing interest in Domain Specific Languages, rather than
+general-purpose modelling languages, clearly recognizes this.
+#+end_quote
+
+With these wise words, to which we subscribe fully, we conclude our outline of
+the industry-wide adoption picture. It is now time to turn our attention to the
+analysis of themes emerging from [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s application, in order to gain a better
+understanding of the specific challenges faced by those using the approach.
+
+* Empirical Analysis of Adoption Literature
+  :properties:
+  :id: 7425D89D-D22D-28C4-364B-371BA929B183
+  :custom_id: ID-7425D89D-D22D-28C4-364B-371BA929B183
+  :end:
+
+A great deal of insightful information can be extracted from the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption
+literature, much of which is relevant to our work. The information is, however,
+in a form that is troublesome to analyse due to its qualitative nature. In order
+to address this problem, we decided to deploy the classification system put
+forward by Whittle /et al./ in [cite:@whittle2013industrial], and subsequently
+improved upon [cite:@whittle2017taxonomy]. There, they describe it as "a loose
+taxonomy of tool-related considerations, based on empirical industry data, which
+can be used to reflect on the tooling landscape as well as inform future
+research on MDE tools."
+
+Our previous brushes with the taxonomy revealed it to be malleable, amenable not
+only for the analysis of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling but also of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption issues in general
+[cite:@marco_craveiro_2021_1] [cite:@marco_craveiro_2021_3]. This is likely a
+byproduct of the close relationship between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] application and its tooling,
+for, as Mohagheghi and Dehlen perceptively noted, "[s]upporting MDE with a
+comprehensive tool environment is crucial, as many of the techniques promoted as
+necessary in MDE strongly depend on proper tool support."
+[cite:@mohagheghi2008proof]
+
+Each of the sections below tackle one of the four top-level categories in the
+taxonomy. They start with a brief description of the category, in order to
+contextualise those unfamiliar, and proceed to analyse relevant issues gleaned
+from the adoption literature. As with Section [[id:8B3C9C5A-4DE5-95C4-751B-694E07648465][How Widely Adopted is MDE?]], the
+objective is not to perform an exhaustive review but instead to capture
+overarching themes that are pertinent to the present dissertation. In addition,
+due to its qualitative nature, we have chosen to rely on the same approach as
+did Whittle /et al./ --- namely, the use of extensive quoting from original
+sources in order to register more faithfully the underlying themes.
+
+** Technical Factors
+   :properties:
+   :id: 0A799746-01F2-8C94-DB6B-68ABEFB4B205
+   :custom_id: ID-0A799746-01F2-8C94-DB6B-68ABEFB4B205
+   :end:
+
+Technical issues that affect the adoption of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], such as the features available
+in tooling and their integration with development environments, were prominent
+in the literature. In particular, there seems to be a noticeable mismatch
+between developer expectations and functionality available in tools, as Clark
+and Muller explain (/emphasis ours/):
+
+#+begin_quote
+Industry would like to use MDD as /a shrink-wrapped black-box process/. Current
+technologies expose a great deal of the inner workings of PIM, PSM and
+transformation design. /Developers/ /feel that they need to have a detailed
+knowledge of all aspects of the/ /technology/ which undermines its commercial
+value compared to the use of more trusted mature technologies such as compilers.
+[cite:@clark2012exploiting]
+#+end_quote
+
+The compiler metaphor is particularly apt, since developers are used to code
+generators that behave in a fashion similar to compilers
+[cite:@marco_craveiro_2021_3]. Whittle /et al./'s findings echoed similar
+thoughts, revealing that the available functionality often exceeds the typical
+needs of software engineers:
+
+#+begin_quote
+Our interviewees emphasized tool immaturity, complexity and lack of usability as
+major barriers. Usability issues can be blamed, at least in part, on an
+over-emphasis on graphical interfaces: "... I did an analysis of one of the IBM
+tools and I counted 250 menu items." More generally, tools are often very
+powerful, but it is too difficult for users to access that power; or, in some
+cases, they do not really need that power and require something much simpler: "I
+was really impressed with the power of it and on the other hand I saw windows
+popping up everywhere... at the end I thought /I still really have no idea how
+to use this tool/ and I have only seen a glimpse of the power that it has."
+[cite:@whittle2017taxonomy]
+#+end_quote
+
+The reliance on graphical interfaces appears to be a common complaint from
+developers: "There is a large amount of evidence that software engineers prefer
+textual representations for system artifacts rather than diagrams."
+[cite:@clark2012exploiting] The underlying thread that unifies all these
+observations is an impedance mismatch between how developers would like tools to
+behave versus how tool developers view the role of those tools. Whittle /et al./
+express a concern for the egregious "[...] lack of consideration for how people
+work and think: 'basically it’s still the mindset that the human adapts to the
+computer, not vice-versa.'" [cite:@whittle2017taxonomy]
+
+They go on to explain that many practitioners addressed this mismatch by
+creating their own special purpose tooling, with reportedly better results
+(/emphasis ours/):
+
+#+begin_quote
+The majority of our interviewees were very successful with MDE but all of them
+either built their own modeling tools, made heavy adaptations of off-the-shelf
+tools, or spent a lot of time finding ways to work around tools. The only
+accounts of easy-to-use, intuitive tools came from those who had developed tools
+themselves for bespoke purposes. Indeed, this suggests that /current tools are a
+barrier to success rather than an enabler/ and "the fact that people are
+struggling with the tools... and succeed nonetheless requires a certain level of
+enthusiasm and competence." [cite:@whittle2017taxonomy]
+#+end_quote
+
+Nevertheless, it is important not to underestimate the immense effort required
+to create industrial-grade [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling, even when experienced practitioners are
+involved, as Paige and Varró's work amply demonstrates [cite:@paige2012lessons],
+and so does Andolfato /et al./'s [cite:@andolfato2014experiences]. Speaking in
+the context of tool vendors, Clark and Muller put the matter in more forceful
+terms (/emphasis theirs/): "/Tool development is expensive/. However much you
+think it will cost in terms of time and effort to develop a business based on a
+modelling tool, multiply by 10. Be prepared to be patient and support
+development through other activities." [cite:@clark2012exploiting] Internal tool
+development does benefit from a narrower focus, of course, but it is no less
+difficult; the cost and the associated risk in developing new tools for a
+complex problem domain such as modeling --- in most cases, a proposition that is
+entirely unrelated to the main business activity and the current engineering
+skill-set --- is an obvious barrier to [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption. Our own work sheds light on
+some of the challenges developers faced:
+
+#+begin_quote
+Interviewees developed an appreciation for the difficulty of creating a general
+purpose code generator: "[...] It was a massively ambitious project, right? [To]
+[b]uild a general purpose code generator, is a very, very difficult thing."
+
+Once the magnitude of the task was understood, a natural process of de-scoping
+started to take place: "But when you say, 'I want to write a code generator that
+is going to work for everything', well then now you need to define what
+everything is. And how do you define /everything/? [...] You can't, so you say
+'right I'm guessing I'm going to need lists, but I'm guessing I won't really
+need dictionaries, I'm guessing it will [be] good enough just to have public
+setters but let's not worry about public/private, everything will be public and
+that's [...] something reasonable that I can write a code generator for, within
+a year and a half and [...] that'll have to do.' [...]"
+[cite:@marco_craveiro_2021_1] (Section 6.1)
+#+end_quote
+
+Thus, the trade-offs between off-the-shelf tooling and internal tool development
+are very complex, and highly dependent on situational context. Whittle /et
+al./'s words summarise the issues with technical factors rather aptly (/emphasis
+ours/):
+
+#+begin_quote
+It is ironic that MDE was introduced to help deal with the essential complexity
+of systems, "but in many cases, adds accidental complexity". Although this
+should not be surprising [...], it is interesting to describe this phenomenon in
+the context of MDE. For the technical categories, in almost every case,
+interviewees gave examples where the category helped to tackle essential
+complexity, but also other examples where the category led to the introduction
+of accidental complexity. So, interviewees talked about the benefits of code
+generation, but, at the same time, lamented the fact that "we have some problems
+with the complexity of the code generated [...] we are permanently optimizing
+this tool." [cite:@whittle2017taxonomy]
+#+end_quote
+
+** Internal Organisational Factors
+   :properties:
+   :id: 86C35930-3713-2CA4-975B-0F547B7DEAFF
+   :custom_id: ID-86C35930-3713-2CA4-975B-0F547B7DEAFF
+   :end:
+
+The adoption of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] takes place in the context of an organisation with its own
+distinctive structure, processes and procedures, as well as a unique culture.
+The literature clearly highlights both the importance and the difficulty in
+integrating [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] related infrastructure with what precedes it:
+
+#+begin_quote
+One interviewee described how the company’s processes had to be significantly
+changed to allow them to use the tool: a lack of control over the code
+generation templates led to the need to modify the generated code directly,
+which in turn led to a process to control these manual edits. Complexity also
+arises when fitting an MDE tool into an existing tool chain: "And the
+integration with all of the other products that you have in your environment..."
+Despite significant investment in providing suites of tools that can work
+together, this is clearly an area where it is easy to introduce accidental
+complexity. [cite:@whittle2017taxonomy]
+#+end_quote
+
+This stumbling block was also observed by Mohagheghi and Dehlen: "Integrating a
+tool suite that satisfies these requirements into a coherent environment is
+evidently a challenge. In the MODELWARE project, a wide range of tools were
+used, but all partners experienced problems with instability of the tools and
+their integration." [cite:@mohagheghi2008proof]
+
+Interestingly, whilst bespoke development facilitates tooling integration as the
+requirements are very specific to an organisation, it often has a clear downside
+with regards to the sustainability of tooling engineering because it lacks an
+alignment with core business activities. In general, developers have very little
+appetite for extraneous activities on an already congested development schedule,
+as we witnessed first-hand:
+
+#+begin_quote
+A key point was the difficulty in justifying continued investment on a bespoke
+code generator from a business perspective: "Its quite product-y? So it almost
+feels like, you know, its something which [we] should be buying in or open
+source [...]. Not what you want to be focusing your interest on, if you can
+[...] avoid it." [cite:@marco_craveiro_2021_1] (Section 6.5)
+#+end_quote
+
+Finally, there are also challenges due to the immaturity of the formal processes
+associated with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], as Mohagheghi and Dehlen note:
+
+#+begin_quote
+The importance of utilizing a defined process in software engineering has been
+known for several years. However, most "tried and tested" processes are not
+tailored for MDE, which does not make any assumptions on the software
+development process or the design methodology. Baker /et al./ report that many
+teams in Motorola encountered major obstacles in adopting MDE due to the lack of
+a well-defined process, lack of necessary skills and inflexibility in changing
+the existing culture [...]. [cite:@mohagheghi2008proof]
+#+end_quote
+
+** External Organisational Factors
+   :properties:
+   :id: 4BE68ED9-C33A-09D4-2DFB-AB384D0F7F1A
+   :custom_id: ID-4BE68ED9-C33A-09D4-2DFB-AB384D0F7F1A
+   :end:
+
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption is also impaired by factors that are external to the organisation
+applying it. As already highlighted (/cf./ Section [[id:4810E0EC-2436-5AF4-21E3-E4FA496C22B6][Analysis of Evidence at a
+Micro-Scale]]), the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tool offering is very large and diverse, bringing with it
+its own problems such as a difficulty in deciding on the appropriate tooling for
+a given project --- much as did CASE before it (/cf./ [[id:E2105730-0CC3-D974-BC4B-D955FD7C2944][Computer Aided Software
+Engineering (CASE)]]). In addition, once tools are identified, there are always
+fears of vendor lock-in, as Mohagheghi and Dehlen report: "[t]he vendor lock-in
+problem persuades some users to use open source tools such as the Eclipse
+framework. Others combine third-party products with self-developed tools [...],
+or develop their own tools [...]." [cite:@mohagheghi2008proof]
+
+Relying on a vendor may also be problematic if the vendor is small, as Paige and
+Varró demonstrate by vividly narrating the many lessons they've learned whilst
+creating and shutting down two [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tool vending start-ups
+[cite:@paige2012lessons]. Our key take-away from their work is that the software
+tooling market is generally very competitive and [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling is no different,
+so, as part of any feasibility analysis, it is very important to take into
+consideration the sustainability of vendors far into the future. This problem is
+exacerbated because interoperability between tools of different vendors is not
+yet a fully resolved issue, even in the presence of mature industry standards
+such XML Metadata Interchange (XMI). In [cite:@lundell2006uml], Lundell /et al./
+analysed the impact of XMI on heterogeneous tooling environments and, whilst
+being generally positive about the standard, they also helped explain why
+interoperability remains such a thorny issue (/emphasis ours/):
+
+#+begin_quote
+In considering the results of the tests it should be noted that /anything short
+of complete success is of limited value in practice/. The work involved in
+repairing significant semantic loss in an interchanged model is often considered
+infeasible for industrial strength models. With this in mind, from the
+perspective of legacy systems and tool lock-in, the new generation of modelling
+tools has not generally improved prospects for importing existing models
+exported from earlier tools. [cite:@lundell2006uml]
+#+end_quote
+
+As a result, practitioners are often wary of finding themselves involved with
+what France and Rumpe called the "the DSL-Babel challenge"; that is, the fear
+that the "[...] use of many DSLs can lead to significant interoperability,
+language-version and language-migration problems." [cite:@france2007model]
+
+** Social Factors
+   :properties:
+   :id: 17D8BDC5-A746-BD84-586B-6EC1165BFB82
+   :custom_id: ID-17D8BDC5-A746-BD84-586B-6EC1165BFB82
+   :end:
+
+An influential aspect of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption is concerned with issues of control and
+trust, particularly with regards to the tools of third-party vendors or of those
+produced by large internal tooling teams with a degree of independence from
+their end-users. Whilst vendors have historically tried to promote holistic
+top-down solutions --- very much in line with the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] vision (/cf./ Section [[id:8B3C9C5A-4DE5-95C4-751B-694E07648465][How
+Widely Adopted is MDE?]]) --- the adoption literature shows that small-scale,
+bottom-up approaches tends to yield better results in practice, as Whittle /et
+al./ explain (/emphasis ours/):
+
+#+begin_quote
+Our findings also lead us to believe that /most successful MDE practice is
+driven from the ground up/. MDE efforts that are imposed by high-level
+management typically struggle; interviewees claimed that top-down management
+mandates fail if they do not have the buy-in of developers first. As a result,
+/there are fewer examples/ /of the use of MDE to generate whole systems/. Rather
+than following heavyweight top-down methodologies, successful MDE practitioners
+use MDE as and when it is appropriate and combine it with other methods in a
+very flexible way. [cite:@whittle2014state]
+#+end_quote
+
+Regardless of whether tools are bespoke or sourced from external vendors, a
+common approach taken by developers to handle tooling inadequacies is to subvert
+the tools in order to achieve some desired behaviour:
+
+#+begin_quote
+These and other speculative features [immutability, factory methods] were not
+optional, perhaps in order to restrict variability, so as a consequence software
+engineers started to make use of them best they could: "I think its a good
+point, you just learn to live with what you got, right? [...] These are the
+[...] constraints that we have, so we're going to have to [...] live with those
+constraints. [...] And you find a way, right?" [cite:@marco_craveiro_2021_1]
+(Section 6.3)
+#+end_quote
+
+Whittle /et al./ recorded eerily similar experiences: "A second example is a
+company that mandated the use of a commercial MDE tool. However, the developers
+could not get the tool to fit their processes, and, under pressure to 'make
+things work’, they hacked it, messed with the generated code, and circumvented
+it when they had to." [cite:@whittle2014state]
+
+And it is with those telling words --- with pragmatism overriding theory to get
+things done --- that we must end our swift excursion through Whittle /et al./'s
+taxonomy, as well as through the larger terrain of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption literature.
+Let's us now gather a set of lessons learned from the analysis.
+
+* Discussion
+   :properties:
+   :id: 28291C36-E8C6-7564-66D3-90D2D83436A6
+   :custom_id: ID-28291C36-E8C6-7564-66D3-90D2D83436A6
+   :end:
+
+The previous sections presented themes unveiled by empirical analysis in the [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+adoption literature. Of these, we would like to highlight those that are of key
+importance to MASD:
+
+- *Usability is often a concern with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tooling.* There is often a mismatch
+  between what developers expect of a tool and what vendors view as the role of
+  the tool. Empirical evidence has shown this is a barrier for adoption.
+- *[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] tools are expensive to develop and maintain.* Whilst bespoke tooling has
+  a better fit, it is very difficult to develop due to the need for specialist
+  skills and the costs involved.
+- *Developers prefer bottom-up and incremental approaches.* Management and tool
+  vendors seem to prefer top-down approaches, but software engineers prefer to
+  integrate new tools and approaches incrementally, experimenting with them over
+  time and increasing their usage as their mastery of the tool improves.
+- *Integration with existing tooling is a challenge.* Software engineers
+  typically use a variety of tools to achieve their goals, and continually pick
+  up new tools over their career. In general, tools that integrate with existing
+  toolsets are favoured over tools that force wholesale changes to development
+  workflows.
+
+Our conclusion from the analysis of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] adoption is that there is a gap in the
+literature for methodology and tooling that are better aligned with how
+practitioners actually use [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] rather than researcher and tool developer's
+expectations. Now that the gap has been established, it is the role of the next
+chapter to distil these and other findings into a set of requirements designed
+to address this impedance mismatch.
+
+* Bibliography
+
+#+print_bibliography:

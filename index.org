@@ -46,13 +46,17 @@ the basic concepts of this field and why we found it necessary to extend it.
 | Page                                      | Description                                                                |
 |-------------------------------------------+----------------------------------------------------------------------------|
 | [[id:4B0DC013-F222-5BB4-33DB-C53414604801][Acronyms]]                                  | List of commonly used TLAs.                                                |
-| [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Towards a Definition of (MDE)]]             | Exploration of the literature towards attaining a definition of this term. |
+| [[id:C29C6088-B396-A404-9183-09FE5AD2D105][Towards a Definition of MDE]]               | Exploration of the literature towards attaining a definition of this term. |
 | [[id:C807836B-B1D6-1024-86E3-7D49BCF20D74][Models and Transformations]]                | Definition of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]'s core concepts, and rationale for their usage.          |
 | [[id:CA232302-65F9-6DE4-AD4B-6D24EE3E9D39][From Problem Space to Solution Space]]      | Characterisation of problem space and solution space.                      |
 | [[id:E5EA2B40-5526-0E44-B6D3-8F817E21C984][MDE and the Software Development Process]]  | How [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] integrates with [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]]s.                                              |
 | [[id:3DD5C3FF-5BC2-F8A4-2A6B-4F037A78D8E6][MDE and Variability Modeling]]              | How [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] integrates with variability modeling approaches.                   |
 | [[id:ABA49482-2E5D-2CA4-6813-5F0C8B868F8E][Survey of Special Purpose Code Generators]] | Survey of [[https://en.wikipedia.org/wiki/Free_and_open-source_software][FOSS]] tools dedicated to special purpose code generation          |
 | [[id:A277E33A-FBA3-0EF4-7F1B-79D38D6820E4][Experience Report of Industrial Adoption]]  | Experience report analysing [[id:79EC741E-8818-3494-8B1B-2B27C182B160][MDD]] techniques applied to financial sector.    |
+| [[id:6EBDB35D-8892-8964-6D03-393E013B74BA][State of the Art in Code Generation]]       | Analysis on the importance of code generation and existing methodologies.  |
+| [[id:3310548C-2A30-0FA4-71F3-6E31EB98D498][The State of MDE Adoption]]                 | Analysis of the practicalities of MDE adoption.                            |
+| [[id:8EFC0922-AD38-9514-538B-88C0EF9F730E][Requirements for a new Methodology]]        | Requirements for the MASD methodology.                                     |
+| [[id:EE673330-E634-3294-54E3-BBE3A4D741BE][The MASD Methodology]]                      | Definition of the MASD methodology.                                        |
 
 ** Models
 

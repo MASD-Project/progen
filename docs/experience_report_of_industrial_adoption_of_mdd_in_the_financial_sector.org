@@ -213,7 +213,7 @@ aspects of interest regarding their [[id:79EC741E-8818-3494-8B1B-2B27C182B160][M
 practical realities of [[id:79EC741E-8818-3494-8B1B-2B27C182B160][MDD]] deployment.
 
 The interview data was sourced from recorded audio, subsequently transcribed,
-lasting between twenty to forty minutes. A total of three interviews was made.
+lasting between twenty to forty minutes. A total of three interviews were made.
 In order to benefit from a wider range of views, interviewees were picked from
 both the early and latter stages of the project, and spanned different levels of
 the organisational hierarchy. The questions followed a core structure, but
@@ -527,12 +527,12 @@ of code and the need to learn two different API.
 
 ** Model
 
-Listing ref:sample_xml_model contains a sample model =M1=, created for this
+Listing [[lst:sample_xml_model]] contains a sample model =M1=, created for this
 paper, but which conforms to The Financial Company's XSD. The source was adapted
 to fit the space constraints.
 
 #+caption: Sample model conforming to the metamodel's XSD. label:sample_xml_model
-#+attr_latex: :options frame=tb
+#+name: lst:sample_xml_model
 #+begin_src xml :exports code
 <Schema Name="M1" IdMin="1" IdMax="10" BaseGuid="A...">
     <Dependencies>
@@ -592,7 +592,7 @@ of the [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PIM]] / [[id:6C44E7F3-4BEA-952
 otherwise been --- for instance, by targeting architectural concepts such as
 SOA.
 
-Similarly, the distinction between problem space and solution space was never
+Similarly, the distinction between [[id:CA232302-65F9-6DE4-AD4B-6D24EE3E9D39][problem space]] and [[id:764D8447-0BE2-30E4-E47B-672B2B9D9E4A][solution space]] was never
 made explicit, and thus many concepts in The Model either straddle both spaces
 or are purely implementation-level concepts. In part, this is a consequence of
 the design of the modeling language, closer to a [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][GPML]] rather than to a [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]]
@@ -603,8 +603,8 @@ and the implementation in source code.
 
 ** Variability
 
-The Code Generator was designed explicitly with limited support for variability.
-It was understood as a /special purpose/ code generator, built exclusively for
+The Code Generator was designed explicitly with limited support for [[id:C9E5C482-E37B-AF14-4E3B-4FF92BB86C50][variability]].
+It was understood as a /[[id:ABA49482-2E5D-2CA4-6813-5F0C8B868F8E][special purpose code generator]]/, built exclusively for
 New System and with no application outside that remit. Therefore, The Code
 Generation Team took a strict approach, in keeping with the Agile methodology:
 in general, functionality was only introduced as needed and, if no longer
@@ -626,9 +626,10 @@ insignificant:
 
 ** Transforms
 
-Unsurprisingly, The Code Generator makes use of both [[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][M2M]] and [[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][M2T]] transforms, and
-there is a clear separation between these two major categories of transforms due
-to the use of a templating language for [[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][M2T]].[fn:czarnecki_transforms]
+Unsurprisingly, The Code Generator makes use of both [[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][Model-to-Model (M2M)]] and
+[[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][Model-to-Text (M2T)]] transforms, and there is a clear separation between these
+two major categories of transforms due to the use of a templating language for
+[[id:93400D0B-2E1E-7244-D07B-DD8BCA98277A][M2T]].[fn:czarnecki_transforms]
 
 [fn:czarnecki_transforms] This section makes use of the feature model defined by
 Czarnecki and Helsen's in [cite:@czarnecki2006feature] for the analysis.
@@ -777,12 +778,13 @@ principles.'"
 
 As a result of this approach, a number of speculative features were added to The
 Code Generator. In many cases, these were found not to match the direction of
-New System: "[T]here are a couple of design choices there was an insistence on
---- this has nothing to do with code generation particularly, this is more to do
-with implementation --- on them [the model elements] being immutable. Which is
-useful in many contexts but we didn't have the problems that that sets out to
-solve, and it was imposed up front without actually finding out if we had any of
-these problems. They were kind of like a solution before we had a problem."
+New System: "[T]here are a couple of design choices [...] there was an
+insistence on --- this has nothing to do with code generation particularly, this
+is more to do with implementation --- on them [the model elements] being
+immutable. Which is useful in many contexts but we didn't have the problems that
+that sets out to solve, and it was imposed up front without actually finding out
+if we had any of these problems. They were kind of like a solution before we had
+a problem."
 
 The issue was not restricted to immutability: "Early on someone decided we
 shouldn't have constructors, we should have everything with factory methods I
@@ -833,8 +835,7 @@ system, I think its going to be really hard to get rid of it."
 A key point was the difficulty in justifying continued investment on a bespoke
 code generator from a business perspective: "Its quite product-y? So it almost
 feels like, you know, its something which [we] should be buying in or open
-source . Not what you want to be focusing your interest on, if you can avoid
-it."
+source. Not what you want to be focusing your interest on, if you can avoid it."
 
 Over time, the budget of New System decreased as the system matured, and
 development became more focused on adding business functionality rather than on
@@ -865,8 +866,8 @@ will compile, knowing that it will work, you can then start sending these things
 around and then its essentially somebody else's problem, really, that you send
 it in from the C# code and it pops up in the C++ code and the C++ code will
 understand it, know what its got and more importantly it will have a strong type
-its not pulling things out of XML. Now, at this point its now a rich object
-which they can now code against, safe in the knowledge that everything that
+it's not pulling things out of XML. Now, at this point it's [...] a rich object
+which they can [...] code against, safe in the knowledge that everything that
 should have been populated will have been populated. And that, that was very
 useful. And I must say, with this sort of three-technology situation we had, it
 certainly made it an awful lot quicker. The alternative would have been to,

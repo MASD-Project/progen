@@ -228,7 +228,7 @@ framework."
   :properties:
   :id: 6C44E7F3-4BEA-9524-810B-B1EE4EECF771
   :custom_id: ID-6C44E7F3-4BEA-9524-810B-B1EE4EECF771
-  :roam_aliases: PSM PIM
+  :roam_aliases: PSM PIM PDM
   :end:
 
 The term /platform/ is employed within the software engineering profession in a

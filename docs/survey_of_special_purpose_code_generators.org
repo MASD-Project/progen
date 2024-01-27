@@ -491,14 +491,13 @@ language is very complex and changes frequently.
 
 ODB is designed to be called as part of the build process in a fashion similar
 to C++ compilers. It makes very few requirements of the build system, other than
-the ability to call external programs.
+the ability to call external programs. Typically, each invocation of the tool
+contains one or more target header files which are decorated with ODB pragmas,
+as exemplified in Listing [[lst:odb_code]].
 
-Typically, each invocation of the tool contains one or more target header files
-which are decorated with ODB pragmas, as exemplified in Listing ref:odb_code.
-
-#+caption: C++ class with ODB pragma annotations. label:odb_code
-#+attr_latex: :options frame=tb
-#+begin_src c++ :exports code
+#+caption: C++ class with ODB pragma annotations.
+#+name: lst:odb_code
+#+begin_src c++
 #include <string>
 
 #pragma db object
@@ -521,7 +520,7 @@ to locate and link the generated code against them.
 *** DSL
 
 ODB defines two internal [[id:1D15099E-7294-6724-3343-A6C71CB05BF9][DSL]]s, hosted within the C++ programming language. The
-first is the /ODB Pragma Language/, as demonstrated in Listing ref:odb_code.
+first is the /ODB Pragma Language/, as demonstrated in Listing [[lst:odb_code]].
 Pragma directives are an extensibility mechanism for the C and C++ languages,
 and are often used to control implementation specific behaviours of compilers.
 ODB makes use of it to define ORM related constructs.
@@ -650,12 +649,12 @@ analysis.
 
 Users define one or more structured data types in a text file, written in
 conformance with the Protocol Buffers Language [cite:@ProtobufLanguage2018].
-Input files typically have the extension =.proto=. Listing ref:proto_code
+Input files typically have the extension =.proto=. Listing [[lst:proto_code]]
 provides an example message.
 
-#+caption: Message using Protocol Buffers IDL. label:proto_code
-#+attr_latex: :options frame=tb
-#+begin_src c++ :exports code
+#+caption: Message using Protocol Buffers IDL.
+#+name: lst:proto_code
+#+begin_src c++
 syntax = "proto3";
 
 message person {
@@ -792,11 +791,11 @@ to create a separate SWIG interface file that explicitly defines the API
 exporting types inadvertently and also to stop polluting general source code
 with SWIG annotations. Interface files typically have a =.i= or =.swg= extension
 and contain C/C++ code interspersed with SWIG interface commands, as exemplified
-in Listing ref:swig_code.
+in Listing [[lst:swig_code]].
 
-#+caption: C++ class with SWIG macros. label:swig_code
-#+attr_latex: :options frame=tb
-#+begin_src c++ :exports code
+#+caption: C++ class with SWIG macros.
+#+name: lst:swig_code
+#+begin_src c++
 %module people
 %{
 #include <string>
@@ -947,9 +946,9 @@ command line options.
 
 *** Usage
 
-Users create XML schemas using their XML editing tool of choice. Once
-defined, the XML schema is supplied to the command line tool
-=xsd-4=.[fn:xsd_installation] Listing ref:xsd_code provides an example XML
+Users create XML schemas using their XML editing tool of choice. Once defined,
+the XML schema is supplied to the command line tool
+=xsd-4=.[fn:xsd_installation] Listing [[lst:xsd_code]] provides an example XML
 schema that can be used as input to XSD.
 
 [fn:xsd_installation] The tool name may vary depending on your
@@ -960,9 +959,9 @@ installation.
 \newpage
 #+end_export
 
-#+caption: XML Schema input for XSD tool. label:xsd_code
-#+attr_latex: :options frame=tb
-#+begin_src xml :exports code
+#+caption: XML Schema input for XSD tool.
+#+name: lst:xsd_code
+#+begin_src xml
 <?xml version="1.0"?>
 <xs:schema xmlns:xs=
  "http://www.w3.org/2001/XMLSchema">

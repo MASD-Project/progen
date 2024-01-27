@@ -1,0 +1,430 @@
+:properties:
+:id: 8EFC0922-AD38-9514-538B-88C0EF9F730E
+:end:
+#+title: Requirements for a New Methodology
+#+author: Marco Craveiro <marco.craveiro@gmail.com>
+#+email: marco.craveiro@gmail.com
+#+options: toc:nil date:nil <:nil c:nil todo:nil H:7 ^:{}
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil toc:nil html-postamble:nil <:nil H:7 ^:{}
+#+cite_export: csl
+#+bibliography: ../bibliography.bib
+
+/[[id:11F938FF-2A01-4424-DBE3-16527251E747][Back to home page]]/
+
+#+begin_quote
+Current modeling approaches, techniques and tools do not live up to the
+challenge. Often, mature tools provide techniques that can successfully cope
+with software systems that we were building a decade ago, but fail when applied
+to model complex systems [...]. Some academic techniques propose interesting
+ways of addressing these shortcomings, but the prototypical nature of academic
+tools often prohibits their application to the development of real-world
+software systems. --- Mussbacher /et al./ [cite:@mussbacher2014relevance]
+#+end_quote
+
+Several far-ranging themes emerged from [[id:6EBDB35D-8892-8964-6D03-393E013B74BA][State of the Art in Code Generation]] and
+[[id:3310548C-2A30-0FA4-71F3-6E31EB98D498][The State of MDE Adoption]], as well as previous analysis
+[cite:@marco_craveiro_2021_1] [cite:@marco_craveiro_2021_2]
+[cite:@marco_craveiro_2021_3]. The present document distils these themes into a
+cohesive narrative of gaps exploitable by a new [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]-based approach, linking each
+requirement back to the theoretical or practical concerns which gave rise to it.
+Since, in our view, application is inextricably linked with theory, we have
+opted for two categories of requirements: requirements for the theoretical
+framework (/cf./ Section [[id:66251FED-9382-1064-37F3-E14160524F03][Theoretical Framework Requirements]]) and requirements
+related to tooling (/cf./ Section [[id:25AAE8FE-10C1-7C84-4B8B-D85D9CBDD5BB][Tooling Requirements]]). Each requirement is
+comprised of a numbered requirement definition to facilitate cross-referencing
+by the remainder of the dissertation[fn:req_def] and a short overview. Let us
+start then by looking at what is deemed necessary from a theoretical standpoint.
+
+[fn:req_def] /e.g./, [[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]] references the first requirement.
+
+
+* Theoretical Framework Requirements
+  :properties:
+  :id: 66251FED-9382-1064-37F3-E14160524F03
+  :custom_id: ID-66251FED-9382-1064-37F3-E14160524F03
+  :end:
+
+** RQ-01: Well-Defined Purpose
+   :properties:
+   :id: 570228FD-A3D0-5C24-350B-651EC203990A
+   :custom_id: ID-570228FD-A3D0-5C24-350B-651EC203990A
+   :roam_aliases: RQ-01
+   :end:
+
+#+name: rq-purpose
+#+begin_requirement
+The new approach will target a single, specific purpose, which is the automated
+generation of schematic and repetitive code.
+#+end_requirement
+
+As explained at length in [cite:@marco_craveiro_2021_2] (Chapter 2), [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] is a
+vast body of knowledge with unclear boundaries. The new approach must avoid
+these difficulties by explicitly defining its purpose and clarifying its
+relationship with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]]. In addition, the boundaries of the new approach
+are circumscribed exclusively to AC-MDSD --- namely, to the automatic generation
+of schematic and repetitive code (/cf./ [[id:AA611197-6A81-98B4-771B-3ADD903003B9][Architecture-Centric MDSD (AC-MDSD)]]).
+
+** RQ-02: Well-Defined Identity
+   :properties:
+   :id: 7B9439C4-DF6D-15D4-9F23-483CFA520E1C
+   :custom_id: ID-7B9439C4-DF6D-15D4-9F23-483CFA520E1C
+   :roam_aliases: RQ-02
+   :end:
+
+#+name: rq-identity
+#+begin_requirement
+The new approach must have a cohesive and well-defined identity, distinct from
+that of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and [[id:7FCC54A3-D2C3-0254-1C0B-103976AA8D87][MD*]].
+#+end_requirement
+
+Identity is a thorny problem within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] [cite:@marco_craveiro_2021_2] (p. 10),
+and thus a frequent source of confusion to newcomers. In addition to having a
+well-defined purpose ([[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]]), any proposed solution must also have a
+well-defined identity, explicitly distinct from all existing approaches within
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. An important consequence of a well-defined identity is that it will
+facilitate macro-analysis of its application (/cf./ [[id:00120B1F-7E38-1924-CD63-B59FBA55DA52][Analysis of Evidence at a
+Macro-Scale]]).
+
+** RQ-03: Well-defined Target Audience
+   :properties:
+   :id: F328F253-223B-45E4-604B-97A93F54DFD3
+   :custom_id: ID-F328F253-223B-45E4-604B-97A93F54DFD3
+   :roam_aliases: RQ-03
+   :end:
+
+#+name: rq-target
+#+begin_requirement
+The new approach must be designed to serve specifically software engineers
+inexperienced in [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
+#+end_requirement
+
+[[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] accumulates knowledge on the subject of modeling, serving many distinct
+audiences in the software development process. As a consequence, it is difficult
+to find an entry point into the body of knowledge [cite:@marco_craveiro_2021_1],
+[cite:@marco_craveiro_2021_2] (Chapter 2). The new approach must set out its
+target audience explicitly; its focus is only on software engineers with little
+to no knowledge of [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]. The intent is not to discourage experienced [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+practitioners, but to bring clarity as to whom the approach is aiming to serve.
+All decisions must take into account the target audience.
+
+** RQ-04: Well-defined Domain Architecture
+   :properties:
+   :id: BF919862-66B8-9564-BD2B-50267AB69D7C
+   :custom_id: ID-BF919862-66B8-9564-BD2B-50267AB69D7C
+   :roam_aliases: RQ-04
+   :end:
+
+#+name: rq-domain-architecture
+#+begin_requirement
+Resolve ambiguity in terminology by means of a single, well-defined, domain
+architecture that covers all core vocabulary.
+#+end_requirement
+
+A key part in establishing a well-defined purpose ([[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]]) and identity ([[id:7B9439C4-DF6D-15D4-9F23-483CFA520E1C][RQ-02]])
+is to create a domain architecture that acts as the single source of truth for
+the approach. [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] concepts that are difficult to define rigorously --- such as
+[[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]], platforms and the like --- must be made clear and unambiguous within the
+domain architecture. In addition, these more rigorous definitions must not
+disagree with their common usage within [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]].
+
+** RQ-05: Cater for Evolution
+   :properties:
+   :id: A338D17B-F00B-0124-CE9B-AE2E8E693804
+   :custom_id: ID-A338D17B-F00B-0124-CE9B-AE2E8E693804
+   :roam_aliases: RQ-05
+   :end:
+
+#+name: rq-evolution
+#+begin_requirement
+In order to adapt continually to the needs of end-users, the domain architecture
+must have an associated set of processes that cater for its continued evolution.
+#+end_requirement
+
+The domain architecture ([[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]]) must be designed for continuous extension in
+order to remain relevant. The approach must define the processes by which it can
+be updated, as well as the criteria for inclusion or exclusion of changes. This
+requirement attempts to address France and Rumpe's warning regarding the
+"widening of the problem-implementation gap" through evolution (/cf./ [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][MDA]]), and
+reflects the importance placed on keeping up to date with changes on platforms
+and [[id:8077C481-01C0-4384-1AA3-5DA290362463][TS]].
+
+** RQ-06: SDM Integration
+   :properties:
+   :id: 1EC48874-83C9-B274-D403-3948B18D8E13
+   :custom_id: ID-1EC48874-83C9-B274-D403-3948B18D8E13
+   :roam_aliases: RQ-06
+   :end:
+
+#+name: rq-sdm-integration
+#+begin_requirement
+The new approach must be able to integrate seamlessly with existing [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]].
+#+end_requirement
+
+Given the limited scope of the new approach, software engineers will require an
+overall process to manage the software development lifecycle via a traditional
+[[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]], which we call the host methodology. As with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], the new approach must be
+agnostic to the host methodology being applied. Unlike [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]], the new approach
+must integrate with its host without requiring any changes to the latter or to
+itself.[fn:mde_sdm]
+
+[fn:mde_sdm] The relationship between [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] and [[id:8E4D171C-1FAE-FA74-0EA3-97F1125B8A2A][SDM]] is discussed at length in
+[cite:@marco_craveiro_2021_2] (Chapter 5).
+
+
+** RQ-07: Clear Governance Model
+   :properties:
+   :id: 9989CB52-6283-1E04-BBDB-B53D57DBDD44
+   :custom_id: ID-9989CB52-6283-1E04-BBDB-B53D57DBDD44
+   :roam_aliases: RQ-07
+   :end:
+
+#+name: rq-governance
+#+begin_requirement
+The new approach must have a clear governance model, identifying the
+responsibilities of all actors and allowing all interested parties to
+contribute.
+#+end_requirement
+
+In order to allay concerns over cost, vendor lock-in and vendor survivability
+(/cf./ [[id:4BE68ED9-C33A-09D4-2DFB-AB384D0F7F1A][External Organisational Factors]]), the approach and all of its components
+must have a governance model that accepts contributions from a variety of
+sources. The approach must include a process by which any interested party can
+contribute changes. The governance model should be focused towards increasing
+the number of use cases for the approach ([[id:4676F4D9-3DD0-DCE4-1DDB-07C632D440FF][RQ-11]]), in accordance to its purpose
+([[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]]) and target audience ([[id:F328F253-223B-45E4-604B-97A93F54DFD3][RQ-03]]).
+
+** RQ-08: Support for PIMs and PSMs
+   :properties:
+   :id: ABE6F956-F44E-9874-6823-556FF007CE4D
+   :custom_id: ID-ABE6F956-F44E-9874-6823-556FF007CE4D
+   :roam_aliases: RQ-08
+   :end:
+
+#+name: rq-pim-psm
+#+begin_requirement
+The modeling language must support [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PIM]] as well as [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PSM]].
+#+end_requirement
+
+The modeling language for the new approach must support both [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PSM]] and [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PIM]] (/cf./
+[[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][MDA]]). Platform independence must be built upon a set of well-defined mappings in
+accordance with the domain architecture ([[id:F328F253-223B-45E4-604B-97A93F54DFD3][RQ-03]]), and extensible by users. Use of
+[[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PIM]] must remain optional.
+
+** RQ-09: Support for PDMs
+   :properties:
+   :id: F6E37D65-F879-8694-2EBB-5D55148BA63C
+   :custom_id: ID-F6E37D65-F879-8694-2EBB-5D55148BA63C
+   :roam_aliases: RQ-09
+   :end:
+
+#+name: rq-pdm
+#+begin_requirement
+The modeling language must support .
+#+end_requirement
+
+The new approach must cater for [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PDM]]s.[fn:pdms] These provide mappings for
+external building blocks, making them accessible by the methodology's modeling
+language. [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PDM]] must be extensible by users and subsequently incorporable into the
+domain architecture ([[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]]) and tooling via a well-defined process.
+
+[fn:pdms] In the sense defined in [cite:@marco_craveiro_2021_2], Chapter 4 (p.
+35); that is to say, a model responsible for mapping platform-level concepts
+into the domain architecture.
+
+
+** RQ-10: Limited Support for Variant Management and Product Lines
+   :properties:
+   :id: CE3A551A-4CE1-CE84-6993-CC580A970F2F
+   :custom_id: ID-CE3A551A-4CE1-CE84-6993-CC580A970F2F
+   :roam_aliases: RQ-10
+   :end:
+
+#+name: rq-variant
+#+begin_requirement
+The approach's modeling language must provide support for variant management and
+product lines.
+#+end_requirement
+
+The modeling language put forward by the approach must include limited support
+for product lines, constraining variability to a well-defined variability
+space.[fn:variability_literature]
+
+[fn:variability_literature] A review of the literature on variability falls
+outside of the scope of the present work. For a high-level overview of the
+subject --- as well as an analysis of its relationship with [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] --- see Chapter
+6 of [cite:@marco_craveiro_2021_2].
+
+
+** RQ-11: Extensible Catalogue of Schematic and Repetitive Code
+   :properties:
+   :id: 4676F4D9-3DD0-DCE4-1DDB-07C632D440FF
+   :custom_id: ID-4676F4D9-3DD0-DCE4-1DDB-07C632D440FF
+   :roam_aliases: RQ-11
+   :end:
+
+#+name: rq-extensible
+#+begin_requirement
+The new approach must define a framework for the management of schematic and
+repetitive code.
+#+end_requirement
+
+A framework for the management of schematic repetitive code (/cf./ [[id:33796FA9-609B-0F64-C0F3-F4F04B844C10][MDA]]) must be
+defined as part of the domain architecture ([[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]]). It must include a catalogue
+of the patterns already identified, including their taxonomy, variability and
+dependencies, as well as outlining a process to identify and propose new
+patterns.
+
+* Tooling Requirements
+  :properties:
+  :id: 25AAE8FE-10C1-7C84-4B8B-D85D9CBDD5BB
+  :custom_id: ID-25AAE8FE-10C1-7C84-4B8B-D85D9CBDD5BB
+  :end:
+
+** RQ-12: "End-to-End" Solution
+   :properties:
+   :id: DF8F82C6-36A4-E044-7223-9C701F610F7B
+   :custom_id: ID-DF8F82C6-36A4-E044-7223-9C701F610F7B
+   :roam_aliases: RQ-12
+   :end:
+
+#+name: rq-end-to-end
+#+begin_requirement
+The new approach must encompass all of the tooling required for its application.
+#+end_requirement
+
+In order to avoid the complexity created by heterogeneous tooling (/cf./
+[[id:4BE68ED9-C33A-09D4-2DFB-AB384D0F7F1A][External Organisational Factors]]), the new approach must provide a single,
+end-to-end solution for the modeling and generation of schematic and repetitive
+code ([[id:4676F4D9-3DD0-DCE4-1DDB-07C632D440FF][RQ-11]]).
+
+This entails specifying the behaviour of all necessary tooling ([[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]]) both in
+terms of their inputs --- /i.e./ modeling languages --- and outputs --- /i.e./
+programming languages. It also entails providing a comprehensive reference
+implementation. Significantly, this requirement does not preclude integrating
+with external tools, but instead attempts to minimise accidental complexity
+within its core competences ([[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]]).
+
+** RQ-13: Prioritise Black-Boxing
+   :properties:
+   :id: 5F450D39-B621-A904-816B-7C0B403F8BF8
+   :custom_id: ID-5F450D39-B621-A904-816B-7C0B403F8BF8
+   :roam_aliases: RQ-13
+   :end:
+
+#+name: rq-black-box
+#+begin_requirement
+Where possible, [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] concepts should be made invisible to end-users.
+#+end_requirement
+
+All tooling should use a black-box approach where possible. For example,
+end-users are not expected to have access to a [[id:707BD590-1E59-56B4-D333-33525E43A78A][MT]] language to operate on the
+input models; instead, from an end-user perspective, [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PIM]] and [[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PSM]] must act as if
+transformed directly into source code (/cf./ [[id:0A799746-01F2-8C94-DB6B-68ABEFB4B205][Technical Factors]]). More generally,
+the approach should aim to promote tooling closer in spirit to special purpose
+code generators [cite:@marco_craveiro_2021_3] rather than to traditional [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]]
+tools.
+
+** RQ-14: Clear Separation of End-users and Tool Developers
+   :properties:
+   :id: 0B2736E7-8886-4974-3D43-98C66612DF73
+   :custom_id: ID-0B2736E7-8886-4974-3D43-98C66612DF73
+   :roam_aliases: RQ-14
+   :end:
+
+#+name: rq-separation
+#+begin_requirement
+There must be a clear separation of roles and responsibilities for all actors.
+#+end_requirement
+
+Closely related to [[id:5F450D39-B621-A904-816B-7C0B403F8BF8][RQ-13]] is the need for a clear demarcation of responsibilities
+between those applying the new approach and those maintaining and extending it.
+End-users --- the consumers of the approach --- should only be required to learn
+a minimal set of modeling concepts in order to use it. Those working on the
+approach itself are expected to be competent [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioners.
+
+Note that this requirement does not preclude allowing end-users to get involved
+with tool development, but merely defines the distinct roles available.
+
+** RQ-15: Prioritise Tooling Integration
+   :properties:
+   :id: FFF14933-2C13-FC94-4193-6C18F2279F3C
+   :custom_id: ID-FFF14933-2C13-FC94-4193-6C18F2279F3C
+   :roam_aliases: RQ-15
+   :end:
+
+#+name: rq-integration
+#+begin_requirement
+The new approach must be designed to integrate tightly with existing tooling and
+workflows.
+#+end_requirement
+
+One of the most significant themes to come out of the adoption literature
+analysis were deficiencies in tooling integration (/cf./ [[id:0A799746-01F2-8C94-DB6B-68ABEFB4B205][Technical Factors]]).
+Consequently, the new approach must take special care in this regard, as
+follows:
+
+- *Reuse input formats*: instead of proposing new native representations for its
+  modeling language, the new approach should focus on specifying mappings (via
+  [[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]]) to existing modeling languages. These mappings are intended to cover
+  tooling used by developers such as IDE and build systems, as well as existing
+  modeling tools.
+- *Standard error reporting*: the reporting of errors and warnings must be
+  designed in accordance with existing tooling --- in particular those which are
+  already well supported in contemporary development environments
+  [cite:@marco_craveiro_2021_3].
+- *Minimal dependencies*: in order to facilitate integration, the reference
+  implementation must be available as both as a command-line utility and as a
+  library, with little to no external dependencies
+  [cite:@marco_craveiro_2021_3].
+
+The overall objective of these dimensions is to allow end-users to continue
+using preferred toolsets and to cause minimal disruption to existing workflows.
+
+** RQ-16: Support Incremental Use of Features
+   :properties:
+   :id: DEEB98C0-FF5A-75D4-98E3-94DD4EFAFF2D
+   :custom_id: ID-DEEB98C0-FF5A-75D4-98E3-94DD4EFAFF2D
+   :roam_aliases: RQ-16
+   :end:
+
+#+name: rq-incremental
+#+begin_requirement
+The approach must support different levels of use, from "basic" to "advanced".
+#+end_requirement
+
+Following on from [[id:1EC48874-83C9-B274-D403-3948B18D8E13][RQ-06]], end-users must be able to make use of the approach
+according to their specific needs. These range from code-generation of trivial
+[[id:6C44E7F3-4BEA-9524-810B-B1EE4EECF771][PSM]] ([[id:ABE6F956-F44E-9874-6823-556FF007CE4D][RQ-08]]) to the management of products and even entire product lines ([[id:CE3A551A-4CE1-CE84-6993-CC580A970F2F][RQ-10]]),
+and thus span both top-down and bottom-up application (/cf./ [[id:17D8BDC5-A746-BD84-586B-6EC1165BFB82][Social Factors]]). As
+a result, the domain architecture ([[id:BF919862-66B8-9564-BD2B-50267AB69D7C][RQ-04]]) must specify these different levels of
+use, and define how they are to be supported by the approach and its tooling ---
+with the objective of guiding users towards more advanced uses as their mastery
+develops.
+
+Last but not least, experienced [[id:C29C6088-B396-A404-9183-09FE5AD2D105][MDE]] practitioners should also be able to make
+use of the approach if, and only if, such use cases do not raise the complexity
+bar for the target audience ([[id:F328F253-223B-45E4-604B-97A93F54DFD3][RQ-03]]) and are within the remit of the approach's
+purpose ([[id:570228FD-A3D0-5C24-350B-651EC203990A][RQ-01]]).
+
+** RQ-17: Conformance Testing
+   :properties:
+   :id: E31AB511-D90C-D624-F11B-8705F1F7F76D
+   :custom_id: ID-E31AB511-D90C-D624-F11B-8705F1F7F76D
+   :roam_aliases: RQ-17
+   :end:
+
+#+name: rq-conformance
+#+begin_requirement
+The new approach should include a comprehensive set of conformance tests to
+validate implementations.
+#+end_requirement
+
+The reference implementation must be validated by a set of automated conformance
+tests which determine the level of compliance. These can then be reused by
+third-party implementations. Conformance tests must cover scalability --- /i.e./
+expected behaviour for different model sizes --- as well as any available
+integration with third party tooling.
+
+* Bibliography
+
+#+print_bibliography:
